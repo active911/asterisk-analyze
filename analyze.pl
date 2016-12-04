@@ -9,23 +9,24 @@ use warnings;
 
 # Parameters
 my $timezone='America/Los_Angeles';
-my $outfile='/var/www/html/stats.json';
-my $queue='299';
+my $outfile='stats.json';
+my $queues="500|510|520|601|602";		# Regex style
 
 my $calls={};
 my $parser=DateTime::Format::Strptime-> new( pattern => '%Y-%m-%d %H:%M:%S', time_zone => $timezone);
 
 while(my $line=<STDIN>) {
 
-	if($line=~/\[(\d\d\d\d-\d\d\-\d\d \d\d:\d\d:\d\d)\].*(SIP\/fpbx\-[a-z0-9\-]+)/) {
+	if($line=~/\[(\d\d\d\d-\d\d\-\d\d \d\d:\d\d:\d\d)\].*(SIP\/fpbx\-[a-z0-9\-]+)/i) {
 
 		# Get the ID and UTC time stamp
 		my $dt=$parser->parse_datetime($1);
 		my $stamp=$dt->epoch;
 		my $id=$2;
 
-		# Create a new entry
+		# Create a new entry if it doesn't exist
 		if(!defined($calls->{$id})){
+
 			$calls->{$id}={
 
 				started		=>		$stamp,
@@ -34,9 +35,12 @@ while(my $line=<STDIN>) {
 				queued		=>		undef,
 				answered	=>		undef,
 				answered_by =>		undef,
+				answered_ct =>		0,
 				caller_id	=>		"",
 				duration	=>		0,
 				pickup_duration =>  undef
+
+
 			};
 
 			next;
@@ -50,8 +54,13 @@ while(my $line=<STDIN>) {
 
 				$calls->{$id}->{answered_by}=$1;
 				$calls->{$id}->{answered}=$stamp;
-				$calls->{$id}->{queued_duration}=$stamp-$calls->{$id}->{queued} unless !defined ($stamp-$calls->{$id}->{queued});
+				$calls->{$id}->{queued_duration}=$stamp-$calls->{$id}->{queued} unless !defined ($calls->{$id}->{queued});
+
 			}
+
+			# Increment answered count (to detect errors, or transfers)
+			$calls->{$id}->{answered_ct}++;
+
 
 		} elsif ($line=~/hangup/i) {		# hangupcall seems to mean that they hung up. If we hang up, it looks like 'Executing [h@ivr-3:1] Hangup("SIP/fpbx-1-f04d84a7-0028664a", "") in new stack'
 
@@ -77,8 +86,10 @@ while(my $line=<STDIN>) {
 			# Caller ID
 			$calls->{$id}->{caller_id}=$1;
 
+# [2016-12-03 15:30:34] VERBOSE[9588][C-00016819] pbx.c:     -- Executing [in@sub-record-check:3] ExecIf("SIP/fpbx-1-4VVl0cGHFeH1-0000c72e", "11?Set(FROMEXTEN=15412300243)") in new stack
+# 0cGHFeH1-0000c72e", "0 ?Set(CALLERID(name)=15412300243)") in new stack
 
-		} elsif ($line=~/Goto\("$id", "ext-queues,$queue,1"\)/) {
+		} elsif ($line=~/Goto\("$id", "ext-queues,'$queues',1"\)/) {
 
 			# Goes to queue (1st time only)
 			if(!defined($calls->{$id}->{queued})) {
@@ -102,6 +113,7 @@ my $stats={
 	queue	=>	{
 
 		total_calls		=>	0,
+		total_answers	=>	0,
 		total_time		=>	0,
 		average_time	=>	0,
 		hangups			=>	{
@@ -164,6 +176,7 @@ CALL_QUEUE_TIME: foreach my $id(keys %{$calls}) {
 		if($call->{queued_duration}) {
 
 			$stats->{queue}->{total_calls}++;
+			$stats->{queue}->{total_answers}+=$call->{answered_ct};
 			$stats->{queue}->{total_time}+=$call->{queued_duration};
 
 
@@ -198,7 +211,7 @@ CALL_QUEUE_TIME: foreach my $id(keys %{$calls}) {
 }
 
 # Calculate average queue time
-$stats->{queue}->{average_time}=$stats->{queue}->{total_time}/$stats->{queue}->{total_calls};
+$stats->{queue}->{average_time}=$stats->{queue}->{total_time}/$stats->{queue}->{total_calls} unless $stats->{queue}->{total_calls}==0;
 $stats->{queue}->{hangups}->{average_time}=$stats->{queue}->{hangups}->{total_time}/$stats->{queue}->{hangups}->{total} unless $stats->{queue}->{hangups}->{total}==0;
 
 
