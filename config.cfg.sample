@@ -1,0 +1,6 @@
+[general]
+timezone="America/Los_Angeles"
+
+[asterisk]
+queues="500|510|520|601|602"	
+

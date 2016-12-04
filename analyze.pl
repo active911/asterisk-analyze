@@ -3,14 +3,23 @@
 use DateTime::Format::Strptime;
 use Data::Dumper;
 use JSON qw(encode_json);
+use Config::Simple;
+use FindBin;
 use strict;
 use warnings;
 
+# Read config
+my $cfg=new Config::Simple($FindBin::Bin.'/config.cfg');
+if(!defined $cfg) {
+
+	die("Error reading configuration file.  Please copy config.cfg.sample to config.cfg and edit any default options.");
+}
+
+my $timezone=	$cfg->param('general.timezone');								
+my $queues=		$cfg->param('asterisk.queues');
 
 # Parameters
-my $timezone='America/Los_Angeles';
 my $outfile='stats.json';
-my $queues="500|510|520|601|602";		# Regex style
 
 my $calls={};
 my $parser=DateTime::Format::Strptime-> new( pattern => '%Y-%m-%d %H:%M:%S', time_zone => $timezone);

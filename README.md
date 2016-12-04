@@ -6,14 +6,14 @@ Make sure you have these modules...
 ```perl
 DateTime::Format::Strptime
 JSON
+Config::Simple
+FindBin
 ```
 
 #### Usage
-Modify the following lines to conform to your settings
-```perl
-my $timezone='America/Los_Angeles';
-my $outfile='/var/www/html/stats.json';
-my $queue='299';
+```bash
+cp config.cfg.sample config.cfg
+vi config.cfg
 ```
 
 Now run the program
