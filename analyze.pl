@@ -18,10 +18,8 @@ if(!defined $cfg) {
 my $timezone=	$cfg->param('general.timezone');								
 my $queues=		$cfg->param('asterisk.queues');
 
-# Parameters
-my $outfile='stats.json';
-
 my $calls={};
+my $history=[];		# Calls, but in order
 my $parser=DateTime::Format::Strptime-> new( pattern => '%Y-%m-%d %H:%M:%S', time_zone => $timezone);
 
 while(my $line=<STDIN>) {
@@ -51,6 +49,7 @@ while(my $line=<STDIN>) {
 
 
 			};
+			push(@{$history}, $calls->{$id});
 
 			next;
 		}
@@ -224,18 +223,24 @@ $stats->{queue}->{average_time}=$stats->{queue}->{total_time}/$stats->{queue}->{
 $stats->{queue}->{hangups}->{average_time}=$stats->{queue}->{hangups}->{total_time}/$stats->{queue}->{hangups}->{total} unless $stats->{queue}->{hangups}->{total}==0;
 
 
-if ($ARGV[0] eq '-p') {
+if (defined $ARGV[0] && $ARGV[0] eq '-p') {
 
 	print encode_json($stats)."\n";
 
-} elsif ($ARGV[0] eq '-pc') {
+} elsif (defined $ARGV[0] && $ARGV[0] eq '-pc') {
 
-	print encode_json($calls)."\n";
+	print encode_json($history)."\n";
 
 } else {
 
-	open (my $F, '>', $outfile) or die("Unable to write to $outfile\n");
+	# Stats
+	open (my $F, '>', $FindBin::Bin.'/public/stats.json') or die("Unable to write to public/stats.json\n");
 	print $F encode_json($stats);
+	close $F;
+
+	# Calls
+	open ($F, '>', $FindBin::Bin.'/public/calls.json') or die("Unable to write to public/calls.json\n");
+	print $F encode_json($history);
 	close $F;
 
 }
