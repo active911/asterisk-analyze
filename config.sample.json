@@ -1,0 +1,9 @@
+{
+  "general": {
+    "timezone": "America/Los_Angeles",
+    "logfile": "/var/log/asterisk/full"
+  },
+  "asterisk": {
+    "queues": "200"
+  }
+}

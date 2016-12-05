@@ -1,3 +1,4 @@
-config.cfg
-stats.json
+config.json
+public/calls.json
+public/stats.json
 

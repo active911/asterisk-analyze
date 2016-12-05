@@ -1,28 +1,27 @@
 # Asterisk-analyze
 
 
-#### Prereqs 
-Make sure you have these modules...
-```perl
-DateTime::Format::Strptime
-JSON
-Config::Simple
-FindBin
+#### Install
+
+```bash
+npm install
 ```
 
-#### Usage
+#### Configure
 ```bash
-cp config.cfg.sample config.cfg
+cp config.json.sample config.json
 vi config.cfg
 ```
 
 Now run the program
 ```bash
-cat /var/log/asterisk/full | ./analyze.pl -p
+node analyze.js
 ```
 
-You will get a nice JSON blob listing stats.
+You will get a nice JSON blob with call data in ```public``` as well as some stats on the screen
 
-Omit the ```-p``` switch to have the JSON written to ```$outfile```.
+#### TODO
+
+The old analyze.pl was a more comprehensive stats generator.  This is now being rewritten into ETL and analyze components.  It's an incomplete work in progress.
 
 
