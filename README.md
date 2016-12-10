@@ -13,15 +13,17 @@ cp config.json.sample config.json
 vi config.cfg
 ```
 
-Now run the program
-```bash
-node analyze.js
-```
+#### Run the program
+1. ```node analyze.js``` to generate calls.json
+2. ```npm run build``` to build
+3. ```npm start``` to start the server
+4. Navigate to server/index.html to see the pretty graphs
 
-You will get a nice JSON blob with call data in ```public``` as well as some stats on the screen
 
 #### TODO
 
-The old analyze.pl was a more comprehensive stats generator.  This is now being rewritten into ETL and analyze components.  It's an incomplete work in progress.
+- calls.json should not be embedded in the build (go to AJAX)
+- Use bootstrap to organize the views
+- Add more graphs
 
 

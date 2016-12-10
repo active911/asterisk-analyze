@@ -1,0 +1,11 @@
+
+#extensions .x.axis text {
+
+	text-anchor: end !important;
+	transform: rotate(-45deg);
+}
+
+.chart-title {
+
+	display: block;
+}
