@@ -1,7 +1,8 @@
 {
   "general": {
     "timezone": "America/Los_Angeles",
-    "logfile": "/var/log/asterisk/full"
+    "input": "/var/log/asterisk/full",
+    "output" : "src/calls.json"
   },
   "asterisk": {
     "queues": "200"

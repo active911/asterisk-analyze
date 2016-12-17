@@ -7,18 +7,32 @@ var crossfilter = require('crossfilter');
 
 
 // Read the config
-nconf.argv().env().file({ file: 'config.json' });
+nconf
+	.argv()
+	.env()
+	.file({ file: 'config.json' })
+	.defaults({ "input" : "full", "output" : "src/calls.json" });
+
+// Create analyzer
 var al=new asterisklog({queues: nconf.get('asterisk').queues});
 
+// If the output file exists, we will merge with it
+if(fs.existsSync(nconf.get('general').output)){
+
+	var data=JSON.parse(fs.readFileSync(nconf.get('general').output));
+	console.log(data.length+" entries read from " + nconf.get('general').output + " will be merged with new data");
+	al.set_calls(data);
+}
+
 // Pump a log file into the analyzer
-(new linebyline(nconf.get('general').logfile))
+(new linebyline(nconf.get('general').input))
 	.on("line", (line)=>al.add(line))
 	.on("end", ()=>{
 
 		// Write calls to calls.json
 		var calls=al.get_calls();
 		fs
-			.writeFileAsync("public/calls.json",JSON.stringify(calls))
+			.writeFileAsync(nconf.get('general').output, JSON.stringify(calls))
 			.then(()=>{
 
 				console.log(calls.length+" calls written");
