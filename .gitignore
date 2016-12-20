@@ -3,4 +3,7 @@ public/calls.json
 public/stats.json
 temp/
 node_modules/
-
+public/bundle.js
+public/bundle.js.map
+src/calls.json
+full

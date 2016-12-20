@@ -10,6 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack src/app.js public/bundle.js",
     "start": "nodemon server.js | bunyan",
+    "etl": "nodemon etl.js | bunyan",
     "webpack-dev-server": "webpack-dev-server --progress --colors --host=192.168.56.102 --content-base public/"
   },
   "repository": {
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/active911/asterisk-analyze#readme",
   "dependencies": {
+    "always-tail2": "^1.0.0",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "bunyan": "^1.8.5",
@@ -35,7 +37,8 @@
     "line-by-line": "^0.1.5",
     "moment": "^2.17.1",
     "morgan": "^1.7.0",
-    "nconf": "^0.8.4"
+    "nconf": "^0.8.4",
+    "promise-mysql": "^3.0.0"
   },
   "devDependencies": {
     "css-loader": "^0.26.1",
