@@ -23,7 +23,8 @@ data text null
 ```
 
 #### Run the program
-1. ``` node etl.js``` to run the ETL daemon (add ```--gulp``` to ingest the whole file)
+0. ```node analyze.js``` to do a one time analysis.  Output JSON is written to the output file specified in general.output.  Stats written to the console.
+1. ```node etl.js``` to run the ETL daemon (add ```--gulp``` to ingest the whole file).  Data goes to database.
 2. ```npm run build``` to build
 3. ```npm start``` to start the server
 4. Navigate to server/index.html to see the pretty graphs

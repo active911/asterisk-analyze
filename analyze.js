@@ -11,7 +11,7 @@ nconf
 	.argv()
 	.env()
 	.file({ file: 'config.json' })
-	.defaults({ "input" : "full", "output" : "src/calls.json" });
+	.defaults({ "input" : "full", "output" : "calls.json" });
 
 // Create analyzer
 var al=new asterisklog({queues: nconf.get('asterisk').queues});

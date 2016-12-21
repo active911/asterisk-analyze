@@ -7,6 +7,7 @@ var Tail = require('always-tail2');
 var log = require("bunyan").createLogger({"name":"asterisk-analyze-etl"});
 var mysql = require("promise-mysql");
 var moment = require("moment");
+var redis = new (require("ioredis"))(); //promise.promisifyAll(require("redis"));
 
 
 // Read the config
@@ -14,7 +15,7 @@ nconf
 	.argv()
 	.env()
 	.file({ file: 'config.json' })
-	.defaults({ "general" : { "input" : "full", "output" : "src/calls.json", "mode" : "follow" } });
+	.defaults({ "general" : { "input" : "full", "output" : "calls.json", "mode" : "follow" } });
 
 // Create analyzer
 var al=new asterisklog({queues: nconf.get('asterisk').queues});
@@ -25,6 +26,8 @@ if(!fs.existsSync(nconf.get('general').input)){
 	log.error("Error - cannot read from input file '"+nconf.get('general').input+"'");
 }
 
+// Create Redis client
+var redis
 
 // Connect to the databsae
 mysql
@@ -37,10 +40,17 @@ mysql
 		al.on("start", (call) => {
 
 			log.info("New call started");
+			redis.publish("calls",JSON.stringify(call));
+		})
+		.on("enqueued", ()=>{
+
+			log.info("Call in queue");
+			redis.publish("calls",JSON.stringify(call));
 		})
 		.on("end", (call) => {
 
 			log.info("Call ended");
+			redis.publish("calls",JSON.stringify(call));
 
 
 			// See if this record already exists
