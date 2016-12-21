@@ -36,7 +36,7 @@ syslogd((entry) => {
 
 	console.log(JSON.stringify(entry));
 
-},{ "address" : "127.0.0.1"}).listen(514, (err)=>{
+},{ "address" : "10.0.2.15"}).listen(514, (err)=>{
 
 	if(err){
 		console.log("error "+err);

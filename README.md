@@ -1,5 +1,10 @@
 # Asterisk-analyze
 
+#### Prerequisites
+1. Node
+2. MySQL
+3. Redis
+
 
 #### Install
 
@@ -12,6 +17,24 @@ npm install
 cp config.json.sample config.json
 vi config.cfg
 ```
+
+#### Configure Asterisk (FreePBX) to send log files to us 
+
+If you don't want to install on the asterisk machine itself, you can stream the log files from asterisk to the analyzer.  This is a two step process, since asterisk doesn't seem to use syslog by default.  
+
+1. First configure asterisk to use the syslog.  Edit ```/etc/asterisk/logger_logfiles_custom.conf``` (or ```logger.conf``` on pure asterisk systems) and add a line like the following: 
+    ```
+    ; Send logs to syslog so we can stream them offsite and analyze
+    syslog.local0 =>  verbose
+    ```
+2. Now tell syslog to stream the log to your analyze server. Edit ```/etc/syslog.conf``` (or rsyslog.conf, or for Debian place a new .conf file into /etc/rsyslog.d)
+    ```
+    # Send asterisk logs to the analyzer
+    local0.*            @my.server.address
+    ```
+3. Restart asterisk: ```asterisk -rx "logger reload"```
+4. Restart syslog: ```service syslogd restart``` (or rsyslogd)
+
 
 #### SQL
 ```sql
