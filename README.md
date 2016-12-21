@@ -53,13 +53,17 @@ data text null
 4. Navigate to server/index.html to see the pretty graphs
 
 
-In ```--gulp``` mode, etl will read the whole input file specified in the config and exit rather than following file modificaitons.  It will also merge the new data with the unclosed calls in the database.  This is slower, but keeps you from adding duplicates.
+In ```--gulp``` mode, etl will read the whole input file specified in the config and exit.  
 
 Without the ```--gulp``` switch (or gulp in the config), etl watches the input file for new data.
+
 
 #### TODO
 - calls.json should not be embedded in the build (go to AJAX)
 - Use bootstrap to organize the views
 - Add more graphs
+- etl does duplicate detection, but it may not be able to detect duplicates added by syslogd because syslogd must use its own time source (TODO: add some time fuzz here so we rely more on the SIP ID of the caller)
+- syslogd may accumulate garabage SIP IDs over time if it sees but does not properly understand outgoing calls. This may effectively constitute a memory leak.  Prune calls older than a week (or something).
+- Fix to track outgoing calls, and calls that create calls (forward to cell phone)
 
 
