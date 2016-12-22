@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "build": "webpack src/app.js public/bundle.js",
     "start": "nodemon server.js | bunyan",
     "etl": "nodemon etl.js | bunyan",
@@ -46,6 +46,7 @@
     "css-loader": "^0.26.1",
     "expose-loader": "^0.7.1",
     "jsdom": "^9.8.3",
+    "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "style-loader": "^0.13.1",
     "uglify-js": "^2.7.5",

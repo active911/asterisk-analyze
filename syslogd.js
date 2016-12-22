@@ -4,7 +4,7 @@ var nconf = require('nconf');
 var log = require("bunyan").createLogger({"name":"asterisk-analyze-syslog"});
 var mysql = require("promise-mysql");
 var moment = require("moment");
-var redis = new (require("ioredis"))(); //promise.promisifyAll(require("redis"));
+//var redis = new (require("ioredis"))(); //promise.promisifyAll(require("redis"));
 var syslogd = require("syslogd");
 
 // Read the config
@@ -36,7 +36,7 @@ syslogd((entry) => {
 
 	console.log(JSON.stringify(entry));
 
-},{ "address" : "10.0.2.15"}).listen(514, (err)=>{
+},{ "address" : "192.168.1.114"}).listen(514, (err)=>{
 
 	if(err){
 		console.log("error "+err);

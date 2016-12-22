@@ -39,15 +39,24 @@ mysql
 		// A new call has been found
 		al.on("start", (call) => {
 
+			// Skip if in test mode
+			if(nconf.get('dry-run')) return;
+
 			log.info("New call started");
 			redis.publish("calls",JSON.stringify(call));
 		})
-		.on("enqueued", ()=>{
+		.on("enqueued", (call)=>{
+
+			// Skip if in test mode
+			if(nconf.get('dry-run')) return;
 
 			log.info("Call in queue");
 			redis.publish("calls",JSON.stringify(call));
 		})
 		.on("end", (call) => {
+
+			// Skip if in test mode
+			if(nconf.get('dry-run')) return;
 
 			log.info("Call ended");
 			redis.publish("calls",JSON.stringify(call));
@@ -112,6 +121,12 @@ reader
 	.on("end",()=>{
 
 		if(reader instanceof linebyline) {
+
+		// Test mode exits with stats
+		if(nconf.get('dry-run')){
+
+			al.print_stats();
+		}
 			
 			process.exit();
 		};
