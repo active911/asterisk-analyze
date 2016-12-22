@@ -1,0 +1,68 @@
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [5412237992@from-pstn:2] Goto("SIP/fpbx-1-f04d84a7-0029dad8", "ext-did,s,1") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ext-did:3] ExecIf("SIP/fpbx-1-f04d84a7-0029dad8", "0 ?Set(CALLERID(name)=15555553333)") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ext-did:4] Ringing("SIP/fpbx-1-f04d84a7-0029dad8", "") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ext-did:5] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__CALLINGPRES_SV=allowed_not_screened") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ext-did:6] Set("SIP/fpbx-1-f04d84a7-0029dad8", "CALLERPRES()=allowed_not_screened") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ext-did:7] Goto("SIP/fpbx-1-f04d84a7-0029dad8", "timeconditions,1,1") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [1@timeconditions:1] GotoIfTime("SIP/fpbx-1-f04d84a7-0029dad8", "12:30-16:00,mon-fri,*,*?truestate") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [1@timeconditions:2] GotoIfTime("SIP/fpbx-1-f04d84a7-0029dad8", "07:00-11:30,mon-fri,*,*?truestate") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [1@timeconditions:8] GotoIf("SIP/fpbx-1-f04d84a7-0029dad8", "0?falsegoto") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [1@timeconditions:9] ExecIf("SIP/fpbx-1-f04d84a7-0029dad8", "0?Set(DB(TC/1)=)") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [1@timeconditions:10] GotoIf("SIP/fpbx-1-f04d84a7-0029dad8", "1?ivr-2,s,1") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:1] Set("SIP/fpbx-1-f04d84a7-0029dad8", "TIMEOUT_LOOPCOUNT=0") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:2] Set("SIP/fpbx-1-f04d84a7-0029dad8", "INVALID_LOOPCOUNT=0") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:3] Set("SIP/fpbx-1-f04d84a7-0029dad8", "_IVR_CONTEXT_ivr-2=") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:4] Set("SIP/fpbx-1-f04d84a7-0029dad8", "_IVR_CONTEXT=ivr-2") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:5] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__IVR_RETVM=") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:6] GotoIf("SIP/fpbx-1-f04d84a7-0029dad8", "0?skip") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:7] Answer("SIP/fpbx-1-f04d84a7-0029dad8", "") in new stack
+[2016-12-01 07:10:46] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:8] Wait("SIP/fpbx-1-f04d84a7-0029dad8", "1") in new stack
+[2016-12-01 07:10:47] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:9] Set("SIP/fpbx-1-f04d84a7-0029dad8", "IVR_MSG=custom/open-ivr-message") in new stack
+[2016-12-01 07:10:47] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:10] Set("SIP/fpbx-1-f04d84a7-0029dad8", "TIMEOUT(digit)=3") in new stack
+[2016-12-01 07:10:47] VERBOSE[25997] pbx.c:     -- Executing [s@ivr-2:11] ExecIf("SIP/fpbx-1-f04d84a7-0029dad8", "1?Background(custom/open-ivr-message)") in new stack
+[2016-12-01 07:10:47] VERBOSE[25997] file.c:     -- <SIP/fpbx-1-f04d84a7-0029dad8> Playing 'custom/open-ivr-message.slin' (language 'en')
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [1@ivr-2:1] Goto("SIP/fpbx-1-f04d84a7-0029dad8", "ext-queues,299,1") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:1] Macro("SIP/fpbx-1-f04d84a7-0029dad8", "user-callerid,") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:2] Answer("SIP/fpbx-1-f04d84a7-0029dad8", "") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:3] Macro("SIP/fpbx-1-f04d84a7-0029dad8", "blkvm-set,reset") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@macro-blkvm-set:1] ExecIf("SIP/fpbx-1-f04d84a7-0029dad8", "1?Set(__BLKVM_CHANNEL=SIP/fpbx-1-f04d84a7-0029dad8)") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@macro-blkvm-set:2] Set("SIP/fpbx-1-f04d84a7-0029dad8", "SHARED(BLKVM,SIP/fpbx-1-f04d84a7-0029dad8)=TRUE") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@macro-blkvm-set:3] Set("SIP/fpbx-1-f04d84a7-0029dad8", "GOSUB_RETVAL=TRUE") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@macro-blkvm-set:4] MacroExit("SIP/fpbx-1-f04d84a7-0029dad8", "") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:4] ExecIf("SIP/fpbx-1-f04d84a7-0029dad8", "1?Set(_DIAL_OPTIONS=trM(auto-blkvm))") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:5] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__NODEST=299") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:6] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__ALERT_INFO=Bellcore-Busy") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:7] Gosub("SIP/fpbx-1-f04d84a7-0029dad8", "sub-record-check,s,1(q,299,dontcare)") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:1] GotoIf("SIP/fpbx-1-f04d84a7-0029dad8", "1?check") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:6] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__MON_FMT=wav") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:7] GotoIf("SIP/fpbx-1-f04d84a7-0029dad8", "1?next") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:10] ExecIf("SIP/fpbx-1-f04d84a7-0029dad8", "0?Return()") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:11] GotoIf("SIP/fpbx-1-f04d84a7-0029dad8", "0?q,1") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:12] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__REC_STATUS=INITIALIZED") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:13] ExecIf("SIP/fpbx-1-f04d84a7-0029dad8", "1?Set(__REC_POLICY_MODE=dontcare)") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:14] Set("SIP/fpbx-1-f04d84a7-0029dad8", "NOW=1480605062") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:15] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__DAY=01") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:16] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__MONTH=12") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:17] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__YEAR=2016") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [s@sub-record-check:21] Goto("SIP/fpbx-1-f04d84a7-0029dad8", "q,1") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [q@sub-record-check:1] GosubIf("SIP/fpbx-1-f04d84a7-0029dad8", "0?recq,1(q,299,17044955333)") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [q@sub-record-check:2] Return("SIP/fpbx-1-f04d84a7-0029dad8", "") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:8] Set("SIP/fpbx-1-f04d84a7-0029dad8", "__CWIGNORE=TRUE") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:9] QueueLog("SIP/fpbx-1-f04d84a7-0029dad8", "299,1480605046.3000238,NONE,DID,s") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] pbx.c:     -- Executing [299@ext-queues:10] Queue("SIP/fpbx-1-f04d84a7-0029dad8", "299,t,,") in new stack
+[2016-12-01 07:11:02] VERBOSE[25997] res_musiconhold.c:     -- Started music on hold, class 'default', on SIP/fpbx-1-f04d84a7-0029dad8
+[2016-12-01 07:11:02] VERBOSE[25997] app_queue.c:     -- Local/213@from-internal-b5b0;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-0029dad8
+[2016-12-01 07:11:02] VERBOSE[25997] app_queue.c:     -- Local/213@from-internal-b5b0;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-0029dad8
+[2016-12-01 07:11:02] VERBOSE[25997] app_queue.c:     -- Local/210@from-internal-b2eb;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-0029dad8
+[2016-12-01 07:11:02] VERBOSE[25997] app_queue.c:     -- Local/210@from-internal-b2eb;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-0029dad8
+[2016-12-01 07:11:04] VERBOSE[26002] pbx.c:     -- Executing [s@macro-blkvm-clr:1] Set("SIP/210-0029dada", "SHARED(BLKVM,SIP/fpbx-1-f04d84a7-0029dad8)=") in new stack
+[2016-12-01 07:11:04] VERBOSE[25997] app_queue.c:     -- Local/210@from-internal-b2eb;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-0029dad8
+[2016-12-01 07:11:04] VERBOSE[25997] app_queue.c:     -- Local/210@from-internal-b2eb;1 answered SIP/fpbx-1-f04d84a7-0029dad8
+[2016-12-01 07:11:04] VERBOSE[25997] res_musiconhold.c:     -- Stopped music on hold on SIP/fpbx-1-f04d84a7-0029dad8
+[2016-12-01 07:18:01] VERBOSE[25997] pbx.c:     -- Executing [h@ext-queues:1] Macro("SIP/fpbx-1-f04d84a7-0029dad8", "hangupcall,") in new stack
+[2016-12-01 07:18:01] VERBOSE[25997] pbx.c:     -- Executing [s@macro-hangupcall:1] GotoIf("SIP/fpbx-1-f04d84a7-0029dad8", "1?theend") in new stack
+[2016-12-01 07:18:01] VERBOSE[25997] pbx.c:     -- Executing [s@macro-hangupcall:3] ExecIf("SIP/fpbx-1-f04d84a7-0029dad8", "0?Set(CDR(recordingfile)=)") in new stack
+[2016-12-01 07:18:01] VERBOSE[25997] pbx.c:     -- Executing [s@macro-hangupcall:4] Hangup("SIP/fpbx-1-f04d84a7-0029dad8", "") in new stack
+[2016-12-01 07:18:01] VERBOSE[25997] app_macro.c:   == Spawn extension (macro-hangupcall, s, 4) exited non-zero on 'SIP/fpbx-1-f04d84a7-0029dad8' in macro 'hangupcall'
+[2016-12-01 07:18:01] VERBOSE[25997] features.c:   == Spawn extension (ext-queues, h, 1) exited non-zero on 'SIP/fpbx-1-f04d84a7-0029dad8'
+[2016-12-01 07:18:01] VERBOSE[25997] pbx.c:   == Spawn extension (ext-queues, 299, 10) exited non-zero on 'SIP/fpbx-1-f04d84a7-0029dad8'

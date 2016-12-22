@@ -66,6 +66,7 @@ etl merges the new data with the unclosed calls in the database, so you should b
 
 
 #### TODO
+- Add tests for syslog mode (no timestamp)
 - etl should not require database connection in --dry-run mode
 - calls.json should not be embedded in the build (go to AJAX)
 - Use bootstrap to organize the views
