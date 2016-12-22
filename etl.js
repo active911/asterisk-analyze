@@ -27,7 +27,7 @@ if(!fs.existsSync(nconf.get('general').input)){
 }
 
 // Create Redis client
-var redis
+//var redis
 
 // Connect to the databsae
 mysql

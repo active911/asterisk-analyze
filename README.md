@@ -70,5 +70,8 @@ etl merges the new data with the unclosed calls in the database, so you should b
 - calls.json should not be embedded in the build (go to AJAX)
 - Use bootstrap to organize the views
 - Add more graphs
+- etl does duplicate detection, but it may not be able to detect duplicates added by syslogd because syslogd must use its own time source (TODO: add some time fuzz here so we rely more on the SIP ID of the caller)
+- syslogd may accumulate garabage SIP IDs over time if it sees but does not properly understand outgoing calls. This may effectively constitute a memory leak.  Prune calls older than a week (or something).
+- Fix to track outgoing calls, and calls that create calls (forward to cell phone)
 
 

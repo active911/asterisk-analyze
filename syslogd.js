@@ -4,7 +4,7 @@ var nconf = require('nconf');
 var log = require("bunyan").createLogger({"name":"asterisk-analyze-syslog"});
 var mysql = require("promise-mysql");
 var moment = require("moment");
-//var redis = new (require("ioredis"))(); //promise.promisifyAll(require("redis"));
+var Redis = require("ioredis"); //promise.promisifyAll(require("redis"));
 var syslogd = require("syslogd");
 
 // Read the config
@@ -17,30 +17,101 @@ nconf
 // Create analyzer
 var al=new asterisklog({queues: nconf.get('asterisk').queues});
 
-// // Listen for incoming messages
-// syslogd((entry) => {
 
-// 	console.log(JSON.stringify(entry));
+// Connect to the databsae
+mysql
+	.createConnection(nconf.get('mysql'))
+	.then((c)=>{
 
-// },{ "address" : nconf.get("general").syslogd.address}).listen(nconf.get("general").syslogd.port, (err)=>{
+		log.info("Connected to database");
+		var redis=new Redis();
 
-// 	if(err){
-// 		console.log("error "+err);
-// 	}
+		// A new call has been found
+		al.on("start", (call) => {
 
-// 	console.log("listening");
-// });
+			log.info("New call started");
+			redis.publish("calls",JSON.stringify(call));
+		})
+		.on("enqueued", ()=>{
 
-// Listen for incoming messages
-syslogd((entry) => {
+			log.info("Call in queue");
+			redis.publish("calls",JSON.stringify(call));
+		})
+		.on("end", (call) => {
 
-	console.log(JSON.stringify(entry));
+			log.info("Call ended");
+			redis.publish("calls",JSON.stringify(call));
 
-},{ "address" : "192.168.1.114"}).listen(514, (err)=>{
 
-	if(err){
-		console.log("error "+err);
-	}
+			// See if this record already exists
+			c
+				.query("SELECT id, data FROM calls WHERE start = ?", [moment(call.start).format('YYYY-MM-DD HH:mm:ss')])
+				.then((rows) =>{
 
-	console.log("listening");
-});
+
+					for(n in rows) {
+
+						var data=JSON.parse(rows[n].data);
+						if (call.id == data.id){
+
+							if(call.end) {
+
+								// This is a match.  Call already listed as ended.  Do not insert.
+								log.info("Existing call found.  Not saving in database");
+								return promise.resolve(false);
+							}
+						}
+					}
+
+					// No matching call.  Insert
+					log.info("Inserting new call into database");
+					return promise.resolve(true);
+
+				})
+				.then((b)=>{
+
+					if(b) c.query("INSERT INTO calls (start, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)]);
+				});		
+		});	
+
+		return promise.resolve(true);
+	})
+	.then(()=>{
+
+
+		// Listen for incoming messages
+		syslogd((entry) => {
+
+			if(entry.address==nconf.get('general').syslogd.allow) {
+
+				//log.info("Data: "+entry.msg);
+				al.add(entry.msg.trim());
+
+			} else {
+
+				console.log("Disallowing remote data from "+entry.address);
+			}
+
+		},{ "address" : nconf.get("general").syslogd.address}).listen(nconf.get("general").syslogd.port, (err)=>{
+
+			if(err){
+				
+				throw err;	// Typically because we forgot to sudo
+
+			} else {
+
+				log.info("Listening");
+				return promise.resolve(true);
+			}
+
+		});
+
+	})
+	.catch((err) =>{
+
+		log.error(err);
+		log.error("Quitting");
+		process.exit();
+	});
+
+
