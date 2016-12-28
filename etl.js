@@ -64,7 +64,7 @@ mysql
 
 			// See if this record already exists
 			c
-				.query("SELECT id, data FROM calls WHERE start = ?", [moment(call.start).format('YYYY-MM-DD HH:mm:ss')])
+				.query("SELECT id, data FROM calls WHERE stamp = ?", [moment(call.start).format('YYYY-MM-DD HH:mm:ss')])
 				.then((rows) =>{
 
 
@@ -89,7 +89,7 @@ mysql
 				})
 				.then((b)=>{
 
-					if(b) c.query("INSERT INTO calls (start, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)]);
+					if(b) c.query("INSERT INTO calls (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)]);
 				});		
 		});	
 

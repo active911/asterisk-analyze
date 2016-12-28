@@ -10,6 +10,7 @@
 
 ```bash
 npm install
+npm test
 ```
 
 #### Configure
@@ -40,7 +41,7 @@ If you don't want to install on the asterisk machine itself, you can stream the 
 ```sql
 CREATE TABLE calls (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-start datetime not null,
+stamp datetime not null,
 data text null
 )ENGINE=innodb;
 ```
@@ -66,7 +67,6 @@ etl merges the new data with the unclosed calls in the database, so you should b
 
 
 #### TODO
-- Add tests for syslog mode (no timestamp)
 - etl should not require database connection in --dry-run mode
 - calls.json should not be embedded in the build (go to AJAX)
 - Use bootstrap to organize the views
