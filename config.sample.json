@@ -1,9 +1,18 @@
 {
-  "general": {
-    "timezone": "America/Los_Angeles",
-    "logfile": "/var/log/asterisk/full"
-  },
-  "asterisk": {
-    "queues": "200"
-  }
+	"general": {
+		"timezone": "America/Los_Angeles",
+		"input": "/var/log/asterisk/full"
+		},
+	"asterisk": {
+		"queues": "200"
+	},
+
+	"mysql" : {
+
+		"host"  : "",
+		"user"  : "",
+		"password"  : "",
+		"database"  : ""
+
+	}
 }
