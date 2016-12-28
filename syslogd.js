@@ -15,7 +15,7 @@ nconf
 	.defaults({ "general" : { "input" : "full", "output" : "calls.json", "mode" : "follow" } });
 
 // Create analyzer
-var al=new asterisklog({queues: nconf.get('asterisk').queues});
+var al=new asterisklog({queues: nconf.get('asterisk').queues, "require_timestamps" : false });
 
 
 // Connect to the databsae

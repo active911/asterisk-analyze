@@ -1,0 +1,348 @@
+VERBOSE[3814]: netsock2.c:501 in ast_set_qos:   == Using SIP RTP TOS bits 184 
+VERBOSE[3814]: netsock2.c:523 in ast_set_qos:   == Using SIP RTP CoS mark 5 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [5415558888@from-pstn:1] NoOp("SIP/fpbx-1-f04d84a7-002a75b6", "Catch-All DID Match - Found 5415558888 - You probably want a DID for this.") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [5415558888@from-pstn:2] Goto("SIP/fpbx-1-f04d84a7-002a75b6", "ext-did,s,1") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (ext-did,s,1) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ext-did:1] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?Set(__FROM_DID=s)") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ext-did:2] Set("SIP/fpbx-1-f04d84a7-002a75b6", "CDR(did)=s") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ext-did:3] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "0 ?Set(CALLERID(name)=15415559999)") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ext-did:4] Ringing("SIP/fpbx-1-f04d84a7-002a75b6", "") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ext-did:5] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__CALLINGPRES_SV=allowed_not_screened") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ext-did:6] Set("SIP/fpbx-1-f04d84a7-002a75b6", "CALLERPRES()=allowed_not_screened") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ext-did:7] Goto("SIP/fpbx-1-f04d84a7-002a75b6", "timeconditions,1,1") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (timeconditions,1,1) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [1@timeconditions:1] GotoIfTime("SIP/fpbx-1-f04d84a7-002a75b6", "12:30-16:00,mon-fri,*,*?truestate") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (timeconditions,1,8) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [1@timeconditions:8] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "0?falsegoto") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [1@timeconditions:9] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "0?Set(DB(TC/1)=)") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [1@timeconditions:10] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?ivr-2,s,1") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (ivr-2,s,1) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:1] Set("SIP/fpbx-1-f04d84a7-002a75b6", "TIMEOUT_LOOPCOUNT=0") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:2] Set("SIP/fpbx-1-f04d84a7-002a75b6", "INVALID_LOOPCOUNT=0") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:3] Set("SIP/fpbx-1-f04d84a7-002a75b6", "_IVR_CONTEXT_ivr-2=") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:4] Set("SIP/fpbx-1-f04d84a7-002a75b6", "_IVR_CONTEXT=ivr-2") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:5] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__IVR_RETVM=") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:6] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "0?skip") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:7] Answer("SIP/fpbx-1-f04d84a7-002a75b6", "") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:8] Wait("SIP/fpbx-1-f04d84a7-002a75b6", "1") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:9] Set("SIP/fpbx-1-f04d84a7-002a75b6", "IVR_MSG=custom/open-ivr-message") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:10] Set("SIP/fpbx-1-f04d84a7-002a75b6", "TIMEOUT(digit)=3") in new stack 
+VERBOSE[12684]: func_timeout.c:183 in timeout_write:     -- Digit timeout set to 3.000 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ivr-2:11] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?Background(custom/open-ivr-message)") in new stack 
+VERBOSE[12684]: file.c:992 in ast_streamfile:     -- <SIP/fpbx-1-f04d84a7-002a75b6> Playing 'custom/open-ivr-message.slin' (language 'en') 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [1@ivr-2:1] Goto("SIP/fpbx-1-f04d84a7-002a75b6", "ext-queues,299,1") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (ext-queues,299,1) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:1] Macro("SIP/fpbx-1-f04d84a7-002a75b6", "user-callerid,") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:1] Set("SIP/fpbx-1-f04d84a7-002a75b6", "AMPUSER=15415559999") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:2] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "0?report") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:3] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?Set(REALCALLERIDNUM=15415559999)") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:4] Set("SIP/fpbx-1-f04d84a7-002a75b6", "AMPUSER=") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:5] Set("SIP/fpbx-1-f04d84a7-002a75b6", "AMPUSERCIDNAME=") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:6] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?report") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-user-callerid,s,11) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:11] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "0?continue") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:12] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__TTL=64") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:13] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?continue") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-user-callerid,s,24) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:24] Set("SIP/fpbx-1-f04d84a7-002a75b6", "CALLERID(number)=15415559999") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:25] Set("SIP/fpbx-1-f04d84a7-002a75b6", "CALLERID(name)=ALYRICA") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:26] Set("SIP/fpbx-1-f04d84a7-002a75b6", "CHANNEL(language)=en") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:2] Answer("SIP/fpbx-1-f04d84a7-002a75b6", "") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:3] Macro("SIP/fpbx-1-f04d84a7-002a75b6", "blkvm-set,reset") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-blkvm-set:1] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?Set(__BLKVM_CHANNEL=SIP/fpbx-1-f04d84a7-002a75b6)") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-blkvm-set:2] Set("SIP/fpbx-1-f04d84a7-002a75b6", "SHARED(BLKVM,SIP/fpbx-1-f04d84a7-002a75b6)=TRUE") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-blkvm-set:3] Set("SIP/fpbx-1-f04d84a7-002a75b6", "GOSUB_RETVAL=TRUE") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-blkvm-set:4] MacroExit("SIP/fpbx-1-f04d84a7-002a75b6", "") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:4] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?Set(_DIAL_OPTIONS=trM(auto-blkvm))") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:5] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__NODEST=299") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:6] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__ALERT_INFO=Bellcore-Busy") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:7] Gosub("SIP/fpbx-1-f04d84a7-002a75b6", "sub-record-check,s,1(q,299,dontcare)") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:1] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?check") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,s,6) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:6] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__MON_FMT=wav") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:7] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?next") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,s,10) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:10] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "0?Return()") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:11] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "0?q,1") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:12] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__REC_STATUS=INITIALIZED") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:13] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?Set(__REC_POLICY_MODE=dontcare)") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:14] Set("SIP/fpbx-1-f04d84a7-002a75b6", "NOW=1482880668") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:15] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__DAY=27") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:16] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__MONTH=12") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:17] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__YEAR=2016") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:18] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__TIMESTR=20161227-151748") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:19] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__FROMEXTEN=15415559999") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:20] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__CALLFILENAME=q-299-15415559999-20161227-151748-1482880653.3050928") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:21] Goto("SIP/fpbx-1-f04d84a7-002a75b6", "q,1") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,q,1) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [q@sub-record-check:1] GosubIf("SIP/fpbx-1-f04d84a7-002a75b6", "0?recq,1(q,299,15415559999)") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [q@sub-record-check:2] Return("SIP/fpbx-1-f04d84a7-002a75b6", "") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:8] Set("SIP/fpbx-1-f04d84a7-002a75b6", "__CWIGNORE=TRUE") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:9] QueueLog("SIP/fpbx-1-f04d84a7-002a75b6", "299,1482880653.3050928,NONE,DID,s") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [299@ext-queues:10] Queue("SIP/fpbx-1-f04d84a7-002a75b6", "299,t,,") in new stack 
+VERBOSE[12684]: res_musiconhold.c:442 in moh_files_alloc:     -- Started music on hold, class 'default', on SIP/fpbx-1-f04d84a7-002a75b6 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [210@from-internal:1] Set("Local/210@from-internal-7b77;2", "__RINGTIMER=15") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [210@from-internal:2] Macro("Local/210@from-internal-7b77;2", "exten-vm,210,210,0,0,0") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:1] Macro("Local/210@from-internal-7b77;2", "user-callerid,") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:1] Set("Local/210@from-internal-7b77;2", "AMPUSER=15415559999") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:2] GotoIf("Local/210@from-internal-7b77;2", "0?report") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:3] ExecIf("Local/210@from-internal-7b77;2", "1?Set(REALCALLERIDNUM=15415559999)") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:4] Set("Local/210@from-internal-7b77;2", "AMPUSER=") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:5] Set("Local/210@from-internal-7b77;2", "AMPUSERCIDNAME=") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:6] GotoIf("Local/210@from-internal-7b77;2", "1?report") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-user-callerid,s,11) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:11] GotoIf("Local/210@from-internal-7b77;2", "0?continue") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:12] Set("Local/210@from-internal-7b77;2", "__TTL=63") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:13] GotoIf("Local/210@from-internal-7b77;2", "1?continue") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-user-callerid,s,24) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:24] Set("Local/210@from-internal-7b77;2", "CALLERID(number)=15415559999") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:25] Set("Local/210@from-internal-7b77;2", "CALLERID(name)=ALYRICA") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:26] Set("Local/210@from-internal-7b77;2", "CHANNEL(language)=en") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:2] Set("Local/210@from-internal-7b77;2", "RingGroupMethod=none") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:3] Set("Local/210@from-internal-7b77;2", "__EXTTOCALL=210") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:4] Set("Local/210@from-internal-7b77;2", "__PICKUPMARK=210") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:5] Set("Local/210@from-internal-7b77;2", "RT=15") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:6] ExecIf("Local/210@from-internal-7b77;2", "0?Macro(vm,210,DIRECTDIAL,)") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:7] ExecIf("Local/210@from-internal-7b77;2", "0?MacroExit()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:8] Gosub("Local/210@from-internal-7b77;2", "sub-record-check,s,1(exten,210,)") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:1] GotoIf("Local/210@from-internal-7b77;2", "1?check") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,s,6) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:6] Set("Local/210@from-internal-7b77;2", "__MON_FMT=wav") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:7] GotoIf("Local/210@from-internal-7b77;2", "1?next") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,s,10) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:10] ExecIf("Local/210@from-internal-7b77;2", "0?Return()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:11] GotoIf("Local/210@from-internal-7b77;2", "1?exten,1") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,exten,1) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [exten@sub-record-check:1] GotoIf("Local/210@from-internal-7b77;2", "1?callee") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,exten,8) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [exten@sub-record-check:8] GosubIf("Local/210@from-internal-7b77;2", "0?record,1(exten,210,15415559999)") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [exten@sub-record-check:9] Return("Local/210@from-internal-7b77;2", "") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:9] GotoIf("Local/210@from-internal-7b77;2", "1?macrodial") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-exten-vm,s,15) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:15] GosubIf("Local/210@from-internal-7b77;2", "0?clrheader,1()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:16] Macro("Local/210@from-internal-7b77;2", "dial-one,15,trM(auto-blkvm),210") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:1] Set("Local/210@from-internal-7b77;2", "DEXTEN=210") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:2] Set("Local/210@from-internal-7b77;2", "DIALSTATUS_CW=") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:3] GosubIf("Local/210@from-internal-7b77;2", "0?screen,1()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:4] GosubIf("Local/210@from-internal-7b77;2", "0?cf,1()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:5] GotoIf("Local/210@from-internal-7b77;2", "1?skip1") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,8) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:8] GotoIf("Local/210@from-internal-7b77;2", "0?nodial") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:9] GotoIf("Local/210@from-internal-7b77;2", "0?continue") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:10] Set("Local/210@from-internal-7b77;2", "EXTHASCW=") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:11] GotoIf("Local/210@from-internal-7b77;2", "1?next1:cwinusebusy") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,12) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:12] GotoIf("Local/210@from-internal-7b77;2", "0?docfu:skip3") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,16) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:16] GotoIf("Local/210@from-internal-7b77;2", "1?next2:continue") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,17) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:17] GotoIf("Local/210@from-internal-7b77;2", "1?continue") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,25) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:25] GotoIf("Local/210@from-internal-7b77;2", "0?nodial") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:26] GosubIf("Local/210@from-internal-7b77;2", "1?dstring,1():dlocal,1()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:1] Set("Local/210@from-internal-7b77;2", "DSTRING=") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:2] Set("Local/210@from-internal-7b77;2", "DEVICES=210") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:3] ExecIf("Local/210@from-internal-7b77;2", "0?Return()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:4] ExecIf("Local/210@from-internal-7b77;2", "0?Set(DEVICES=10)") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:5] Set("Local/210@from-internal-7b77;2", "LOOPCNT=1") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:6] Set("Local/210@from-internal-7b77;2", "ITER=1") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:7] Set("Local/210@from-internal-7b77;2", "THISDIAL=SIP/210") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:8] GosubIf("Local/210@from-internal-7b77;2", "1?zap2dahdi,1()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:1] ExecIf("Local/210@from-internal-7b77;2", "0?Return()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:2] Set("Local/210@from-internal-7b77;2", "NEWDIAL=") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:3] Set("Local/210@from-internal-7b77;2", "LOOPCNT2=1") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:4] Set("Local/210@from-internal-7b77;2", "ITER2=1") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:5] Set("Local/210@from-internal-7b77;2", "THISPART2=SIP/210") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:6] ExecIf("Local/210@from-internal-7b77;2", "0?Set(THISPART2=DAHDI/210)") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:7] Set("Local/210@from-internal-7b77;2", "NEWDIAL=SIP/210&") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:8] Set("Local/210@from-internal-7b77;2", "ITER2=2") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:9] GotoIf("Local/210@from-internal-7b77;2", "0?begin2") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:10] Set("Local/210@from-internal-7b77;2", "THISDIAL=SIP/210") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:11] Return("Local/210@from-internal-7b77;2", "") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:9] Set("Local/210@from-internal-7b77;2", "DSTRING=SIP/210&") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:10] Set("Local/210@from-internal-7b77;2", "ITER=2") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:11] GotoIf("Local/210@from-internal-7b77;2", "0?begin") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:12] Set("Local/210@from-internal-7b77;2", "DSTRING=SIP/210") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:13] Return("Local/210@from-internal-7b77;2", "") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:27] GotoIf("Local/210@from-internal-7b77;2", "0?nodial") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:28] GotoIf("Local/210@from-internal-7b77;2", "0?skiptrace") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:29] GosubIf("Local/210@from-internal-7b77;2", "1?ctset,1():ctclear,1()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [ctset@macro-dial-one:1] Set("Local/210@from-internal-7b77;2", "DB(CALLTRACE/210)=15415559999") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [ctset@macro-dial-one:2] Return("Local/210@from-internal-7b77;2", "") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:30] Set("Local/210@from-internal-7b77;2", "D_OPTIONS=trM(auto-blkvm)") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:31] ExecIf("Local/210@from-internal-7b77;2", "1?SIPAddHeader(Alert-Info: Bellcore-Busy)") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:32] ExecIf("Local/210@from-internal-7b77;2", "0?SIPAddHeader()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:33] ExecIf("Local/210@from-internal-7b77;2", "0?Set(CHANNEL(musicclass)=)") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:34] GosubIf("Local/210@from-internal-7b77;2", "0?qwait,1()") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:35] Set("Local/210@from-internal-7b77;2", "__CWIGNORE=TRUE") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:36] Set("Local/210@from-internal-7b77;2", "__KEEPCID=TRUE") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:37] GotoIf("Local/210@from-internal-7b77;2", "0?usegoto,1") in new stack 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:38] GotoIf("Local/210@from-internal-7b77;2", "1?godial") in new stack 
+VERBOSE[12687]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,42) 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:42] Dial("Local/210@from-internal-7b77;2", "SIP/210,15,trM(auto-blkvm)") in new stack 
+VERBOSE[12687]: netsock2.c:501 in ast_set_qos:   == Using SIP RTP TOS bits 184 
+VERBOSE[12687]: netsock2.c:523 in ast_set_qos:   == Using SIP RTP CoS mark 5 
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 210[ext-local] new state Ringing for Notify User 212  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 210[ext-local] new state Ringing for Notify User 07431298  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 210[ext-local] new state Ringing for Notify User 18436207  
+VERBOSE[12687]: app_dial.c:2363 in dial_exec_full:     -- Called SIP/210 
+VERBOSE[12684]: app_queue.c:3719 in wait_for_answer:     -- Local/210@from-internal-7b77;1 is ringing 
+VERBOSE[12684]: app_queue.c:3735 in wait_for_answer:     -- Local/210@from-internal-7b77;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-002a75b6 
+VERBOSE[12684]: app_queue.c:3735 in wait_for_answer:     -- Local/210@from-internal-7b77;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-002a75b6 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [213@from-internal:1] GotoIf("Local/213@from-internal-1e30;2", "1?ext-local,213,1") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (ext-local,213,1) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [213@ext-local:1] Set("Local/213@from-internal-1e30;2", "__RINGTIMER=30") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [213@ext-local:2] Macro("Local/213@from-internal-1e30;2", "exten-vm,213,213,0,0,0") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:1] Macro("Local/213@from-internal-1e30;2", "user-callerid,") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:1] Set("Local/213@from-internal-1e30;2", "AMPUSER=15415559999") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:2] GotoIf("Local/213@from-internal-1e30;2", "0?report") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:3] ExecIf("Local/213@from-internal-1e30;2", "1?Set(REALCALLERIDNUM=15415559999)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:4] Set("Local/213@from-internal-1e30;2", "AMPUSER=") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:5] Set("Local/213@from-internal-1e30;2", "AMPUSERCIDNAME=") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:6] GotoIf("Local/213@from-internal-1e30;2", "1?report") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-user-callerid,s,11) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:11] GotoIf("Local/213@from-internal-1e30;2", "0?continue") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:12] Set("Local/213@from-internal-1e30;2", "__TTL=63") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:13] GotoIf("Local/213@from-internal-1e30;2", "1?continue") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-user-callerid,s,24) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:24] Set("Local/213@from-internal-1e30;2", "CALLERID(number)=15415559999") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:25] Set("Local/213@from-internal-1e30;2", "CALLERID(name)=ALYRICA") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-user-callerid:26] Set("Local/213@from-internal-1e30;2", "CHANNEL(language)=en") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:2] Set("Local/213@from-internal-1e30;2", "RingGroupMethod=none") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:3] Set("Local/213@from-internal-1e30;2", "__EXTTOCALL=213") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:4] Set("Local/213@from-internal-1e30;2", "__PICKUPMARK=213") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:5] Set("Local/213@from-internal-1e30;2", "RT=30") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:6] ExecIf("Local/213@from-internal-1e30;2", "0?Macro(vm,213,DIRECTDIAL,)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:7] ExecIf("Local/213@from-internal-1e30;2", "0?MacroExit()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:8] Gosub("Local/213@from-internal-1e30;2", "sub-record-check,s,1(exten,213,)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:1] GotoIf("Local/213@from-internal-1e30;2", "1?check") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,s,6) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:6] Set("Local/213@from-internal-1e30;2", "__MON_FMT=wav") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:7] GotoIf("Local/213@from-internal-1e30;2", "1?next") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,s,10) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:10] ExecIf("Local/213@from-internal-1e30;2", "0?Return()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@sub-record-check:11] GotoIf("Local/213@from-internal-1e30;2", "1?exten,1") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,exten,1) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [exten@sub-record-check:1] GotoIf("Local/213@from-internal-1e30;2", "1?callee") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (sub-record-check,exten,8) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [exten@sub-record-check:8] GosubIf("Local/213@from-internal-1e30;2", "0?record,1(exten,213,15415559999)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [exten@sub-record-check:9] Return("Local/213@from-internal-1e30;2", "") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:9] GotoIf("Local/213@from-internal-1e30;2", "1?macrodial") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-exten-vm,s,15) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:15] GosubIf("Local/213@from-internal-1e30;2", "0?clrheader,1()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-exten-vm:16] Macro("Local/213@from-internal-1e30;2", "dial-one,30,trM(auto-blkvm),213") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:1] Set("Local/213@from-internal-1e30;2", "DEXTEN=213") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:2] Set("Local/213@from-internal-1e30;2", "DIALSTATUS_CW=") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:3] GosubIf("Local/213@from-internal-1e30;2", "0?screen,1()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:4] GosubIf("Local/213@from-internal-1e30;2", "0?cf,1()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:5] GotoIf("Local/213@from-internal-1e30;2", "1?skip1") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,8) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:8] GotoIf("Local/213@from-internal-1e30;2", "0?nodial") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:9] GotoIf("Local/213@from-internal-1e30;2", "0?continue") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:10] Set("Local/213@from-internal-1e30;2", "EXTHASCW=") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:11] GotoIf("Local/213@from-internal-1e30;2", "1?next1:cwinusebusy") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,12) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:12] GotoIf("Local/213@from-internal-1e30;2", "0?docfu:skip3") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,16) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:16] GotoIf("Local/213@from-internal-1e30;2", "1?next2:continue") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,17) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:17] GotoIf("Local/213@from-internal-1e30;2", "1?continue") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,25) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:25] GotoIf("Local/213@from-internal-1e30;2", "0?nodial") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:26] GosubIf("Local/213@from-internal-1e30;2", "1?dstring,1():dlocal,1()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:1] Set("Local/213@from-internal-1e30;2", "DSTRING=") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:2] Set("Local/213@from-internal-1e30;2", "DEVICES=213") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:3] ExecIf("Local/213@from-internal-1e30;2", "0?Return()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:4] ExecIf("Local/213@from-internal-1e30;2", "0?Set(DEVICES=13)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:5] Set("Local/213@from-internal-1e30;2", "LOOPCNT=1") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:6] Set("Local/213@from-internal-1e30;2", "ITER=1") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:7] Set("Local/213@from-internal-1e30;2", "THISDIAL=SIP/213") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:8] GosubIf("Local/213@from-internal-1e30;2", "1?zap2dahdi,1()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:1] ExecIf("Local/213@from-internal-1e30;2", "0?Return()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:2] Set("Local/213@from-internal-1e30;2", "NEWDIAL=") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:3] Set("Local/213@from-internal-1e30;2", "LOOPCNT2=1") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:4] Set("Local/213@from-internal-1e30;2", "ITER2=1") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:5] Set("Local/213@from-internal-1e30;2", "THISPART2=SIP/213") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:6] ExecIf("Local/213@from-internal-1e30;2", "0?Set(THISPART2=DAHDI/213)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:7] Set("Local/213@from-internal-1e30;2", "NEWDIAL=SIP/213&") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:8] Set("Local/213@from-internal-1e30;2", "ITER2=2") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:9] GotoIf("Local/213@from-internal-1e30;2", "0?begin2") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:10] Set("Local/213@from-internal-1e30;2", "THISDIAL=SIP/213") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [zap2dahdi@macro-dial-one:11] Return("Local/213@from-internal-1e30;2", "") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:9] Set("Local/213@from-internal-1e30;2", "DSTRING=SIP/213&") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:10] Set("Local/213@from-internal-1e30;2", "ITER=2") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:11] GotoIf("Local/213@from-internal-1e30;2", "0?begin") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:12] Set("Local/213@from-internal-1e30;2", "DSTRING=SIP/213") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [dstring@macro-dial-one:13] Return("Local/213@from-internal-1e30;2", "") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:27] GotoIf("Local/213@from-internal-1e30;2", "0?nodial") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:28] GotoIf("Local/213@from-internal-1e30;2", "0?skiptrace") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:29] GosubIf("Local/213@from-internal-1e30;2", "1?ctset,1():ctclear,1()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [ctset@macro-dial-one:1] Set("Local/213@from-internal-1e30;2", "DB(CALLTRACE/213)=15415559999") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [ctset@macro-dial-one:2] Return("Local/213@from-internal-1e30;2", "") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:30] Set("Local/213@from-internal-1e30;2", "D_OPTIONS=trM(auto-blkvm)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:31] ExecIf("Local/213@from-internal-1e30;2", "1?SIPAddHeader(Alert-Info: Bellcore-Busy)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:32] ExecIf("Local/213@from-internal-1e30;2", "0?SIPAddHeader()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:33] ExecIf("Local/213@from-internal-1e30;2", "0?Set(CHANNEL(musicclass)=)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:34] GosubIf("Local/213@from-internal-1e30;2", "0?qwait,1()") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:35] Set("Local/213@from-internal-1e30;2", "__CWIGNORE=TRUE") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:36] Set("Local/213@from-internal-1e30;2", "__KEEPCID=TRUE") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:37] GotoIf("Local/213@from-internal-1e30;2", "0?usegoto,1") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:38] GotoIf("Local/213@from-internal-1e30;2", "1?godial") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-dial-one,s,42) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-dial-one:42] Dial("Local/213@from-internal-1e30;2", "SIP/213,30,trM(auto-blkvm)") in new stack 
+VERBOSE[12688]: netsock2.c:501 in ast_set_qos:   == Using SIP RTP TOS bits 184 
+VERBOSE[12688]: netsock2.c:523 in ast_set_qos:   == Using SIP RTP CoS mark 5 
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 213[ext-local] new state Ringing for Notify User 210  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 213[ext-local] new state Ringing for Notify User 18436207  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 213[ext-local] new state Ringing for Notify User 212  
+VERBOSE[12688]: app_dial.c:2363 in dial_exec_full:     -- Called SIP/213 
+VERBOSE[12684]: app_queue.c:3719 in wait_for_answer:     -- Local/213@from-internal-1e30;1 is ringing 
+VERBOSE[12684]: app_queue.c:3735 in wait_for_answer:     -- Local/213@from-internal-1e30;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-002a75b6 
+VERBOSE[12684]: app_queue.c:3735 in wait_for_answer:     -- Local/213@from-internal-1e30;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-002a75b6 
+VERBOSE[12687]: app_dial.c:1264 in wait_for_answer:     -- SIP/210-002a75b7 is ringing 
+VERBOSE[12684]: app_queue.c:3719 in wait_for_answer:     -- Local/210@from-internal-7b77;1 is ringing 
+VERBOSE[12688]: app_dial.c:1264 in wait_for_answer:     -- SIP/213-002a75b8 is ringing 
+VERBOSE[12684]: app_queue.c:3719 in wait_for_answer:     -- Local/213@from-internal-1e30;1 is ringing 
+VERBOSE[12688]: app_dial.c:1175 in wait_for_answer:     -- SIP/213-002a75b8 answered Local/213@from-internal-1e30;2 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-auto-blkvm:1] Set("SIP/213-002a75b8", "__MACRO_RESULT=") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-auto-blkvm:2] Macro("SIP/213-002a75b8", "blkvm-clr,") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-blkvm-clr:1] Set("SIP/213-002a75b8", "SHARED(BLKVM,SIP/fpbx-1-f04d84a7-002a75b6)=") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-blkvm-clr:2] Set("SIP/213-002a75b8", "GOSUB_RETVAL=") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-blkvm-clr:3] MacroExit("SIP/213-002a75b8", "") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-auto-blkvm:3] ExecIf("SIP/213-002a75b8", "0?Set(MASTER_CHANNEL(CONNECTEDLINE(num))=213)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-auto-blkvm:4] ExecIf("SIP/213-002a75b8", "0?Set(MASTER_CHANNEL(CONNECTEDLINE(name))=Tyler Lyman)") in new stack 
+VERBOSE[12684]: app_queue.c:3735 in wait_for_answer:     -- Local/213@from-internal-1e30;1 connected line has changed. Saving it until answer for SIP/fpbx-1-f04d84a7-002a75b6 
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 213[ext-local] new state InUse for Notify User 210  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 213[ext-local] new state InUse for Notify User 18436207  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 213[ext-local] new state InUse for Notify User 212  
+VERBOSE[12684]: app_queue.c:3655 in wait_for_answer:     -- Local/213@from-internal-1e30;1 answered SIP/fpbx-1-f04d84a7-002a75b6 
+VERBOSE[12684]: res_musiconhold.c:271 in moh_files_release:     -- Stopped music on hold on SIP/fpbx-1-f04d84a7-002a75b6 
+VERBOSE[12687]: app_macro.c:430 in _macro_exec:   == Spawn extension (macro-dial-one, s, 42) exited non-zero on 'Local/210@from-internal-7b77;2' in macro 'dial-one' 
+VERBOSE[12687]: app_macro.c:430 in _macro_exec:   == Spawn extension (macro-exten-vm, s, 16) exited non-zero on 'Local/210@from-internal-7b77;2' in macro 'exten-vm' 
+VERBOSE[12687]: pbx.c:5326 in __ast_pbx_run:   == Spawn extension (from-internal, 210, 2) exited non-zero on 'Local/210@from-internal-7b77;2' 
+VERBOSE[12687]: pbx.c:4256 in pbx_extension_helper:     -- Executing [h@from-internal:1] Hangup("Local/210@from-internal-7b77;2", "") in new stack 
+VERBOSE[12687]: pbx.c:5504 in __ast_pbx_run:   == Spawn extension (from-internal, h, 1) exited non-zero on 'Local/210@from-internal-7b77;2' 
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 210[ext-local] new state Idle for Notify User 212  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 210[ext-local] new state Idle for Notify User 07431298  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 210[ext-local] new state Idle for Notify User 18436207  
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [h@ext-queues:1] Macro("SIP/fpbx-1-f04d84a7-002a75b6", "hangupcall,") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-hangupcall:1] GotoIf("SIP/fpbx-1-f04d84a7-002a75b6", "1?theend") in new stack 
+VERBOSE[12684]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-hangupcall,s,3) 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-hangupcall:3] ExecIf("SIP/fpbx-1-f04d84a7-002a75b6", "0?Set(CDR(recordingfile)=)") in new stack 
+VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-hangupcall:4] Hangup("SIP/fpbx-1-f04d84a7-002a75b6", "") in new stack 
+VERBOSE[12684]: app_macro.c:430 in _macro_exec:   == Spawn extension (macro-hangupcall, s, 4) exited non-zero on 'SIP/fpbx-1-f04d84a7-002a75b6' in macro 'hangupcall' 
+VERBOSE[12684]: features.c:4361 in ast_bridge_call:   == Spawn extension (ext-queues, h, 1) exited non-zero on 'SIP/fpbx-1-f04d84a7-002a75b6' 
+VERBOSE[12684]: pbx.c:5326 in __ast_pbx_run:   == Spawn extension (ext-queues, 299, 10) exited non-zero on 'SIP/fpbx-1-f04d84a7-002a75b6' 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [h@macro-dial-one:1] Macro("Local/213@from-internal-1e30;2", "hangupcall,") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-hangupcall:1] GotoIf("Local/213@from-internal-1e30;2", "1?theend") in new stack 
+VERBOSE[12688]: pbx.c:10140 in pbx_builtin_goto:     -- Goto (macro-hangupcall,s,3) 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-hangupcall:3] ExecIf("Local/213@from-internal-1e30;2", "0?Set(CDR(recordingfile)=)") in new stack 
+VERBOSE[12688]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@macro-hangupcall:4] Hangup("Local/213@from-internal-1e30;2", "") in new stack 
+VERBOSE[12688]: app_macro.c:430 in _macro_exec:   == Spawn extension (macro-hangupcall, s, 4) exited non-zero on 'Local/213@from-internal-1e30;2' in macro 'hangupcall' 
+VERBOSE[12688]: features.c:4361 in ast_bridge_call:   == Spawn extension (macro-dial-one, h, 1) exited non-zero on 'Local/213@from-internal-1e30;2' 
+VERBOSE[12688]: app_macro.c:430 in _macro_exec:   == Spawn extension (macro-dial-one, s, 42) exited non-zero on 'Local/213@from-internal-1e30;2' in macro 'dial-one' 
+VERBOSE[12688]: app_macro.c:430 in _macro_exec:   == Spawn extension (macro-exten-vm, s, 16) exited non-zero on 'Local/213@from-internal-1e30;2' in macro 'exten-vm' 
+VERBOSE[12688]: pbx.c:5326 in __ast_pbx_run:   == Spawn extension (ext-local, 213, 2) exited non-zero on 'Local/213@from-internal-1e30;2' 
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 213[ext-local] new state Idle for Notify User 210  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 213[ext-local] new state Idle for Notify User 18436207  
+VERBOSE[3321]: chan_sip.c:14724 in extensionstate_update:   == Extension Changed 213[ext-local] new state Idle for Notify User 212  

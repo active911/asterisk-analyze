@@ -3,9 +3,9 @@ var asterisklog=require("../lib/asterisklog.js");
 var linebyline=require("line-by-line");
 
 
-describe("Normal call",()=>{
+describe("Ingest sample call data",()=>{
 
-	it("Start",(done)=>{
+	it("Direct log",(done)=>{
 
 		var a=new asterisklog({queues: "299" });
 		(new linebyline("./test/normal.log"))
@@ -27,6 +27,35 @@ describe("Normal call",()=>{
 					  });
 				done();
 			});
+
+	});
+
+	it("Remote syslog (no timestamps)",(done)=>{
+
+		var a=new asterisklog({queues: "299", "require_timestamps" : false });
+		(new linebyline("./test/syslog.log"))
+			.on("line", (line)=>a.add(line))
+			.on("error", (err)=>{throw err})
+			.on("end",()=>{
+
+				var calls=a.get_calls();
+				assert.equal(calls.length,1);	
+				assert.equal(calls[0].id, "SIP/fpbx-1-f04d84a7-002a75b6");	// Remote syslog does not have timestamps, so replaying the log results in incorrect times
+				assert.equal(calls[0].caller_id, "15415559999");				
+				assert.equal(calls[0].answered_by, "213");				
+				done();
+			});
+	});
+
+
+	it("Throw if required timestamp is missing",(done)=>{
+
+			var a=new asterisklog({queues: "299" });
+
+			assert.throws(()=>{
+					a.add("VERBOSE[12684]: pbx.c:4256 in pbx_extension_helper:     -- Executing [s@ext-did:1] ExecIf(\"SIP/fpbx-1-f04d84a7-002a75b6\", \"1?Set(__FROM_DID=s)\") in new stack ");
+			}, Error);
+			done();
 	});
 
 });
