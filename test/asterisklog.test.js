@@ -22,13 +22,19 @@ describe("Ingest sample call data",()=>{
 					    "end": "2016-12-01T15:18:01.000Z",
 					    "enqueued": "2016-12-01T15:11:02.000Z",
 					    "answered": "2016-12-01T15:11:04.000Z",
-					    "answered_by": "210",
-					    "caller_id": "15555553333"
+					    "answered_by": "Local/210",
+					    "caller_id": "15555553333",
+					    "rang": {
+					    	"210": "2016-12-01T15:11:02.000Z",
+					    	"213": "2016-12-01T15:11:02.000Z"
+					    }
 					  });
 				done();
 			});
 
 	});
+
+
 
 	it("Remote syslog (no timestamps)",(done)=>{
 
@@ -42,7 +48,7 @@ describe("Ingest sample call data",()=>{
 				assert.equal(calls.length,1);	
 				assert.equal(calls[0].id, "SIP/fpbx-1-f04d84a7-002a75b6");	// Remote syslog does not have timestamps, so replaying the log results in incorrect times
 				assert.equal(calls[0].caller_id, "15415559999");				
-				assert.equal(calls[0].answered_by, "213");				
+				assert.equal(calls[0].answered_by, "Local/213");				
 				done();
 			});
 	});
