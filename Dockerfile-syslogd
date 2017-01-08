@@ -1,0 +1,10 @@
+FROM node:boron
+RUN mkdir -p /usr/src/app/lib
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app/
+RUN npm install --production
+COPY ./lib/* /usr/src/app/lib/
+COPY syslogd.js /usr/src/app/
+COPY config.json /usr/src/app/
+EXPOSE 514
+CMD ["node", "syslogd.js"]
