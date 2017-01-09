@@ -1,7 +1,12 @@
 {
 	"general": {
 		"timezone": "America/Los_Angeles",
-		"input": "/var/log/asterisk/full"
+		"input": "/var/log/asterisk/full",
+		"syslogd" : {
+			"address" : "1.2.3.4",
+			"port" : 514,
+			"allow": "5.6.7.8"
+			}
 		},
 	"asterisk": {
 		"queues": "200"
