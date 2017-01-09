@@ -39,9 +39,6 @@ mysql
 app
 	.use(morgan(':remote-addr ":method :url HTTP/:http-version" :status :res[content-length] - :response-time ms', { "stream" : info_log_stream }))   // Morgan HTTP logging
 	.use(express.static("public"))
-
-	// TODO... should we really be sending call data?  Shouldn't we analyze it locally, then send the results?  It depends on what metrics we expect to expose
-
 	.get("/api/calls/:year/:month",(req, res)=>{
 
 		// Calculate date ranges

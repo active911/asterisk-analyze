@@ -8,10 +8,14 @@
   },
   "scripts": {
     "test": "mocha",
-    "build": "webpack src/app.js public/bundle.js",
+    "build": "webpack",
+    "lint": "jshint --reporter=node_modules/jshint-stylish *.js src/*.js",
     "start": "nodemon server.js | bunyan",
     "etl": "nodemon etl.js | bunyan",
     "webpack-dev-server": "webpack-dev-server --progress --colors --host=192.168.56.102 --content-base public/"
+  },
+  "jshintConfig": {
+    "esversion": 6
   },
   "repository": {
     "type": "git",
@@ -45,10 +49,9 @@
   "devDependencies": {
     "css-loader": "^0.26.1",
     "expose-loader": "^0.7.1",
-    "gulp": "^3.9.1",
-    "gulp-jshint": "^2.0.4",
     "jsdom": "^9.8.3",
     "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "style-loader": "^0.13.1",
