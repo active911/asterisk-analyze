@@ -55,7 +55,7 @@ app
 		.then((rows) =>{
 
 			var data=[];
-			for(r of rows) {
+			for(let r of rows) {
 
 				data.push({
         			"type"			:	"call",

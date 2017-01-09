@@ -24,7 +24,7 @@ $(document).ready(()=>{
 	var queue_time_dim=cf.dimension((d) => (d.enqueued && d.answered)?((new Date(d.answered)) - (new Date(d.enqueued)) )/1000:null);
 	var queue_time_group=queue_time_dim.group((v)=>{
 
-		if (v==null ) return -1;
+		if (v===null ) return -1;
 
 		var bucket=Math.ceil(v/10)*10;
 		return (bucket<200)?bucket:200;
@@ -41,7 +41,7 @@ $(document).ready(()=>{
 		.dimension(queue_time_dim)
 		.group(queue_time_group)
 		//.x(d3.scale.ordinal().domain([10,20,30,40,50,60,70]))
-		.x(d3.scale.ordinal().domain(queue_time_group.all().map((o)=>{return o.key}).filter((v)=>v>0)))	// Filter negative queue times since it means they were never in the queue
+		.x(d3.scale.ordinal().domain(queue_time_group.all().map((o)=>{return o.key;}).filter((v)=>v>0)))	// Filter negative queue times since it means they were never in the queue
 		.xUnits(dc.units.ordinal)
 		.render();
 
@@ -56,7 +56,7 @@ $(document).ready(()=>{
 	// Extensions
 	var extension_dim=cf.dimension((d)=>d.answered_by);
 	var extension_group=extension_dim.group();
-	var keys=extension_group.top(Infinity).map((o)=>{return o.key});
+	var keys=extension_group.top(Infinity).map((o)=>{return o.key;});
 	var extension_chart=dc.barChart('#extensions');
 	extension_chart
 		.width(640)

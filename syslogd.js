@@ -49,7 +49,7 @@ mysql
 				.then((rows) =>{
 
 
-					for(n in rows) {
+					for(let n in rows) {
 
 						var data=JSON.parse(rows[n].data);
 						if (call.id == data.id){
