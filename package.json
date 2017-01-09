@@ -45,7 +45,10 @@
   "devDependencies": {
     "css-loader": "^0.26.1",
     "expose-loader": "^0.7.1",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.4",
     "jsdom": "^9.8.3",
+    "jshint": "^2.9.4",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "style-loader": "^0.13.1",
