@@ -16,13 +16,14 @@ vi config.cfg
 
 ```bash
 # Production
-npm install --production
+npm install
+npm run build
 node syslogd.js # Back end, gather data
 node server.js  # Front end, pretty graphs
 
 # Development
 npm install
-npm run dev		# Automatically runs 'npm run build'
+npm run dev		# Automatically watches and runs nodemon, browsersync, lint, webpack.  Browse to http://localhost:3001/ 
 ```
 
 
