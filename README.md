@@ -7,18 +7,27 @@
 
 
 #### Configure
+1. Create MySQL table
+```sql
+CREATE TABLE calls (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+stamp datetime not null,
+data text null
+)ENGINE=innodb;
+```
+2. Create config file
 ```bash
 cp config.json.sample config.json
-vi config.cfg
 ```
+3. Edit ```config.json``` and edit the MySQL credentials, etc 
+
 
 #### Install and run
-
 ```bash
 # Production
 npm install
-npm run build
-node syslogd.js # Back end, gather data
+npm run build	# Run tests, lint, transcode frontend app to ES5, minify bundle.js 
+node syslogd.js	# Back end, gather data
 node server.js  # Front end, pretty graphs
 
 # Development
@@ -44,15 +53,6 @@ local0.*            @my.server.address
 3. Restart asterisk: ```asterisk -rx "logger reload"```
 4. Restart syslog: ```service syslogd restart``` (or rsyslogd)
 
-
-#### SQL
-```sql
-CREATE TABLE calls (
-`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-stamp datetime not null,
-data text null
-)ENGINE=innodb;
-```
 
 #### Run the program
 0. ```node etl.js --gulp --dry-run``` to do a one time analysis.  Stats written to the console.
