@@ -105,17 +105,32 @@ $(document).ready(()=>{
 			.render();
 
 
+		// TODO: Replace with Crossfilter code
+		// Find calls that were enqueued and answered, or enqueued and rang.  Hangups that never rang are ignored.
+		var queuers=o.data.map((c)=>{
 
-		// Average queue time
-		var average_queue_time="too long"; // Figure out some other way
-			// (queue_time_group.all().filter((v)=>v.key!=null).map((o)=>{return o.key*o.value}).reduce((a,b)=>a+b,0))/
-			// (queue_time_group.all().filter((v)=>v.key!=null).map((o)=>{return o.value}).reduce((a,b)=>a+b,0));
-		$("#stats").text("Average queue time "+average_queue_time+"s");
+			if(c.attributes.enqueued){
+
+				if(c.attributes.answered) {
+
+					return (new Date(c.attributes.answered)-new Date(c.attributes.enqueued))/1000;	// Call was enqueued and then answered
+				} else {
+
+					if(c.attributes.end && Object.keys(c.attributes.rang).length) {
+
+						return (new Date(c.attributes.end)-new Date(c.attributes.enqueued))/1000;		// Call was not answered, but rang at least once before it ended
+					}				
+				}
+			}
+
+			return null;	// Default is to exclude the call
+		}).filter((c)=>(c!==null));
+		$("#stats").text("Average queue time "+(queuers.reduce((a,v)=>a+v,0)/queuers.length).toFixed(1)+"s");
 
 		// Extensions
-		var extension_dim=cf.dimension((d)=>d.attributes.answered_by);
-		var extension_group=extension_dim.group();
-		var keys=extension_group.top(Infinity).map((o)=>{return o.key;});
+		var extension_dim=cf.dimension((d)=>d.attributes.answered_by||"unanswered");
+		var extension_group=extension_dim.group().reduceCount();
+
 		var extension_chart=dc.barChart('#extensions');
 		extension_chart
 			.width(640)
@@ -125,7 +140,7 @@ $(document).ready(()=>{
 	//		.xAxisLabel("Extension")
 			.dimension(extension_dim)
 			.group(extension_group)
-			.x(d3.scale.ordinal().domain(keys))
+			.x(d3.scale.ordinal().domain(extension_group.top(Infinity).map((o)=>{return o.key;})))
 			.xUnits(dc.units.ordinal)
 			.on("renderlet",(chart)=>{
 
