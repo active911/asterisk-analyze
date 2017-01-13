@@ -14,16 +14,16 @@ $(document).ready(()=>{
 
 	$.getJSON("/api/calls/2017/1").then((o)=>{
 
-		var rings=[];
+		var ring_data=[];
 		for (let c of o.data){
 			if(c.attributes.answered){
 				for(let ext of Object.keys(c.attributes.rang)) {
-					rings.push({"ext": ext, "time": (new Date(c.attributes.answered)-new Date(c.attributes.rang[ext]))/1000});
+					ring_data.push({"ext": ext, "time": (new Date(c.attributes.answered)-new Date(c.attributes.rang[ext]))/1000});
 				}
 			}
 		}
 
-		var rings=crossfilter(rings);
+		var rings=crossfilter(ring_data);
 		var rings_dim=rings.dimension((o)=>o.ext);
 		var rings_group=rings_dim.group().reduce(
 			//Add
