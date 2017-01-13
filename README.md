@@ -54,7 +54,7 @@ local0.*            @my.server.address
 4. Restart syslog: ```service syslogd restart``` (or rsyslogd)
 
 
-#### Run the program
+#### Manual data import
 0. ```node etl.js --gulp --dry-run``` to do a one time analysis.  Stats written to the console.
 0. ```node etl.js --gulp``` to ingest the input file and log to the database.
 1. ```node etl.js``` to run the ETL daemon.  Input file is watched rather than ingested.  Data goes to database.
@@ -71,16 +71,14 @@ node etl.js --general.input=december --gulp --dry-run
 
 Without the ```--gulp``` switch (or gulp in the config), etl watches the input file for new data.
 
-etl merges the new data with the unclosed calls in the database, so you should be able to ingest the same data more than once without getting duplicates.  Be aware, however, that syslogd.js uses the current time from Date() since no timestamp is sent with the logs.  This means that a different date might be logged to the asterisk log than what is streamed via syslog.  If you then re-ingest those files you might get duplicates.  TODO: this could be fixed later by reading all calls and comparing using SIP ID instead of limiting our duplicate search to calls that happened at that moment.
+etl merges the new data with the unclosed calls in the database, so you should be able to ingest the same data more than once without getting duplicates.  Be aware, however, that syslogd.js uses the current time from Date() since no timestamp is sent with the logs.  This means that a different date might be logged to the asterisk log than what is streamed via syslog.  If you then re-ingest those files you might get duplicates.  TODO: this could be fixed later by reading all calls and comparing using SIP ID instead of limiting our duplicate search to calls that happened at that moment.  syslogd.js does not check for duplicates.
 
 
 #### TODO
 - etl should not require database connection in --dry-run mode
-- calls.json should not be embedded in the build (go to AJAX)
 - Use bootstrap to organize the views
 - Add more graphs
 - etl does duplicate detection, but it may not be able to detect duplicates added by syslogd because syslogd must use its own time source (TODO: add some time fuzz here so we rely more on the SIP ID of the caller)
 - syslogd may accumulate garabage SIP IDs over time if it sees but does not properly understand outgoing calls. This may effectively constitute a memory leak.  Prune calls older than a week (or something).
-- Fix to track outgoing calls, and calls that create calls (forward to cell phone)
 
 
