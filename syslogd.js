@@ -29,7 +29,7 @@ al
 		log.info("New call started");
 		redis.publish("calls",JSON.stringify(call));
 	})
-	.on("enqueued", ()=>{
+	.on("enqueued", (call)=>{
 
 		log.info("Call in queue");
 		redis.publish("calls",JSON.stringify(call));
