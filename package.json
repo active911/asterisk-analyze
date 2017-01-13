@@ -10,8 +10,13 @@
     "esversion": 6
   },
   "scripts": {
+    "//":"PROD BUILD RULES",
     "test": "mocha",
     "lint": "jshint --reporter=node_modules/jshint-stylish server.js etl.js src/app.js",
+    "webpack" : "NODE_ENV=production webpack",
+    "build" : "npm run lint -s && npm run test -s && npm run webpack -s",
+
+    "//":"DEV RULES",
     "watch:webpack": "webpack --progress --colors --watch",
     "browsersync": "browser-sync start --proxy 'localhost:3000' --files 'public/*' 'server.js' --port 3001",
     "watch:server": "nodemon -w server.js server.js | ./node_modules/bunyan/bin/bunyan",
