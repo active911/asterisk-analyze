@@ -6,16 +6,17 @@
   "directories": {
     "test": "test"
   },
-  "scripts": {
-    "test": "mocha",
-    "build": "webpack",
-    "lint": "jshint --reporter=node_modules/jshint-stylish *.js src/*.js",
-    "start": "nodemon server.js | bunyan",
-    "etl": "nodemon etl.js | bunyan",
-    "webpack-dev-server": "webpack-dev-server --progress --colors --host=192.168.56.102 --content-base public/"
-  },
   "jshintConfig": {
     "esversion": 6
+  },
+  "scripts": {
+    "test": "mocha",
+    "lint": "jshint --reporter=node_modules/jshint-stylish server.js etl.js src/app.js",
+    "watch:webpack": "webpack --progress --colors --watch",
+    "browsersync": "browser-sync start --proxy 'localhost:3000' --files 'public/*' 'server.js' --port 3001",
+    "watch:server": "nodemon -w server.js server.js | ./node_modules/bunyan/bin/bunyan",
+    "watch:lint": "nodemon -w server.js -w etl.js -w src/app.js -x npm run lint -s",
+    "dev": "parallelshell 'npm run watch:lint -s' 'npm run watch:server -s' 'npm run browsersync -s' 'npm run watch:webpack -s'"
   },
   "repository": {
     "type": "git",
@@ -47,15 +48,20 @@
     "syslogd": "^1.1.2"
   },
   "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "browser-sync": "^2.18.6",
+    "bunyan-pretty": "0.0.1",
     "css-loader": "^0.26.1",
     "expose-loader": "^0.7.1",
     "jsdom": "^9.8.3",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
     "mocha": "^3.2.0",
-    "nodemon": "^1.11.0",
+    "parallelshell": "^2.0.0",
     "style-loader": "^0.13.1",
     "uglify-js": "^2.7.5",
-    "webpack": "^1.13.3"
+    "webpack": "^2.2.0-rc.4"
   }
 }

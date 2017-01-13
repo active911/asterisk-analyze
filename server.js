@@ -8,9 +8,13 @@ var nconf = require('nconf');
 var stream=require('stream');
 var mysql = require("promise-mysql");
 
-
 // Read the config
 nconf.argv().env().file({ file: 'config.json' });
+
+
+
+
+
 
 
 // A stream to pipe morgan (http logging) to bunyan

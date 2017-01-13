@@ -6,18 +6,25 @@
 3. Redis
 
 
-#### Install
-
-```bash
-npm install
-npm test
-```
-
 #### Configure
 ```bash
 cp config.json.sample config.json
 vi config.cfg
 ```
+
+#### Install and run
+
+```bash
+# Production
+npm install --production
+node syslogd.js # Back end, gather data
+node server.js  # Front end, pretty graphs
+
+# Development
+npm install
+npm run dev		# Automatically runs 'npm run build'
+```
+
 
 #### Configure Asterisk (FreePBX) to send log files to us 
 
