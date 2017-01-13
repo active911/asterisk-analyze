@@ -1,11 +1,16 @@
 FROM node:boron
 RUN mkdir -p /usr/src/app/lib
+RUN mkdir -p /usr/src/app/src
+RUN mkdir -p /usr/src/app/public
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 RUN npm install
+COPY ./public/* /usr/src/app/public/
 COPY ./lib/* /usr/src/app/lib/
 COPY server.js /usr/src/app/
+COPY src/* /usr/src/app/src/
+COPY webpack.config.js /usr/src/app/
 COPY config.json /usr/src/app/
-RUN node run build -s
+RUN npm run webpack -s
 EXPOSE 3000
 CMD ["node", "server.js"]
