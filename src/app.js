@@ -1,6 +1,7 @@
 // var promise=require("bluebird");
 require ('./styles.css');
 require("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+require("../node_modules/dc/dc.min.css");
 var crossfilter = require('crossfilter');
 var d3 = require('d3');
 var dc = require('dc');
@@ -19,11 +20,7 @@ $(document).ready(()=>{
 
 		// Create ring data, add custom attributes (like queue time)
 		var ring_data=[];
-		let queue_time=0, queuers=0;
 		for (let c of o.data){
-
-			// Set a default queue tume
-			c.attributes.queue_time=null;
 
 			if(c.attributes.answered){
 
@@ -31,9 +28,12 @@ $(document).ready(()=>{
 				for(let ext of Object.keys(c.attributes.rang)) {
 					ring_data.push({"ext": ext, "time": (new Date(c.attributes.answered)-new Date(c.attributes.rang[ext]))/1000});
 				}
+			}
 
-				// Calculate queue time
-				if(c.attributes.enqueued) {
+			// Calculate queue time
+			c.attributes.queue_time=null;
+			if(c.attributes.enqueued) {
+				if(c.attributes.answered) {
 
 					c.attributes.queue_time=(new Date(c.attributes.answered)-new Date(c.attributes.enqueued))/1000;	// Call was enqueued and then answered
 				} else {
@@ -44,43 +44,10 @@ $(document).ready(()=>{
 					}				
 				}
 			}
-
-			// Calculate queue time
-			if(c.attributes.queue_time!==null){
-
-				queue_time+=c.attributes.queue_time;
-				queuers++;
-			}
-
 		}
 
-		// Average queue time
-		var average_queue_time=(queuers>0)?(queue_time/queuers):0;
-		console.log(average_queue_time+" for "+queuers);
+		// recalculate_thresholds();
 
-		// TODO: Replace with Crossfilter code
-		// Find calls that were enqueued and answered, or enqueued and rang.  Hangups that never rang are ignored.
-		var qrs=o.data.map((c)=>{
-
-			if(c.attributes.enqueued){
-
-				if(c.attributes.answered) {
-
-					return (new Date(c.attributes.answered)-new Date(c.attributes.enqueued))/1000;	// Call was enqueued and then answered
-				} else {
-
-					if(c.attributes.end && Object.keys(c.attributes.rang).length) {
-
-						return (new Date(c.attributes.end)-new Date(c.attributes.enqueued))/1000;		// Call was not answered, but rang at least once before it ended
-					}				
-				}
-			}
-
-			return null;	// Default is to exclude the call
-		}).filter((c)=>(c!==null));
-		//$("#stats").text("Average queue time "+(qrs.reduce((a,v)=>a+v,0)/qrs.length)+"s");
-		var aqt=(qrs.reduce((a,v)=>a+v,0)/qrs.length);
-		console.log(aqt+" for "+qrs.length);
 
 		// Crossfilter ring data
 		var rings=crossfilter(ring_data);
@@ -120,53 +87,87 @@ $(document).ready(()=>{
 			.group(rings_group)
 			.x(d3.scale.ordinal().domain(rings_group.top(Infinity).map(o=>o.key)))
 			.xUnits(dc.units.ordinal)
+			.on("renderlet",chart=>draw_bar_labels(chart,(o)=>o.average.toFixed(1)+"s"))
 			.render();
 
 
 		// Crossfilter, queue time
 		var cf=crossfilter(o.data);
 		var queue_time_dim=cf.dimension((c) => c.attributes.queue_time);
-		var queue_time_group=queue_time_dim.group((v)=>{
-			
-			// Queue time histogram.  Groups are created by taking 10 second "buckets"
-			if (v===null ) return -1;
+		var queue_time_group=queue_time_dim.group(v=>(v===null)?null:Math.ceil(v/10)*10);
 
-			var bucket=Math.ceil(v/10)*10;
-			return (bucket<200)?bucket:200;
-		});	
+		$("#average_queue_time").text((o.data.reduce((p,v)=>p+v.attributes.queue_time,0)/(o.data.filter(v=>v.attributes.queue_time!==null).length||null)).toFixed(1));
 
 		// Time in queue
-		dc.barChart('#queue_time')
+		var total_queued_calls;
+		var queue_time_chart=dc.barChart('#queue_time')
 			.width(640)
 			.height(480)
 			.margins({top: 10, right: 50, left: 50, bottom: 40})
 			.xAxisLabel("Seconds")
+			.title((p)=>p.value+" calls")
+			.renderTitle(true)
 			.dimension(queue_time_dim)
 			.group(queue_time_group)
-			.x(d3.scale.ordinal().domain(queue_time_group.all().map((o)=>{return o.key;}).filter((v)=>v>0)))	// Filter negative queue times since it means they were never in the queue
+			.y(d3.scale.linear().domain([0,1]))
+			.x(d3.scale.ordinal().domain(queue_time_group.all().map((o)=>{return o.key;})))
 			.xUnits(dc.units.ordinal)
-			.render();
+			.on("preRedraw",(chart)=>{ total_queued_calls=queue_time_dim.top(Infinity).filter(c=>c.attributes.queue_time!==null).length; })
+			.on("preRender",(chart)=>{ total_queued_calls=queue_time_dim.top(Infinity).filter(c=>c.attributes.queue_time!==null).length; })
+			.turnOnControls(true);
+
+		// Make chart show percentages
+		queue_time_chart
+			.valueAccessor(p=>p.value/total_queued_calls)
+			.yAxis().tickFormat(d3.format(".0%"));
+		queue_time_chart.render();
+
+		// Setup reset button
+		$("#queue_time a.reset")
+			.css("display","none") // Change to visibility,hidden in future dc.js releases
+			.click(()=>{
+				queue_time_chart.filterAll();
+				dc.redrawAll();
+			});
 
 
-
-
-		// Call load by extension
+		// Call Destination
 		var extension_dim=cf.dimension((d)=>d.attributes.answered_by||"unanswered");
 		var extension_group=extension_dim.group().reduceCount();
-		dc.barChart('#extensions')
+		var destination_chart=dc.barChart('#destinations')
 			.width(640)
 			.height(480)
-			.margins({top: 10, right: 50, left: 50, bottom: 80})
-			.yAxisLabel("Calls")
+			.margins({top: 10, right: 50, left: 100, bottom: 100})
 			.dimension(extension_dim)
 			.group(extension_group)
 			.x(d3.scale.ordinal().domain(extension_group.top(Infinity).map((o)=>{return o.key;})))
 			.xUnits(dc.units.ordinal)
-			.on("renderlet",draw_bar_labels)
-			.render();
+			.on("renderlet",draw_bar_labels);
+
+		// Make chart show percentages
+		destination_chart
+			.valueAccessor(p=>p.value/cf.size())
+			.yAxis().tickFormat(d3.format(".0%"));
+		destination_chart.render();
+
+		// Setup reset button
+		$("#destinations a.reset")
+			.css("display","none") // Change to visibility,hidden in future dc.js releases
+			.click(()=>{
+				destination_chart.filterAll();
+				recalculate_thresholds();
+				dc.redrawAll();
+			});
 
 	});
 });
+
+
+/**
+ * Recalculate thresholds
+ *
+ * We have to use several thresholds
+ */
 
 
 /**
@@ -174,7 +175,7 @@ $(document).ready(()=>{
  *
  * Thanks http://stackoverflow.com/questions/25026010/show-values-on-top-of-bars-in-a-barchart
  */
-function draw_bar_labels(chart){
+function draw_bar_labels(chart, accessor=(o)=>o){
 
     var barsData = [];
     var bars = chart.selectAll('.bar').each(function(d) { barsData.push(d); });
@@ -192,7 +193,7 @@ function draw_bar_labels(chart){
 
         gLabels
             .append("text")
-            .text(barsData[i].data.value)
+            .text(accessor(barsData[i].data.value))
             .attr('x', +b.getAttribute('x') + (b.getAttribute('width')/2) )
             .attr('y', +b.getAttribute('y') + 15)
             .attr('text-anchor', 'middle')

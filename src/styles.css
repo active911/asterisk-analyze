@@ -1,6 +1,6 @@
 /*@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css")
 */
-#extensions .x.axis text {
+#destinations .x.axis text {
 
 	text-anchor: end !important;
 	transform: rotate(-45deg);

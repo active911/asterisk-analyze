@@ -11,9 +11,23 @@
 
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-6 col-sm-12"><div id="queue_time" ><h3 class="chart-title">Time in Queue</h3></div></div>
-				<div class="col-md-6 col-sm-12"><div id="extensions" ><h3 class="chart-title">Call load by extension</h3></div></div>
-				<div class="col-md-6 col-sm-12"><div id="rings" ><h3 class="chart-title">Average Ring Time Before Answer</h3></div></div>
+				<div class="col-md-6 col-sm-12">
+					<div id="queue_time" class="chart" >
+						<h3 class="chart-title">Queue Time Histogram (Average <span id="average_queue_time"></span>s)</h3>
+						<a class="reset">Filter: Destination <span class="filter"></span> [reset]</a>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<div id="destinations" class="chart" >
+						<h3 class="chart-title">Calls by Destination</h3>
+						<a class="reset">Filter: <span class="filter"></span> s [reset]</a>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<div id="rings" >
+						<h3 class="chart-title">Average Ring Time Before Answer</h3>
+					</div>
+				</div>
 				<div class="col-md-6 col-sm-12"><div id="stats"></div></div>
 			</div>
 		</div>
