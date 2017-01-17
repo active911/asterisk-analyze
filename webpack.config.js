@@ -12,11 +12,19 @@ module.exports={
 
 		"rules"	:	[
 			{ "test" : /\.css$/, "loader" : "style-loader!css-loader"},
-			{ "test" : /\.json$/, "loader" : "json-loader"}
+			{ "test" : /\.json$/, "loader" : "json-loader"},
+			{ "test" : /\.(png|woff|woff2|eot|ttf|svg)$/, "loader" : "url-loader?limit=100000"}
 		]
 	},
 	"devtool" : "#source-map",
-	"plugins" : []
+	"plugins" : [
+		new webpack.ProvidePlugin({
+			jQuery: 'jquery',
+			$: 'jquery',
+			jquery: 'jquery'
+
+		})
+	]
 		
 
 };

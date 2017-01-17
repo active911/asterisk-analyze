@@ -1,4 +1,5 @@
-
+/*@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css")
+*/
 #extensions .x.axis text {
 
 	text-anchor: end !important;
