@@ -18,7 +18,7 @@ var moment=require("moment");
 $(document).ready(()=>{
 
 	var m=(new moment()).subtract(12, "months");
-	for(n=0; n<12; n++){
+	for(let n=0; n<12; n++){
 
 		m.add(1, "months");
 		$("#date").append($("<option />").text(m.format("MMM YYYY")).val(m.toISOString()));
@@ -134,7 +134,7 @@ $(document).ready(()=>{
 			// Time in queue
 			var queue_time_dim=cf.dimension((c) => c.attributes.queue_time);
 			var queue_time_group=queue_time_dim.group(v=>(v===null)?-1:(v===0)?10:Math.ceil(v/10)*10);
-			var total_queued_calls;
+			var total_shown_calls;
 			var queue_time_chart=dc.barChart('#queue_time')
 				.width(640)
 				.height(480)
