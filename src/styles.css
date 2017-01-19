@@ -1,12 +1,22 @@
-/*@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css")
-*/
-#destinations .x.axis text {
+
+
+/* X axis text for two of the charts is too long and should be angled 45 degrees for readability */
+#destinations .x.axis text, #rings .x.axis text {
 
 	text-anchor: end !important;
 	transform: rotate(-45deg);
 }
 
-.chart-title {
 
-	display: block;
+/* Make bar labels smaller   */
+g>text {
+
+	font-size: smaller;
+}
+
+/* Date selector at top should have margins that match the title, which is an <h3> */
+select#date{
+
+	margin-top: 20px;
+	margin-left: 20px;
 }

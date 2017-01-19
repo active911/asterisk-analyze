@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Phone Calls</title>
 	</head>
 
 
@@ -11,37 +12,44 @@
 
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-sm-6 col-md-3">
+					<h3>Phone Calls</h3>
+				</div>
+				<div class="col-sm-6 col-md-3">
 					<form class="form-inline">
-						<div class="form-group">
-							<label for="date">Period</label>
+ 							<label for="date" class="sr-only">Period</label>
 							<select class="form-control" id="date" name="date"></select>
-						</div>
 					</form>
 				</div>
+				<div class="col-sm-12"><hr></div>
 			</div>
+
+
 			<div class="row">
-				<div class="col-md-4 col-sm-12">
+				<div class="col-lg-8 col-sm-12">
 					<div id="daily" class="chart">
-						<h3 class="chart-title">Daily Activity</h3>
+						<h4 class="chart-title">Daily Activity</h4>
 						<a class="reset">Filter: Day <span class="filter"></span> [reset]</a>
 					</div>
 				</div>
-				<div class="col-md-4 col-sm-12">
+				<div class="col-lg-4 col-sm-12">
 					<div id="queue_time" class="chart">
-						<h3 class="chart-title">Queue Time Histogram (Average <span id="average_queue_time"></span>s)</h3>
+						<h4 class="chart-title">Queue Time Histogram (Average <span id="average_queue_time"></span>s)</h4>
 						<a class="reset">Filter: Destination <span class="filter"></span> [reset]</a>
 					</div>
 				</div>
-				<div class="col-md-4 col-sm-12">
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-sm-12">
 					<div id="destinations" class="chart" >
-						<h3 class="chart-title">Calls by Destination</h3>
+						<h4 class="chart-title">Calls by Destination</h4>
 						<a class="reset">Filter: <span class="filter"></span> s [reset]</a>
 					</div>
 				</div>
-				<div class="col-md-4 col-sm-12">
+				<div class="col-lg-4 col-sm-12">
 					<div id="rings" >
-						<h3 class="chart-title">Average Ring Time Before Answer</h3>
+						<h4 class="chart-title">Ringing Time Before Answer</h4>
+						<a class="reset">Filter: <span class="filter"></span> [reset]</a>
 					</div>
 				</div>
 			</div>

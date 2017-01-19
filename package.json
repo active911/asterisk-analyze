@@ -13,14 +13,16 @@
   "scripts": {
     "//": "DEV RULES",
     "test": "mocha",
-    "lint": "jshint --reporter=node_modules/jshint-stylish server.js etl.js src/app.js",
+    "lint:js": "jshint --reporter=node_modules/jshint-stylish server.js etl.js src/app.js",
+    "lint:html": "node helpers/lint-html.js",
     "webpack": "NODE_ENV=production webpack",
-    "build": "npm run lint -s && npm run test -s && npm run webpack -s",
+    "build": "npm run lint:js -s && npm run lint:html -s && npm run test -s && npm run webpack -s",
     "watch:webpack": "webpack --progress --colors --watch",
     "browsersync": "browser-sync start --proxy 'localhost:3000' --files 'public/*' 'server.js' --port 3001",
     "watch:server": "nodemon -w server.js server.js | ./node_modules/bunyan/bin/bunyan",
-    "watch:lint": "nodemon -w server.js -w etl.js -w src/app.js -x npm run lint -s",
-    "dev": "parallelshell 'npm run watch:lint -s' 'npm run watch:server -s' 'npm run browsersync -s' 'npm run watch:webpack -s'"
+    "watch:lint:js": "nodemon -w server.js -w etl.js -w src/app.js -x npm run lint:js -s",
+    "watch:lint:html": "nodemon -w public/index.html -x npm run lint:html -s",
+    "dev": "parallelshell 'npm run watch:lint:js -s' 'npm run watch:lint:html -s' 'npm run watch:server -s' 'npm run browsersync -s' 'npm run watch:webpack -s'"
   },
   "repository": {
     "type": "git",
@@ -62,6 +64,7 @@
     "dc": "^2.1.1",
     "expose-loader": "^0.7.1",
     "file-loader": "^0.9.0",
+    "html5-lint": "^0.3.0",
     "jsdom": "^9.8.3",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",

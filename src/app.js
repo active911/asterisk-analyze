@@ -9,6 +9,10 @@ var $ = require('jquery');
 var bootstrap = require("bootstrap"); /* jshint ignore:line */ // (supress unused variable warning)
 var moment=require("moment");
 
+var chart_size={
+	width: 450,
+	height: 300
+};
 
 // Data and dimensions
 //var data=require("./calls.json");
@@ -29,16 +33,7 @@ $(document).ready(()=>{
 		$.getJSON("/api/calls/"+m.year()+"/"+(1+m.date())).then((o)=>{
 
 			// Create ring data, add custom attributes (like queue time)
-			var ring_data=[];
 			for (let c of o.data){
-
-				if(c.attributes.answered){
-
-					// Compile ring data
-					for(let ext of Object.keys(c.attributes.rang)) {
-						ring_data.push({"ext": ext, "time": (new Date(c.attributes.answered)-new Date(c.attributes.rang[ext]))/1000});
-					}
-				}
 
 				// Calculate queue time
 				c.attributes.queue_time=null;
@@ -56,25 +51,28 @@ $(document).ready(()=>{
 				}
 			}
 
-			// recalculate_thresholds();
+			// Yay crossfilter!
+			var cf=crossfilter(o.data);
 
-
-			// Crossfilter ring data
-			var rings=crossfilter(ring_data);
-			var rings_dim=rings.dimension((o)=>o.ext);
-			var rings_group=rings_dim.group().reduce(
+			// At pickup, how long was their phone ringing?
+			var calls_by_answerer=cf.dimension((c)=>c.attributes.answered_by||"unanswered");
+			var ring_time_group_by_answerer=calls_by_answerer.group().reduce(
 				(p,v)=>{	// Add
 
-					p.calls++;
-					p.seconds+=v.time;
-					p.average=p.calls?(p.seconds/p.calls):0;
+					if(v.attributes.answered && v.attributes.answered_by && v.attributes.rang[v.attributes.answered_by]) {
+						p.calls++;
+						p.seconds+=(new Date(v.attributes.answered)-new Date(v.attributes.rang[v.attributes.answered_by]))/1000;
+						p.average=p.seconds/p.calls|1;
+					}
 					return p;
 				},
 				(p,v)=>{	// Remove
 
-					p.calls--;
-					p.seconds-=v.time;
-					p.average=p.calls?(p.seconds/p.calls):0;
+					if(v.attributes.answered && v.attributes.answered_by && v.attributes.rang[v.attributes.answered_by]) {
+						p.calls--;
+						p.seconds-=(new Date(v.attributes.answered)-new Date(v.attributes.rang[v.attributes.answered_by]))/1000;
+						p.average=p.seconds/p.calls|1;
+					}
 					return p;
 				},
 				()=>{
@@ -88,33 +86,45 @@ $(document).ready(()=>{
 			// Average ring time before answer
 			var ring_time_chart=dc.barChart('#rings');
 			ring_time_chart
-				.width(640)
-				.height(480)
-				.margins({top: 10, right: 50, left: 50, bottom: 80})
+				.width(chart_size.width)
+				.height(chart_size.height)
+				.margins({top: 10, right: 50, left: 50, bottom: 100})
 				.yAxisLabel("Seconds")
 				.valueAccessor(o=>o.value.average)
-				.dimension(rings_dim)
-				.group(rings_group)
-				.x(d3.scale.ordinal().domain(rings_group.top(Infinity).map(o=>o.key)))
+				.dimension(calls_by_answerer)
+				.group(ring_time_group_by_answerer)
+				.x(d3.scale.ordinal().domain(ring_time_group_by_answerer.top(Infinity).map(o=>o.key)))
 				.xUnits(dc.units.ordinal)
-				.on("renderlet",chart=>draw_bar_labels(chart,(o)=>o.average.toFixed(1)+"s"))
+				.on("renderlet",chart=>draw_bar_labels(chart,(o)=>o.average.toFixed(1)))
+				.turnOnControls(true)
 				.render();
 
+			// Setup reset button
+			$("#rings a.reset")
+				.css("display","none") // Change to visibility,hidden in future dc.js releases
+				.click(()=>{
+					ring_time_chart.filterAll();
+					dc.redrawAll();
+				});
 
-			var cf=crossfilter(o.data);
+
+			// Calls by day
 			var day_dim=cf.dimension(c=>(new Date(c.attributes.start)).getDate());
 			var day_group=day_dim.group();
-			var daily_chart=dc.barChart("#daily")
-				.width(640)
-				.height(480)
+			var daily_chart=dc.lineChart("#daily")
+				.width(chart_size.width*2)
+				.height(chart_size.height)
 				.margins({top: 10, right: 50, left: 50, bottom: 40})
-				.xAxisLabel("January")
+				.xAxisLabel(()=>m.format("MMMM YYYY"))	// "January 2017", etc
 				.title((p)=>p.value+" calls")
 				.renderTitle(true)
 				.dimension(day_dim)
+				// .brushOn(false)
 				.group(day_group)
-				.x(d3.scale.ordinal().domain(day_group.all().map((o)=>{return o.key;})))
-				.xUnits(dc.units.ordinal)
+				// .x(d3.scale.ordinal().domain(day_group.all().map((o)=>{return o.key;})))
+				.x(d3.scale.linear().domain([1,m.clone().endOf("month").date()]))
+				// .x(d3.scale.time().domain([m.clone().startOf("month"),m.clone().endOf("month")]))
+				// .xUnits(dc.units.ordinal)
 				.turnOnControls(true)
 				.on("renderlet",draw_bar_labels)
 				.render();
@@ -134,8 +144,8 @@ $(document).ready(()=>{
 			var queue_time_group=queue_time_dim.group(v=>(v===null)?-1:(v===0)?10:Math.ceil(v/10)*10);
 			var total_shown_calls;
 			var queue_time_chart=dc.barChart('#queue_time')
-				.width(640)
-				.height(480)
+				.width(chart_size.width)
+				.height(chart_size.height)
 				.margins({top: 10, right: 50, left: 50, bottom: 40})
 				.xAxisLabel("Max Seconds")
 				.title((p)=>p.value+" calls")
@@ -174,9 +184,9 @@ $(document).ready(()=>{
 			var extension_dim=cf.dimension((d)=>d.attributes.answered_by||"unanswered");
 			var extension_group=extension_dim.group().reduceCount();
 			var destination_chart=dc.barChart('#destinations')
-				.width(640)
-				.height(480)
-				.margins({top: 10, right: 50, left: 100, bottom: 100})
+				.width(chart_size.width)
+				.height(chart_size.height)
+				.margins({top: 10, right: 50, left: 50, bottom: 100})
 				.dimension(extension_dim)
 				.group(extension_group)
 				.x(d3.scale.ordinal().domain(extension_group.top(Infinity).map((o)=>{return o.key;})))
