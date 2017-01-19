@@ -31,11 +31,27 @@ module.exports={
 
 if(process.env.NODE_ENV=='production') {
 
+	// Prod only. 
+
+	// Transcode to es5
 	module.exports.module.rules.push({ 
 				test : /\.js$/,
-				loader: "babel-loader",
+				loader: "babel-loader",			
 				exclude: /node_modules/,
 				query: { presets: ['es2015']}
 			});
+
+	// Minify
 	module.exports.plugins.push(new webpack.optimize.UglifyJsPlugin({minimize:true}));
-};
+} else {
+
+	// Dev only
+
+	// Expose jquery so we can debug with less pain...
+	module.exports.module.rules.push({
+//		test: require.resolve('jquery'),
+		test: /jquery\.js$/,
+		loader: "expose-loader?jquery!expose-loader?$"
+	});
+
+}
