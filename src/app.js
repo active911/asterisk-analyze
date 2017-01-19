@@ -6,10 +6,8 @@ var crossfilter = require('crossfilter');
 var d3 = require('d3');
 var dc = require('dc');
 var $ = require('jquery');
-var bootstrap = require("bootstrap");
+var bootstrap = require("bootstrap"); /* jshint ignore:line */ // (supress unused variable warning)
 var moment=require("moment");
-
-
 
 
 // Data and dimensions
@@ -25,7 +23,7 @@ $(document).ready(()=>{
 	}
 	$("#date option:last-child").attr("selected", true);
 
-	$("#date").on("change",(me)=>{
+	$("#date").on("change",()=>{
 
 		m=moment($("#date").val());
 		$.getJSON("/api/calls/"+m.year()+"/"+(1+m.date())).then((o)=>{
@@ -151,7 +149,7 @@ $(document).ready(()=>{
 				.turnOnControls(true);
 
 			// Chart events
-			["preRender","preRedraw"].forEach(e=>queue_time_chart.on(e,(chart)=>{
+			["preRender","preRedraw"].forEach(e=>queue_time_chart.on(e,(/*chart*/)=>{
 
 				// Recalculate total shown calls and average hold time.
 				total_shown_calls=queue_time_dim.top(Infinity).length;

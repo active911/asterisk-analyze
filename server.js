@@ -1,9 +1,9 @@
 var express=require('express');
 var app = express();
 var morgan=require('morgan');
-var body_parser = require("body-parser");
+//var body_parser = require("body-parser");
 var log = require("bunyan").createLogger({"name":"asterisk-analyze"});
-var promise=require("bluebird");
+//var promise=require("bluebird");
 var nconf = require('nconf');
 var stream=require('stream');
 var mysql = require("promise-mysql");
