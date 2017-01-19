@@ -2,5 +2,6 @@ config.json
 temp/
 node_modules/
 public/bundle.js.map
+public/bundle.js
 src/calls.json
 full
