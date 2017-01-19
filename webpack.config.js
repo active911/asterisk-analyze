@@ -16,6 +16,12 @@ module.exports={
 			{ "test" : /\.(png|woff|woff2|eot|ttf|svg)$/, "loader" : "url-loader?limit=100000"}
 		]
 	},
+	"resolve" : {
+
+		"alias" : {
+			"crossfilter" : "crossfilter2"
+		}
+	},
 	"devtool" : "#source-map",
 	"plugins" : [
 		new webpack.ProvidePlugin({
@@ -24,6 +30,7 @@ module.exports={
 			jquery: 'jquery'
 
 		})
+
 	]
 		
 

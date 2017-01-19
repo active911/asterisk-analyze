@@ -2,7 +2,7 @@
 require ('./styles.css');
 require("../node_modules/bootstrap/dist/css/bootstrap.min.css");
 require("../node_modules/dc/dc.min.css");
-var crossfilter = require('crossfilter');
+var crossfilter = require('crossfilter2');
 var d3 = require('d3');
 var dc = require('dc');
 var $ = require('jquery');
