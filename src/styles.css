@@ -1,7 +1,7 @@
 
 
 /* X axis text for two of the charts is too long and should be angled 45 degrees for readability */
-#destinations .x.axis text, #rings .x.axis text {
+#destinations .x.axis text, #rings .x.axis text, #length .x.axis text  {
 
 	text-anchor: end !important;
 	transform: rotate(-45deg);

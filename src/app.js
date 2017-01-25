@@ -19,6 +19,15 @@ var chart_size={
 
 $(document).ready(()=>{
 
+	// Websockets
+	let host=window.document.location.host;//replace(/:.*/,'');
+	var ws=new WebSocket("ws://"+host);
+
+	ws.onmessage=(e)=>{
+
+		console.log("New ws data: "+e.data);
+	};
+
 	var m=(new moment()).subtract(12, "months");
 	for(let n=0; n<12; n++){
 
@@ -54,15 +63,67 @@ $(document).ready(()=>{
 			// Yay crossfilter!
 			var cf=crossfilter(o.data);
 
-			// At pickup, how long was their phone ringing?
+
 			var calls_by_answerer=cf.dimension((c)=>c.attributes.answered_by||"unanswered");
+			var call_time_group_by_answerer=calls_by_answerer.group().reduce(
+				(p,v)=>{	// Add
+
+					if(v.attributes.answered && v.attributes.end) {
+						p.calls++;
+						p.minutes+=((new Date(v.attributes.end)-new Date(v.attributes.answered))/60000);
+						p.average=p.calls?p.minutes/p.calls:0;
+					}
+					return p;
+				},
+				(p,v)=>{	// Remove
+
+					if(v.attributes.answered && v.attributes.end) {
+						p.calls--;
+						p.minutes-=(new Date(v.attributes.end)-new Date(v.attributes.answered))/60000;
+						p.average=p.calls?p.minutes/p.calls:0;
+					}
+					return p;
+				},
+				()=>{
+						return {
+							calls: 0,
+							minutes: 0,
+							average: 0
+						};
+				});
+
+			// Average ring time before answer
+			var call_time_chart=dc.barChart('#length');
+			call_time_chart
+				.width(chart_size.width)
+				.height(chart_size.height)
+				.margins({top: 10, right: 50, left: 50, bottom: 100})
+				.yAxisLabel("Minutes")
+				.valueAccessor(o=>o.value.average)
+				.dimension(calls_by_answerer)
+				.group(call_time_group_by_answerer)
+				.x(d3.scale.ordinal().domain(call_time_group_by_answerer.top(Infinity).map(o=>o.key)))
+				.xUnits(dc.units.ordinal)
+//				.on("renderlet",chart=>draw_bar_labels(chart,(o)=>o.average.toFixed(1)))
+				.turnOnControls(true)
+				.render();
+
+			// Setup reset button
+			$("#length a.reset")
+				.css("display","none") // Change to visibility,hidden in future dc.js releases
+				.click(()=>{
+					call_time_chart.filterAll();
+					dc.redrawAll();
+				});
+
+
 			var ring_time_group_by_answerer=calls_by_answerer.group().reduce(
 				(p,v)=>{	// Add
 
 					if(v.attributes.answered && v.attributes.answered_by && v.attributes.rang[v.attributes.answered_by]) {
 						p.calls++;
 						p.seconds+=(new Date(v.attributes.answered)-new Date(v.attributes.rang[v.attributes.answered_by]))/1000;
-						p.average=p.seconds/p.calls|1;
+						p.average=p.calls?p.seconds/p.calls:0;
 					}
 					return p;
 				},
@@ -71,7 +132,7 @@ $(document).ready(()=>{
 					if(v.attributes.answered && v.attributes.answered_by && v.attributes.rang[v.attributes.answered_by]) {
 						p.calls--;
 						p.seconds-=(new Date(v.attributes.answered)-new Date(v.attributes.rang[v.attributes.answered_by]))/1000;
-						p.average=p.seconds/p.calls|1;
+						p.average=p.calls?p.seconds/p.calls:0;
 					}
 					return p;
 				},
@@ -140,8 +201,14 @@ $(document).ready(()=>{
 
 
 			// Time in queue
-			var queue_time_dim=cf.dimension((c) => c.attributes.queue_time);
-			var queue_time_group=queue_time_dim.group(v=>(v===null)?-1:(v===0)?10:Math.ceil(v/10)*10);
+			var queue_time_dim=cf.dimension((c) => {
+
+				let t=c.attributes.queue_time;
+				return (t===null)?-1:
+							((t===0)?10:
+								Math.ceil(t/10)*10);
+			});
+			var queue_time_group=queue_time_dim.group();
 			var total_shown_calls;
 			var queue_time_chart=dc.barChart('#queue_time')
 				.width(chart_size.width)
@@ -167,7 +234,7 @@ $(document).ready(()=>{
 			}));
 
 			// Clean up axes
-			queue_time_chart.yAxis().tickFormat(v=>v*100+"%");
+			queue_time_chart.yAxis().tickFormat(v=>Math.round(v*100)+"%");
 			queue_time_chart.xAxis().tickFormat(v=>(v==-1)?"n/a":v);
 			queue_time_chart.render();
 
@@ -182,16 +249,17 @@ $(document).ready(()=>{
 
 			// Call Destination
 			var extension_dim=cf.dimension((d)=>d.attributes.answered_by||"unanswered");
-			var extension_group=extension_dim.group().reduceCount();
+			var extension_group=extension_dim.group();
 			var destination_chart=dc.barChart('#destinations')
 				.width(chart_size.width)
 				.height(chart_size.height)
 				.margins({top: 10, right: 50, left: 50, bottom: 100})
 				.dimension(extension_dim)
 				.group(extension_group)
-				.x(d3.scale.ordinal().domain(extension_group.top(Infinity).map((o)=>{return o.key;})))
+				.x(d3.scale.ordinal().domain(extension_group.all().map((o)=>{return o.key;})))
 				.xUnits(dc.units.ordinal)
 				.on("renderlet",draw_bar_labels);
+
 
 			// Make chart show percentages
 			destination_chart

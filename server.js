@@ -1,20 +1,15 @@
+var server=require("http").createServer();
 var express=require('express');
-var app = express();
 var morgan=require('morgan');
-//var body_parser = require("body-parser");
+var url=require("url");
 var log = require("bunyan").createLogger({"name":"asterisk-analyze"});
-//var promise=require("bluebird");
 var nconf = require('nconf');
 var stream=require('stream');
 var mysql = require("promise-mysql");
+var WebsocketServer=require("ws").Server;
 
 // Read the config
 nconf.argv().env().file({ file: 'config.json' });
-
-
-
-
-
 
 
 // A stream to pipe morgan (http logging) to bunyan
@@ -25,21 +20,35 @@ nconf.argv().env().file({ file: 'config.json' });
     done();
 };
 
-// Connect to the databsae
-var db;
-mysql
-	.createConnection(nconf.get('mysql'))
-	.then((c)=>{
 
-		log.info("Connected to database");
-		db=c;
-		app.listen(3000, function() {
+// Websockets server
+var wss=new WebsocketServer({server: server});
+wss.on("connection",(ws)=>{
 
-	    	log.info("webservice listening on %s", 3000);
-		});
+	let location=url.parse(ws.upgradeReq.url, true);
+	log.info("Websockets connected! :"+location);
+	var iv=setInterval(()=>{
+
+		ws.send("Hello...",()=>{});
+
+	},1000);
+
+	ws.on("message",(msg)=>{
+
+		log.info("Websockets message: "+msg);
+	})
+	.on("close",()=>{
+		clearInterval(iv);
+		log.info("Websocket closed");
 	});
 
 
+});
+
+
+// Web app
+var app = express();
+server.on("request", app);
 app
 	.use(morgan(':remote-addr ":method :url HTTP/:http-version" :status :res[content-length] - :response-time ms', { "stream" : info_log_stream }))   // Morgan HTTP logging
 	.use(express.static("public"))
@@ -92,3 +101,25 @@ app
 		});
 
 	});
+
+
+// Connect to the database and start the server
+var db;
+mysql
+	.createConnection(nconf.get('mysql'))
+	.then((c)=>{
+
+		log.info("Connected to database");
+		db=c;
+		server.listen(3000, function() {
+
+	    	log.info("webservice listening on %s", 3000);
+		});
+	});
+
+
+
+
+
+
+
