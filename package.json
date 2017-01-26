@@ -72,6 +72,7 @@
     "json-loader": "^0.5.4",
     "mocha": "^3.2.0",
     "parallelshell": "^2.0.0",
+    "reconnectingwebsocket": "^1.0.0",
     "style-loader": "^0.13.1",
     "uglify-js": "^2.7.5",
     "url-loader": "^0.5.7",

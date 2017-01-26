@@ -1,12 +1,13 @@
 var server=require("http").createServer();
 var express=require('express');
 var morgan=require('morgan');
-var url=require("url");
+//var url=require("url");
 var log = require("bunyan").createLogger({"name":"asterisk-analyze"});
 var nconf = require('nconf');
 var stream=require('stream');
 var mysql = require("promise-mysql");
 var WebsocketServer=require("ws").Server;
+var redis = new (require("ioredis"))(); 
 
 // Read the config
 nconf.argv().env().file({ file: 'config.json' });
@@ -23,27 +24,39 @@ nconf.argv().env().file({ file: 'config.json' });
 
 // Websockets server
 var wss=new WebsocketServer({server: server});
-wss.on("connection",(ws)=>{
 
-	let location=url.parse(ws.upgradeReq.url, true);
-	log.info("Websockets connected! :"+location);
-	var iv=setInterval(()=>{
+// Alert clients when new call happens
+redis.subscribe("calls",(err)=>console.log(err?err:"Subscribed to 'calls' on Redis"));
+redis.on("message", (channel, msg)=>{
 
-		ws.send("Hello...",()=>{});
+	// Verify channel
+	if(channel!="calls") return;
 
-	},1000);
+	// Get the call
+	let call=JSON.parse(msg);
 
-	ws.on("message",(msg)=>{
+	// Only send finished calls (so we don't complicate things and maybe cause the webapp to ingest mutating data)
+	if(!call.end) return;
 
-		log.info("Websockets message: "+msg);
-	})
-	.on("close",()=>{
-		clearInterval(iv);
-		log.info("Websocket closed");
-	});
-
-
+	// Broadcast call to all clients
+	wss.clients.forEach((client)=>client.send(msg));
+	log.info("Call ended, sending to all clients");
 });
+
+// wss.on("connection",(ws)=>{
+
+// 	let location=url.parse(ws.upgradeReq.url, true);
+// 	log.info("websocket client connected to path '"+location.pathname+"'");
+// 	// ws.send("Hello...",()=>{});
+// 	// ws.on("message",(msg)=>{
+
+// 	// 	log.info("Websockets message: "+msg);
+// 	// })
+// 	.on("close",()=>{
+// 		clearInterval(iv);
+// 		log.info("websocket client closed");
+// 	});
+// });
 
 
 // Web app

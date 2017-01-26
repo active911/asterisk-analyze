@@ -7,6 +7,7 @@ var d3 = require('d3');
 var dc = require('dc');
 var $ = require('jquery');
 var bootstrap = require("bootstrap"); /* jshint ignore:line */ // (supress unused variable warning)
+var ReconnectingWebSocket=require("reconnectingwebsocket");
 var moment=require("moment");
 
 var chart_size={
@@ -42,15 +43,6 @@ function queue_time(c){
 
 $(document).ready(()=>{
 
-	// Websockets
-	let host=window.document.location.host;//replace(/:.*/,'');
-	var ws=new WebSocket("ws://"+host);
-
-	ws.onmessage=(e)=>{
-
-		console.log("New ws data: "+e.data);
-	};
-
 	var m=(new moment()).subtract(12, "months");
 	for(let n=0; n<12; n++){
 
@@ -69,6 +61,26 @@ $(document).ready(()=>{
 
 			// Yay crossfilter!
 			var cf=crossfilter(o.data);
+
+			// Get new calls from Websockets
+			let host=window.document.location.host;//replace(/:.*/,'');
+			var ws=new ReconnectingWebSocket("ws://"+host);
+			ws.onmessage=(e)=>{
+
+				console.log("New ws data: "+e.data);
+
+				// Create a new call item
+				let call={
+					type: "call",
+					id: 0,
+					attributes: JSON.parse(e.data)
+				};
+				call.attributes.queue_time=queue_time(call);
+
+				// Add the new call
+				cf.add([call]);
+				dc.redrawAll();
+			};
 
 
 			var calls_by_answerer=cf.dimension((c)=>(c.attributes.answered_by||"unanswered").toString());
@@ -255,7 +267,6 @@ $(document).ready(()=>{
 
 
 			// Call counts by answerer
-			// var extension_dim=cf.dimension((d)=>d.attributes.answered_by||"unanswered");
 			var call_count_group_by_answerer=calls_by_answerer.group();
 			var destination_chart=dc.barChart('#destinations')
 				.width(chart_size.width)
@@ -263,7 +274,8 @@ $(document).ready(()=>{
 				.margins({top: 10, right: 50, left: 50, bottom: 100})
 				.dimension(calls_by_answerer)
 				.group(call_count_group_by_answerer)
-				.x(d3.scale.ordinal().domain(call_count_group_by_answerer.all().map((o)=>{return o.key;})))
+				.x(d3.scale.ordinal().domain(()=>call_count_group_by_answerer.all().map((o)=>{return o.key;})))
+				// .x(d3.scale.ordinal().domain(call_count_group_by_answerer.all().map((o)=>{return o.key;})))
 				.xUnits(dc.units.ordinal)
 				.on("renderlet",draw_bar_labels);
 
