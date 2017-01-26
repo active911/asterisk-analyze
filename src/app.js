@@ -14,8 +14,31 @@ var chart_size={
 	height: 300
 };
 
-// Data and dimensions
-//var data=require("./calls.json");
+/**
+ * Calculate queue time
+ *
+ * Helper function to calculate time in queue for a call
+ * @param {call} call - the call 
+ * @return time in queue (s) or null
+*/
+function queue_time(c){
+
+	if(c.attributes.enqueued) {
+		if(c.attributes.answered) {
+
+			return (new Date(c.attributes.answered)-new Date(c.attributes.enqueued))/1000;	// Call was enqueued and then answered
+
+		} else {
+
+			if(c.attributes.end && Object.keys(c.attributes.rang).length) {
+
+				return (new Date(c.attributes.end)-new Date(c.attributes.enqueued))/1000;		// Call was not answered, but rang at least once before it ended
+			}				
+		}
+	}
+
+	return null;	// Default
+}
 
 $(document).ready(()=>{
 
@@ -41,30 +64,14 @@ $(document).ready(()=>{
 		m=moment($("#date").val());
 		$.getJSON("/api/calls/"+m.year()+"/"+(1+m.date())).then((o)=>{
 
-			// Create ring data, add custom attributes (like queue time)
-			for (let c of o.data){
-
-				// Calculate queue time
-				c.attributes.queue_time=null;
-				if(c.attributes.enqueued) {
-					if(c.attributes.answered) {
-
-						c.attributes.queue_time=(new Date(c.attributes.answered)-new Date(c.attributes.enqueued))/1000;	// Call was enqueued and then answered
-					} else {
-
-						if(c.attributes.end && Object.keys(c.attributes.rang).length) {
-
-							c.attributes.queue_time=(new Date(c.attributes.end)-new Date(c.attributes.enqueued))/1000;		// Call was not answered, but rang at least once before it ended
-						}				
-					}
-				}
-			}
+			// Calculate queue time for each call
+			for (let c of o.data) c.attributes.queue_time=queue_time(c);
 
 			// Yay crossfilter!
 			var cf=crossfilter(o.data);
 
 
-			var calls_by_answerer=cf.dimension((c)=>c.attributes.answered_by||"unanswered");
+			var calls_by_answerer=cf.dimension((c)=>(c.attributes.answered_by||"unanswered").toString());
 			var call_time_group_by_answerer=calls_by_answerer.group().reduce(
 				(p,v)=>{	// Add
 
@@ -92,7 +99,7 @@ $(document).ready(()=>{
 						};
 				});
 
-			// Average ring time before answer
+			// Average call time by answerer
 			var call_time_chart=dc.barChart('#length');
 			call_time_chart
 				.width(chart_size.width)
@@ -104,7 +111,7 @@ $(document).ready(()=>{
 				.group(call_time_group_by_answerer)
 				.x(d3.scale.ordinal().domain(call_time_group_by_answerer.top(Infinity).map(o=>o.key)))
 				.xUnits(dc.units.ordinal)
-//				.on("renderlet",chart=>draw_bar_labels(chart,(o)=>o.average.toFixed(1)))
+				.on("renderlet",chart=>draw_bar_labels(chart,(o)=>o.average.toFixed(1)))
 				.turnOnControls(true)
 				.render();
 
@@ -115,7 +122,6 @@ $(document).ready(()=>{
 					call_time_chart.filterAll();
 					dc.redrawAll();
 				});
-
 
 			var ring_time_group_by_answerer=calls_by_answerer.group().reduce(
 				(p,v)=>{	// Add
@@ -205,10 +211,11 @@ $(document).ready(()=>{
 
 				let t=c.attributes.queue_time;
 				return (t===null)?-1:
-							((t===0)?10:
-								Math.ceil(t/10)*10);
+							(t===0)?10:
+								Math.ceil(t/10)*10;
 			});
 			var queue_time_group=queue_time_dim.group();
+
 			var total_shown_calls;
 			var queue_time_chart=dc.barChart('#queue_time')
 				.width(chart_size.width)
@@ -247,16 +254,16 @@ $(document).ready(()=>{
 				});
 
 
-			// Call Destination
-			var extension_dim=cf.dimension((d)=>d.attributes.answered_by||"unanswered");
-			var extension_group=extension_dim.group();
+			// Call counts by answerer
+			// var extension_dim=cf.dimension((d)=>d.attributes.answered_by||"unanswered");
+			var call_count_group_by_answerer=calls_by_answerer.group();
 			var destination_chart=dc.barChart('#destinations')
 				.width(chart_size.width)
 				.height(chart_size.height)
 				.margins({top: 10, right: 50, left: 50, bottom: 100})
-				.dimension(extension_dim)
-				.group(extension_group)
-				.x(d3.scale.ordinal().domain(extension_group.all().map((o)=>{return o.key;})))
+				.dimension(calls_by_answerer)
+				.group(call_count_group_by_answerer)
+				.x(d3.scale.ordinal().domain(call_count_group_by_answerer.all().map((o)=>{return o.key;})))
 				.xUnits(dc.units.ordinal)
 				.on("renderlet",draw_bar_labels);
 
