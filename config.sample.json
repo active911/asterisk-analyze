@@ -17,7 +17,8 @@
 		"host"  : "",
 		"user"  : "",
 		"password"  : "",
-		"database"  : ""
+		"database"  : "",
+		"table" :	"calls"
 
 	}
 }

@@ -74,7 +74,7 @@ app
 		let to=`${year}-${month}-01`;
 
 		// Fetch from database
-		db.query("SELECT id, data FROM calls WHERE stamp BETWEEN ? AND ? ORDER BY stamp",[from, to])// WHERE stamp = ?", [moment(call.start).format('YYYY-MM-DD HH:mm:ss')])
+		db.query("SELECT id, data FROM ? WHERE stamp BETWEEN ? AND ? ORDER BY stamp",[nconf.get('mysql').table, from, to])// WHERE stamp = ?", [moment(call.start).format('YYYY-MM-DD HH:mm:ss')])
 		.then((rows) =>{
 
 			var data=[];

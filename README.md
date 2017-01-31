@@ -11,7 +11,7 @@
 ```sql
 CREATE TABLE calls (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-stamp datetime not null,
+stamp datetime NOT NULL,
 data text null
 )ENGINE=innodb;
 ```
