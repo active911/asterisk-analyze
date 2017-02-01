@@ -1,6 +1,5 @@
 {
 	"general": {
-		"timezone": "America/Los_Angeles",
 		"input": "/var/log/asterisk/full",
 		"syslogd" : {
 			"address" : "1.2.3.4",
@@ -9,7 +8,8 @@
 			}
 		},
 	"asterisk": {
-		"queues": "200"
+		"queues": "200",
+		"/*force_utc_offset" : "+00:00 slows things down */"
 	},
 
 	"mysql" : {

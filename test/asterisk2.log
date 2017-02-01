@@ -1,0 +1,181 @@
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:1] Set("SIP/5412202580-000000e9", "__DIRECTION=INBOUND") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:2] Gosub("SIP/5412202580-000000e9", "sub-record-check,s,1(in,s,force)") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:1] GotoIf("SIP/5412202580-000000e9", "0?initialized") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:2] Set("SIP/5412202580-000000e9", "__REC_STATUS=INITIALIZED") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:3] Set("SIP/5412202580-000000e9", "NOW=1485910088") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:4] Set("SIP/5412202580-000000e9", "__DAY=31") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:5] Set("SIP/5412202580-000000e9", "__MONTH=01") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:6] Set("SIP/5412202580-000000e9", "__YEAR=2017") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:7] Set("SIP/5412202580-000000e9", "__TIMESTR=20170131-164808") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:8] Set("SIP/5412202580-000000e9", "__FROMEXTEN=unknown") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:9] Set("SIP/5412202580-000000e9", "__MON_FMT=gsm") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:10] NoOp("SIP/5412202580-000000e9", "Recordings initialized") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:11] ExecIf("SIP/5412202580-000000e9", "0?Set(ARG3=dontcare)") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:12] Set("SIP/5412202580-000000e9", "REC_POLICY_MODE_SAVE=") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:13] ExecIf("SIP/5412202580-000000e9", "0?Set(REC_STATUS=NO)") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:14] GotoIf("SIP/5412202580-000000e9", "2?checkaction") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:17] GotoIf("SIP/5412202580-000000e9", "1?sub-record-check,in,1") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [in@sub-record-check:1] NoOp("SIP/5412202580-000000e9", "Inbound Recording Check to s") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [in@sub-record-check:2] Set("SIP/5412202580-000000e9", "FROMEXTEN=unknown") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [in@sub-record-check:3] ExecIf("SIP/5412202580-000000e9", "10?Set(FROMEXTEN=5412300555)") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [in@sub-record-check:4] Gosub("SIP/5412202580-000000e9", "recordcheck,1(force,in,s)") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:1] NoOp("SIP/5412202580-000000e9", "Starting recording check against force") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:2] Goto("SIP/5412202580-000000e9", "force") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:5] Set("SIP/5412202580-000000e9", "__REC_POLICY_MODE=FORCE") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:6] GotoIf("SIP/5412202580-000000e9", "1?startrec") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:16] NoOp("SIP/5412202580-000000e9", "Starting recording: in, s") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:17] Set("SIP/5412202580-000000e9", "AUDIOHOOK_INHERIT(MixMonitor)=yes") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:18] Set("SIP/5412202580-000000e9", "__CALLFILENAME=in-s-5412300555-20170131-164808-1485910088.659") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:19] MixMonitor("SIP/5412202580-000000e9", "/var/spool/asterisk/recording/2017/01/31/in-s-5412300555-20170131-164808-1485910088.659.gsm,ai(LOCAL_MIXMON_ID),") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:20] Set("SIP/5412202580-000000e9", "__MIXMON_ID=0x7f4bcc0202c0") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:21] Set("SIP/5412202580-000000e9", "__RECORD_ID=SIP/5412202580-000000e9") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:22] Set("SIP/5412202580-000000e9", "__REC_STATUS=RECORDING") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:23] Set("SIP/5412202580-000000e9", "CDR(recordingfile)=in-s-5412300555-20170131-164808-1485910088.659.gsm") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:24] Return("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [in@sub-record-check:5] Return("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:3] Gosub("SIP/5412202580-000000e9", "app-blacklist-check,s,1()") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@app-blacklist-check:1] GotoIf("SIP/5412202580-000000e9", "0?blacklisted") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@app-blacklist-check:2] Set("SIP/5412202580-000000e9", "CALLED_BLACKLIST=1") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@app-blacklist-check:3] Return("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:4] ExecIf("SIP/5412202580-000000e9", "1?Set(__FROM_DID=s)") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:5] Set("SIP/5412202580-000000e9", "CDR(did)=s") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:6] ExecIf("SIP/5412202580-000000e9", "0 ?Set(CALLERID(name)=5412300555)") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:7] Set("SIP/5412202580-000000e9", "__MOHCLASS=") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:8] Set("SIP/5412202580-000000e9", "__REVERSAL_REJECT=FALSE") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:9] GotoIf("SIP/5412202580-000000e9", "1?post-reverse-charge") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:11] NoOp("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:08] VERBOSE[20930][C-0000003b] app_mixmonitor.c:   == Begin MixMonitor Recording SIP/5412202580-000000e9
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:12] Set("SIP/5412202580-000000e9", "__CALLINGNAMEPRES_SV=allowed_not_screened") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:13] Set("SIP/5412202580-000000e9", "__CALLINGNUMPRES_SV=allowed_not_screened") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:14] Set("SIP/5412202580-000000e9", "CALLERID(name-pres)=allowed_not_screened") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:15] Set("SIP/5412202580-000000e9", "CALLERID(num-pres)=allowed_not_screened") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:16] NoOp("SIP/5412202580-000000e9", "CallerID Entry Point") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:17] Set("SIP/5412202580-000000e9", "FAX_DEST=ext-fax^25^1") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:18] Set("SIP/5412202580-000000e9", "FAXOPT(faxdetect)=yes") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:19] Answer("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:08] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:20] Wait("SIP/5412202580-000000e9", "3") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@from-trunk:21] Goto("SIP/5412202580-000000e9", "app-daynight,0,1") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [0@app-daynight:1] GotoIf("SIP/5412202580-000000e9", "0?app-announcement-2,s,1:timeconditions,5,1") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:1] Set("SIP/5412202580-000000e9", "DB(TC/5/INUSESTATE)=INUSE") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:2] Set("SIP/5412202580-000000e9", "DB(TC/5/NOT_INUSESTATE)=NOT_INUSE") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:3] GotoIfTime("SIP/5412202580-000000e9", "08:00-17:00,*,29,may,America/Los_Angeles?truestate") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:4] GotoIfTime("SIP/5412202580-000000e9", "08:00-17:00,*,4,jul,America/Los_Angeles?truestate") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:5] GotoIfTime("SIP/5412202580-000000e9", "08:00-17:00,*,4,sep,America/Los_Angeles?truestate") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:6] GotoIfTime("SIP/5412202580-000000e9", "08:00-17:00,*,23-24,nov,America/Los_Angeles?truestate") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:7] GotoIfTime("SIP/5412202580-000000e9", "08:00-17:00,*,25-26,dec,America/Los_Angeles?truestate") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:8] GotoIf("SIP/5412202580-000000e9", "0?truegoto") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:9] ExecIf("SIP/5412202580-000000e9", "0?Set(DB(TC/5)=)") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:10] Set("SIP/5412202580-000000e9", "DEVICE_STATE(Custom:TC5)=INUSE") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:11] ExecIf("SIP/5412202580-000000e9", "0?Set(DEVICE_STATE(Custom:TCSTICKY)=INUSE)") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [5@timeconditions:12] GotoIf("SIP/5412202580-000000e9", "1?timeconditions,1,1") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@timeconditions:1] Set("SIP/5412202580-000000e9", "DB(TC/1/INUSESTATE)=INUSE") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@timeconditions:2] Set("SIP/5412202580-000000e9", "DB(TC/1/NOT_INUSESTATE)=NOT_INUSE") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@timeconditions:3] GotoIfTime("SIP/5412202580-000000e9", "08:08-17:00,sat,*,*,America/Los_Angeles?truestate") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@timeconditions:4] GotoIfTime("SIP/5412202580-000000e9", "08:00-22:00,mon-fri,*,*,America/Los_Angeles?truestate") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@timeconditions:14] GotoIf("SIP/5412202580-000000e9", "0?falsegoto") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@timeconditions:15] ExecIf("SIP/5412202580-000000e9", "0?Set(DB(TC/1)=)") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@timeconditions:16] Set("SIP/5412202580-000000e9", "DEVICE_STATE(Custom:TC1)=NOT_INUSE") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@timeconditions:17] ExecIf("SIP/5412202580-000000e9", "0?Set(DEVICE_STATE(Custom:TCSTICKY)=INUSE)") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@timeconditions:18] GotoIf("SIP/5412202580-000000e9", "1?ivr-2,s,1") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@ivr-2:1] Set("SIP/5412202580-000000e9", "TIMEOUT_LOOPCOUNT=0") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@ivr-2:2] Set("SIP/5412202580-000000e9", "INVALID_LOOPCOUNT=0") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@ivr-2:3] Set("SIP/5412202580-000000e9", "_IVR_CONTEXT_ivr-2=") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@ivr-2:4] Set("SIP/5412202580-000000e9", "_IVR_CONTEXT=ivr-2") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@ivr-2:5] Set("SIP/5412202580-000000e9", "__IVR_RETVM=") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@ivr-2:6] GotoIf("SIP/5412202580-000000e9", "1?skip") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@ivr-2:9] Set("SIP/5412202580-000000e9", "IVR_MSG=custom/main-ivr") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@ivr-2:10] Set("SIP/5412202580-000000e9", "TIMEOUT(digit)=3") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@ivr-2:11] ExecIf("SIP/5412202580-000000e9", "1?Background(custom/main-ivr)") in new stack
+[2017-01-31 16:48:11] VERBOSE[20929][C-0000003b] file.c:     -- <SIP/5412202580-000000e9> Playing 'custom/main-ivr.gsm' (language 'en')
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:   == CDR updated on SIP/5412202580-000000e9
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [1@ivr-2:1] Goto("SIP/5412202580-000000e9", "ext-queues,510,1") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:1] Macro("SIP/5412202580-000000e9", "user-callerid,") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:1] Set("SIP/5412202580-000000e9", "TOUCH_MONITOR=1485910088.659") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:2] Set("SIP/5412202580-000000e9", "AMPUSER=5412300555") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:3] GotoIf("SIP/5412202580-000000e9", "0?report") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:4] ExecIf("SIP/5412202580-000000e9", "1?Set(REALCALLERIDNUM=5412300555)") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:5] Set("SIP/5412202580-000000e9", "AMPUSER=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:6] GotoIf("SIP/5412202580-000000e9", "0?limit") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:7] Set("SIP/5412202580-000000e9", "AMPUSERCIDNAME=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:8] GotoIf("SIP/5412202580-000000e9", "1?report") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:15] GotoIf("SIP/5412202580-000000e9", "0?continue") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:16] Set("SIP/5412202580-000000e9", "__TTL=64") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:17] GotoIf("SIP/5412202580-000000e9", "1?continue") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:28] Set("SIP/5412202580-000000e9", "CALLERID(number)=5412300555") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:29] Set("SIP/5412202580-000000e9", "CALLERID(name)=ALYRICA ") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:30] GotoIf("SIP/5412202580-000000e9", "0?cnum") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:31] Set("SIP/5412202580-000000e9", "CDR(cnam)=ALYRICA") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:32] Set("SIP/5412202580-000000e9", "CDR(cnum)=5412300555") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-user-callerid:33] Set("SIP/5412202580-000000e9", "CHANNEL(language)=en") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:2] Answer("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:3] Macro("SIP/5412202580-000000e9", "blkvm-set,reset") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-blkvm-set:1] ExecIf("SIP/5412202580-000000e9", "1?Set(__BLKVM_CHANNEL=SIP/5412202580-000000e9)") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-blkvm-set:2] Set("SIP/5412202580-000000e9", "SHARED(BLKVM,SIP/5412202580-000000e9)=TRUE") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-blkvm-set:3] Set("SIP/5412202580-000000e9", "GOSUB_RETVAL=TRUE") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-blkvm-set:4] MacroExit("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:4] ExecIf("SIP/5412202580-000000e9", "1?Set(_DIAL_OPTIONS=TtrM(auto-blkvm))") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:5] Set("SIP/5412202580-000000e9", "__NODEST=510") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:6] Set("SIP/5412202580-000000e9", "QCIDPP=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:7] Set("SIP/5412202580-000000e9", "VQ_CIDPP=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:8] ExecIf("SIP/5412202580-000000e9", "0?Macro(prepend-cid,)") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:9] Set("SIP/5412202580-000000e9", "QAINFO=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:10] Set("SIP/5412202580-000000e9", "VQ_AINFO=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:11] ExecIf("SIP/5412202580-000000e9", "0?Set(__ALERT_INFO=)") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:12] Set("SIP/5412202580-000000e9", "QJOINMSG=custom/call-monitored") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:13] Set("SIP/5412202580-000000e9", "VQ_JOINMSG=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:14] Set("SIP/5412202580-000000e9", "QRETRY=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:15] Set("SIP/5412202580-000000e9", "VQ_RETRY=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:16] Set("SIP/5412202580-000000e9", "QOPTIONS=t") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:17] Set("SIP/5412202580-000000e9", "VQ_OPTIONS=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:18] Set("SIP/5412202580-000000e9", "QGOSUB=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:19] Set("SIP/5412202580-000000e9", "VQ_GOSUB=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:20] Set("SIP/5412202580-000000e9", "QAGI=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:21] Set("SIP/5412202580-000000e9", "VQ_AGI=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:22] Set("SIP/5412202580-000000e9", "QRULE=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:23] Set("SIP/5412202580-000000e9", "VQ_RULE=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:24] Set("SIP/5412202580-000000e9", "QPOSITION=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:25] Set("SIP/5412202580-000000e9", "VQ_POSITION=") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:26] Gosub("SIP/5412202580-000000e9", "sub-record-check,s,1(q,510,force)") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:1] GotoIf("SIP/5412202580-000000e9", "10?initialized") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:10] NoOp("SIP/5412202580-000000e9", "Recordings initialized") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:11] ExecIf("SIP/5412202580-000000e9", "0?Set(ARG3=dontcare)") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:12] Set("SIP/5412202580-000000e9", "REC_POLICY_MODE_SAVE=FORCE") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:13] ExecIf("SIP/5412202580-000000e9", "0?Set(REC_STATUS=NO)") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:14] GotoIf("SIP/5412202580-000000e9", "1?checkaction") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:17] GotoIf("SIP/5412202580-000000e9", "0?sub-record-check,q,1") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:18] NoOp("SIP/5412202580-000000e9", "Generic q Recording Check - 5412300555 510") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:19] Gosub("SIP/5412202580-000000e9", "recordcheck,1(force,q,510)") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:1] NoOp("SIP/5412202580-000000e9", "Starting recording check against force") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:2] Goto("SIP/5412202580-000000e9", "force") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:5] Set("SIP/5412202580-000000e9", "__REC_POLICY_MODE=FORCE") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:6] GotoIf("SIP/5412202580-000000e9", "0?startrec") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [recordcheck@sub-record-check:7] Return("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@sub-record-check:20] Return("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:27] Set("SIP/5412202580-000000e9", "__CWIGNORE=TRUE") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:28] ExecIf("SIP/5412202580-000000e9", "1?Playback(custom/call-monitored, )") in new stack
+[2017-01-31 16:48:28] VERBOSE[20929][C-0000003b] file.c:     -- <SIP/5412202580-000000e9> Playing 'custom/call-monitored.slin' (language 'en')
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:29] QueueLog("SIP/5412202580-000000e9", "510,1485910088.659,NONE,DID,s") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:30] Set("SIP/5412202580-000000e9", "QAANNOUNCE=") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:31] Set("SIP/5412202580-000000e9", "VQ_AANNOUNCE=") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:32] Set("SIP/5412202580-000000e9", "QMOH=") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:33] Set("SIP/5412202580-000000e9", "VQ_MOH=") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:34] ExecIf("SIP/5412202580-000000e9", "0?Set(__MOHCLASS=)") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:35] ExecIf("SIP/5412202580-000000e9", "0?Set(CHANNEL(musicclass)=)") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:36] Set("SIP/5412202580-000000e9", "QMAXWAIT=30") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:37] Set("SIP/5412202580-000000e9", "VQ_MAXWAIT=") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:38] Set("SIP/5412202580-000000e9", "QUEUENUM=510") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:39] Set("SIP/5412202580-000000e9", "QUEUEJOINTIME=1485910112") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [510@ext-queues:40] Queue("SIP/5412202580-000000e9", "510,t,,,30,,,,,") in new stack
+[2017-01-31 16:48:32] VERBOSE[20929][C-0000003b] res_musiconhold.c:     -- Started music on hold, class 'default', on SIP/5412202580-000000e9
+[2017-01-31 16:48:53] VERBOSE[20957][C-0000003b] pbx.c:     -- Executing [s@macro-blkvm-clr:1] Set("SIP/206-000000ed", "SHARED(BLKVM,SIP/5412202580-000000e9)=") in new stack
+[2017-01-31 16:48:53] VERBOSE[20929][C-0000003b] app_queue.c:     -- Local/206@from-queue-000000d9;1 answered SIP/5412202580-000000e9
+[2017-01-31 16:48:53] VERBOSE[20929][C-0000003b] res_musiconhold.c:     -- Stopped music on hold on SIP/5412202580-000000e9
+[2017-01-31 16:48:58] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [h@ext-queues:1] Macro("SIP/5412202580-000000e9", "hangupcall,") in new stack
+[2017-01-31 16:48:58] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-hangupcall:1] ExecIf("SIP/5412202580-000000e9", "0?Set(CDR(recordingfile)=in-s-5412300555-20170131-164808-1485910088.659.gsm)") in new stack
+[2017-01-31 16:48:58] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-hangupcall:2] GotoIf("SIP/5412202580-000000e9", "1?theend") in new stack
+[2017-01-31 16:48:58] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-hangupcall:4] ExecIf("SIP/5412202580-000000e9", "0?Set(CDR(recordingfile)=)") in new stack
+[2017-01-31 16:48:58] VERBOSE[20929][C-0000003b] pbx.c:     -- Executing [s@macro-hangupcall:5] Hangup("SIP/5412202580-000000e9", "") in new stack
+[2017-01-31 16:48:58] VERBOSE[20929][C-0000003b] app_macro.c:   == Spawn extension (macro-hangupcall, s, 5) exited non-zero on 'SIP/5412202580-000000e9' in macro 'hangupcall'
+[2017-01-31 16:48:58] VERBOSE[20929][C-0000003b] pbx.c:   == Spawn extension (ext-queues, h, 1) exited non-zero on 'SIP/5412202580-000000e9'
+[2017-01-31 16:48:58] VERBOSE[20929][C-0000003b] pbx.c:   == Spawn extension (ext-queues, 510, 40) exited non-zero on 'SIP/5412202580-000000e9'
+[2017-01-31 16:48:58] VERBOSE[20930][C-0000003b] app_mixmonitor.c:   == End MixMonitor Recording SIP/5412202580-000000e9

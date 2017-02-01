@@ -3,12 +3,14 @@ var asterisklog=require("../lib/asterisklog.js");
 var linebyline=require("line-by-line");
 
 
-describe("Ingest sample call data",()=>{
+describe("Ingest sample call data",function(){
 
-	it("Direct log",(done)=>{
+	this.slow(200);		// We are forcing timezone offsets, which is slower
 
-		var a=new asterisklog({queues: "299" });
-		(new linebyline("./test/normal.log"))
+	it("Direct log 1",(done)=>{
+
+		var a=new asterisklog({queues: "299", force_utc_offset: "+00:00" });
+		(new linebyline("./test/asterisk1.log"))
 			.on("line", (line)=>a.add(line))
 			.on("error", (err)=>{throw err})
 			.on("end",()=>{
@@ -18,15 +20,15 @@ describe("Ingest sample call data",()=>{
 				assert.deepEqual(JSON.parse(JSON.stringify(calls[0])),		// Conversion to/from JSON is to convert Date() objects to strings
 					  {
 					    "id": "SIP/fpbx-1-f04d84a7-0029dad8",
-					    "start": "2016-12-01T15:10:46.000Z",
-					    "end": "2016-12-01T15:18:01.000Z",
-					    "enqueued": "2016-12-01T15:11:02.000Z",
-					    "answered": "2016-12-01T15:11:04.000Z",
+					    "start": "2016-12-01T07:10:46.000Z",
+					    "end": "2016-12-01T07:18:01.000Z",
+					    "enqueued": "2016-12-01T07:11:02.000Z",
+					    "answered": "2016-12-01T07:11:04.000Z",
 					    "answered_by": "Local/210",
 					    "caller_id": "15555553333",
 					    "rang": {
-					    	"Local/210": "2016-12-01T15:11:02.000Z",
-					    	"Local/213": "2016-12-01T15:11:02.000Z"
+					      "Local/213": "2016-12-01T07:11:02.000Z",
+					      "Local/210": "2016-12-01T07:11:02.000Z"
 					    }
 					  });
 				done();
@@ -34,6 +36,31 @@ describe("Ingest sample call data",()=>{
 
 	});
 
+	it("Direct log 2",(done)=>{
+
+		a=new asterisklog({queues: "510", force_utc_offset: "+00:00" });
+		(new linebyline("./test/asterisk2.log"))
+			.on("line", (line)=>a.add(line))
+			.on("error", (err)=>{throw err})
+			.on("end",()=>{
+
+				var calls=a.get_calls();
+				assert.equal(calls.length,1);
+				assert.deepEqual(JSON.parse(JSON.stringify(calls[0])),		// Conversion to/from JSON is to convert Date() objects to strings
+				  {
+				    "id": "SIP/5412202580-000000e9",
+				    "start": "2017-01-31T16:48:08.000Z",
+				    "end": "2017-01-31T16:48:58.000Z",
+				    "enqueued": "2017-01-31T16:48:28.000Z",
+				    "answered": "2017-01-31T16:48:53.000Z",
+				    "answered_by": "Local/206",
+				    "caller_id": "5412300555",
+				    "rang": {}
+				  });
+				done();
+			});
+
+	});
 
 
 	it("Remote syslog (no timestamps)",(done)=>{

@@ -75,7 +75,6 @@ etl merges the new data with the unclosed calls in the database, so you should b
 
 
 #### TODO
-- tests fail on unix system
 - etl should not require database connection in --dry-run mode
 - Use bootstrap to organize the views
 - Add more graphs

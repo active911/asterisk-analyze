@@ -18,7 +18,7 @@ nconf
 	.defaults({ "general" : { "input" : "full", "output" : "calls.json", "mode" : "follow" } });
 
 // Create analyzer
-var al=new asterisklog({queues: nconf.get('asterisk').queues});
+var al=new asterisklog(nconf.get('asterisk'));
 
 // Ensure input file exists
 if(!fs.existsSync(nconf.get('general').input)){
