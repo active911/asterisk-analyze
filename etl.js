@@ -64,7 +64,7 @@ mysql
 
 			// See if this record already exists
 			c
-				.query("SELECT id, data FROM ? WHERE stamp = ?", [nconf.get('mysql').table, moment(call.start).format('YYYY-MM-DD HH:mm:ss')])
+				.query("SELECT id, data FROM "+(nconf.get('mysql').table||"calls")+" WHERE stamp = ?", [moment(call.start).format('YYYY-MM-DD HH:mm:ss')])
 				.then((rows) =>{
 
 
@@ -89,7 +89,7 @@ mysql
 				})
 				.then((b)=>{
 
-					if(b) c.query("INSERT INTO ? (stamp, data) VALUES ( ?, ?)",[nconf.get('mysql').table, moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)]);
+					if(b) c.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)]);
 				});		
 		});	
 

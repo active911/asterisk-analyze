@@ -38,7 +38,7 @@ al
 
 		log.info("Call ended. Inserting into database");
 		redis.publish("calls",JSON.stringify(call));
-		pool.query("INSERT INTO ? (stamp, data) VALUES ( ?, ?)",[nconf.get('mysql').table, moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)])
+		pool.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)])
 			.then(()=>{
 				log.info("Call inserted into database successfully.");
 			})
