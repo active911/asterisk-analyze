@@ -54,7 +54,7 @@ $(document).ready(()=>{
 	$("#date").on("change",()=>{
 
 		m=moment($("#date").val());
-		$.getJSON("/api/calls/"+m.year()+"/"+(1+m.date())).then((o)=>{
+		$.getJSON("/api/calls/"+m.year()+"/"+(1+m.month())).then((o)=>{
 
 			// Calculate queue time for each call
 			for (let c of o.data) c.attributes.queue_time=queue_time(c);
