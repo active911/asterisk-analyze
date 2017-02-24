@@ -62,6 +62,31 @@ describe("Ingest sample call data",function(){
 
 	});
 
+	it("Asterisk 1.4.42 log sample",(done)=>{
+
+		a=new asterisklog({queues: "299", force_utc_offset: "+00:00" });
+		(new linebyline("./test/asterisk1.4.42.log"))
+			.on("line", (line)=>a.add(line))
+			.on("error", (err)=>{throw err})
+			.on("end",()=>{
+
+				var calls=a.get_calls();
+				assert.equal(calls.length,1);
+				assert.deepEqual(JSON.parse(JSON.stringify(calls[0])),		// Conversion to/from JSON is to convert Date() objects to strings
+				  {
+				  "id": "SIP/fpbx-1-f04d84a7-00000032",
+				  "start": "2017-02-23T15:03:12.000Z",
+				  "end": "2017-02-23T15:03:34.000Z",
+				  "enqueued": "2017-02-23T15:03:25.000Z",
+				  "answered": "2017-02-23T15:03:27.000Z",
+				  "answered_by": "SIP/212",
+				  "caller_id": "15410001111",
+				  "rang": {}
+				});
+				done();
+			});
+
+	});
 
 	it("Remote syslog (no timestamps)",(done)=>{
 

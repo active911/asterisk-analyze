@@ -1,0 +1,382 @@
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [5412237992@from-pstn:1] NoOp("SIP/fpbx-1-f04d84a7-00000032", "Catch-All DID Match - Found 5412237992 - You probably want a DID for this.") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [5412237992@from-pstn:1] NoOp("SIP/fpbx-1-f04d84a7-00000032", "Catch-All DID Match - Found 5412237992 - You probably want a DID for this.") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [5412237992@from-pstn:2] Set("SIP/fpbx-1-f04d84a7-00000032", "__FROM_DID=5412237992") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [5412237992@from-pstn:2] Set("SIP/fpbx-1-f04d84a7-00000032", "__FROM_DID=5412237992") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [5412237992@from-pstn:3] Goto("SIP/fpbx-1-f04d84a7-00000032", "ext-did|s|1") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [5412237992@from-pstn:3] Goto("SIP/fpbx-1-f04d84a7-00000032", "ext-did|s|1") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Goto (ext-did,s,1)
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Goto (ext-did,s,1)
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:1] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Set|__FROM_DID=s") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:1] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Set|__FROM_DID=s") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:2] Gosub("SIP/fpbx-1-f04d84a7-00000032", "app-blacklist-check|s|1()") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:2] Gosub("SIP/fpbx-1-f04d84a7-00000032", "app-blacklist-check|s|1()") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@app-blacklist-check:1] LookupBlacklist("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@app-blacklist-check:1] LookupBlacklist("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@app-blacklist-check:2] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?blacklisted") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@app-blacklist-check:2] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?blacklisted") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@app-blacklist-check:3] Set("SIP/fpbx-1-f04d84a7-00000032", "CALLED_BLACKLIST=1") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@app-blacklist-check:3] Set("SIP/fpbx-1-f04d84a7-00000032", "CALLED_BLACKLIST=1") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@app-blacklist-check:4] Return("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@app-blacklist-check:4] Return("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:3] Set("SIP/fpbx-1-f04d84a7-00000032", "CDR(did)=5412237992") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:3] Set("SIP/fpbx-1-f04d84a7-00000032", "CDR(did)=5412237992") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:4] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0 |Set|CALLERID(name)=15410001111") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:4] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0 |Set|CALLERID(name)=15410001111") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:5] Set("SIP/fpbx-1-f04d84a7-00000032", "CHANNEL(musicclass)=default") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:5] Set("SIP/fpbx-1-f04d84a7-00000032", "CHANNEL(musicclass)=default") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:6] Set("SIP/fpbx-1-f04d84a7-00000032", "__MOHCLASS=default") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:6] Set("SIP/fpbx-1-f04d84a7-00000032", "__MOHCLASS=default") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:7] Ringing("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:7] Ringing("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:8] Set("SIP/fpbx-1-f04d84a7-00000032", "__CALLINGPRES_SV=allowed_not_screened") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:8] Set("SIP/fpbx-1-f04d84a7-00000032", "__CALLINGPRES_SV=allowed_not_screened") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:9] SetCallerPres("SIP/fpbx-1-f04d84a7-00000032", "allowed_not_screened") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:9] SetCallerPres("SIP/fpbx-1-f04d84a7-00000032", "allowed_not_screened") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:10] Goto("SIP/fpbx-1-f04d84a7-00000032", "timeconditions|1|1") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ext-did:10] Goto("SIP/fpbx-1-f04d84a7-00000032", "timeconditions|1|1") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Goto (timeconditions,1,1)
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Goto (timeconditions,1,1)
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [1@timeconditions:1] GotoIfTime("SIP/fpbx-1-f04d84a7-00000032", "12:30-16:00|mon-fri|*|*?truestate") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [1@timeconditions:1] GotoIfTime("SIP/fpbx-1-f04d84a7-00000032", "12:30-16:00|mon-fri|*|*?truestate") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Goto (timeconditions,1,9)
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Goto (timeconditions,1,9)
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [1@timeconditions:9] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?falsegoto") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [1@timeconditions:9] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?falsegoto") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [1@timeconditions:10] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Set|DB(TC/1)=") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [1@timeconditions:10] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Set|DB(TC/1)=") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [1@timeconditions:11] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?ivr-2|s|1") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [1@timeconditions:11] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?ivr-2|s|1") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Goto (ivr-2,s,1)
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Goto (ivr-2,s,1)
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:1] Set("SIP/fpbx-1-f04d84a7-00000032", "TIMEOUT_LOOPCOUNT=0") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:1] Set("SIP/fpbx-1-f04d84a7-00000032", "TIMEOUT_LOOPCOUNT=0") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:2] Set("SIP/fpbx-1-f04d84a7-00000032", "INVALID_LOOPCOUNT=0") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:2] Set("SIP/fpbx-1-f04d84a7-00000032", "INVALID_LOOPCOUNT=0") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:3] Set("SIP/fpbx-1-f04d84a7-00000032", "_IVR_CONTEXT_ivr-2=") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:3] Set("SIP/fpbx-1-f04d84a7-00000032", "_IVR_CONTEXT_ivr-2=") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:4] Set("SIP/fpbx-1-f04d84a7-00000032", "_IVR_CONTEXT=ivr-2") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:4] Set("SIP/fpbx-1-f04d84a7-00000032", "_IVR_CONTEXT=ivr-2") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:5] Set("SIP/fpbx-1-f04d84a7-00000032", "__IVR_RETVM=") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:5] Set("SIP/fpbx-1-f04d84a7-00000032", "__IVR_RETVM=") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:6] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?skip") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:6] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?skip") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:7] Answer("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:7] Answer("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:8] Wait("SIP/fpbx-1-f04d84a7-00000032", "1") in new stack
+[2017-02-23 15:03:12] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:8] Wait("SIP/fpbx-1-f04d84a7-00000032", "1") in new stack
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:9] Set("SIP/fpbx-1-f04d84a7-00000032", "IVR_MSG=custom/open-ivr-message") in new stack
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:9] Set("SIP/fpbx-1-f04d84a7-00000032", "IVR_MSG=custom/open-ivr-message") in new stack
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:10] Set("SIP/fpbx-1-f04d84a7-00000032", "TIMEOUT(digit)=3") in new stack
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:10] Set("SIP/fpbx-1-f04d84a7-00000032", "TIMEOUT(digit)=3") in new stack
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- Digit timeout set to 3
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- Digit timeout set to 3
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:11] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Background|custom/open-ivr-message") in new stack
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- Executing [s@ivr-2:11] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Background|custom/open-ivr-message") in new stack
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- <SIP/fpbx-1-f04d84a7-00000032> Playing 'custom/open-ivr-message' (language 'en')
+[2017-02-23 15:03:13] VERBOSE[5070] logger.c:     -- <SIP/fpbx-1-f04d84a7-00000032> Playing 'custom/open-ivr-message' (language 'en')
+[2017-02-23 15:03:25] DTMF[5070] channel.c: DTMF begin '1' received on SIP/fpbx-1-f04d84a7-00000032
+[2017-02-23 15:03:25] DTMF[5070] channel.c: DTMF begin ignored '1' on SIP/fpbx-1-f04d84a7-00000032
+[2017-02-23 15:03:25] DTMF[5070] channel.c: DTMF end '1' received on SIP/fpbx-1-f04d84a7-00000032, duration 95 ms
+[2017-02-23 15:03:25] DTMF[5070] channel.c: DTMF end passthrough '1' on SIP/fpbx-1-f04d84a7-00000032
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [1@ivr-2:1] Goto("SIP/fpbx-1-f04d84a7-00000032", "ext-queues|299|1") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [1@ivr-2:1] Goto("SIP/fpbx-1-f04d84a7-00000032", "ext-queues|299|1") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Goto (ext-queues,299,1)
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Goto (ext-queues,299,1)
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:1] Macro("SIP/fpbx-1-f04d84a7-00000032", "user-callerid|") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:1] Macro("SIP/fpbx-1-f04d84a7-00000032", "user-callerid|") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:1] Set("SIP/fpbx-1-f04d84a7-00000032", "TOUCH_MONITOR=1487890992.50") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:1] Set("SIP/fpbx-1-f04d84a7-00000032", "TOUCH_MONITOR=1487890992.50") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:2] Set("SIP/fpbx-1-f04d84a7-00000032", "AMPUSER=15410001111") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:2] Set("SIP/fpbx-1-f04d84a7-00000032", "AMPUSER=15410001111") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:3] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?report") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:3] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?report") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:4] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|REALCALLERIDNUM=15410001111") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:4] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|REALCALLERIDNUM=15410001111") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:25] DEBUG[5070] func_db.c: DB: DEVICE/15410001111/user not found in database.
+[2017-02-23 15:03:25] DEBUG[5070] func_db.c: DB: DEVICE/15410001111/user not found in database.
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:5] Set("SIP/fpbx-1-f04d84a7-00000032", "AMPUSER=") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:5] Set("SIP/fpbx-1-f04d84a7-00000032", "AMPUSER=") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:6] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?limit") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:6] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?limit") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] DEBUG[5070] func_db.c: DB: AMPUSER//cidname not found in database.
+[2017-02-23 15:03:25] DEBUG[5070] func_db.c: DB: AMPUSER//cidname not found in database.
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:7] Set("SIP/fpbx-1-f04d84a7-00000032", "AMPUSERCIDNAME=") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:7] Set("SIP/fpbx-1-f04d84a7-00000032", "AMPUSERCIDNAME=") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:8] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?report") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:8] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?report") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Goto (macro-user-callerid,s,16)
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Goto (macro-user-callerid,s,16)
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:16] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?continue") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:16] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?continue") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] DEBUG[5070] func_db.c: DB: AMPUSER/299/accountcode not found in database.
+[2017-02-23 15:03:25] DEBUG[5070] func_db.c: DB: AMPUSER/299/accountcode not found in database.
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:17] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|__CALLEE_ACCOUNCODE=") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:17] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|__CALLEE_ACCOUNCODE=") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:25] DEBUG[5070] func_db.c: DB: AMPUSER/299/accountcode not found in database.
+[2017-02-23 15:03:25] DEBUG[5070] func_db.c: DB: AMPUSER/299/accountcode not found in database.
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Last app: Set|__CALLEE_ACCOUNCODE=
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Last app: Set|__CALLEE_ACCOUNCODE=
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:18] Set("SIP/fpbx-1-f04d84a7-00000032", "__TTL=64") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:18] Set("SIP/fpbx-1-f04d84a7-00000032", "__TTL=64") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:19] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?continue") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:19] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?continue") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Goto (macro-user-callerid,s,30)
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Goto (macro-user-callerid,s,30)
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:30] Set("SIP/fpbx-1-f04d84a7-00000032", "CALLERID(number)=15410001111") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:30] Set("SIP/fpbx-1-f04d84a7-00000032", "CALLERID(number)=15410001111") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:31] Set("SIP/fpbx-1-f04d84a7-00000032", "CALLERID(name)=ALYRICA") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:31] Set("SIP/fpbx-1-f04d84a7-00000032", "CALLERID(name)=ALYRICA") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:32] Set("SIP/fpbx-1-f04d84a7-00000032", "CDR(cnum)=15410001111") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:32] Set("SIP/fpbx-1-f04d84a7-00000032", "CDR(cnum)=15410001111") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:33] Set("SIP/fpbx-1-f04d84a7-00000032", "CDR(cnam)=ALYRICA") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-user-callerid:33] Set("SIP/fpbx-1-f04d84a7-00000032", "CDR(cnam)=ALYRICA") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:2] Answer("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:2] Answer("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:3] Macro("SIP/fpbx-1-f04d84a7-00000032", "blkvm-set|reset") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:3] Macro("SIP/fpbx-1-f04d84a7-00000032", "blkvm-set|reset") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:1] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|__BLKVM_BASE=299") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:1] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|__BLKVM_BASE=299") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Last app: Set|__BLKVM_BASE=299
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Last app: Set|__BLKVM_BASE=299
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:2] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|__BLKVM_OVERRIDE=BLKVM/299/SIP/fpbx-1-f04d84a7-00000032") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:2] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|__BLKVM_OVERRIDE=BLKVM/299/SIP/fpbx-1-f04d84a7-00000032") in new stack
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:25] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:3] Set("SIP/fpbx-1-f04d84a7-00000032", "DB(BLKVM/299/SIP/fpbx-1-f04d84a7-00000032)=TRUE") in new stack
+[2017-02-23 15:03:25] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:3] Set("SIP/fpbx-1-f04d84a7-00000032", "DB(BLKVM/299/SIP/fpbx-1-f04d84a7-00000032)=TRUE") in new stack
+[2017-02-23 15:03:26] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:26] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:4] Set("SIP/fpbx-1-f04d84a7-00000032", "GOSUB_RETVAL=TRUE") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:4] Set("SIP/fpbx-1-f04d84a7-00000032", "GOSUB_RETVAL=TRUE") in new stack
+[2017-02-23 15:03:26] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:26] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:5] MacroExit("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-set:5] MacroExit("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:4] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|_DIAL_OPTIONS=trM(auto-blkvm)") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:4] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|_DIAL_OPTIONS=trM(auto-blkvm)") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:5] Set("SIP/fpbx-1-f04d84a7-00000032", "__NODEST=299") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:5] Set("SIP/fpbx-1-f04d84a7-00000032", "__NODEST=299") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:6] Set("SIP/fpbx-1-f04d84a7-00000032", "QCIDPP=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:6] Set("SIP/fpbx-1-f04d84a7-00000032", "QCIDPP=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:7] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_CIDPP=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:7] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_CIDPP=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:8] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Macro|prepend-cid|") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:8] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Macro|prepend-cid|") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:9] Set("SIP/fpbx-1-f04d84a7-00000032", "QAINFO=Bellcore-Busy") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:9] Set("SIP/fpbx-1-f04d84a7-00000032", "QAINFO=Bellcore-Busy") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:10] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_AINFO=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:10] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_AINFO=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:11] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|__ALERT_INFO=Bellcore-Busy") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:11] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|__ALERT_INFO=Bellcore-Busy") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:12] Set("SIP/fpbx-1-f04d84a7-00000032", "QJOINMSG=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:12] Set("SIP/fpbx-1-f04d84a7-00000032", "QJOINMSG=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:13] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_JOINMSG=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:13] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_JOINMSG=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:14] Set("SIP/fpbx-1-f04d84a7-00000032", "QMOH=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:14] Set("SIP/fpbx-1-f04d84a7-00000032", "QMOH=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:15] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_MOH=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:15] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_MOH=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:16] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Set|__MOHCLASS=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:16] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Set|__MOHCLASS=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:17] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|CHANNEL(musicclass)=default") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:17] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Set|CHANNEL(musicclass)=default") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:18] Set("SIP/fpbx-1-f04d84a7-00000032", "QRETRY=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:18] Set("SIP/fpbx-1-f04d84a7-00000032", "QRETRY=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:19] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_RETRY=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:19] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_RETRY=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:20] Set("SIP/fpbx-1-f04d84a7-00000032", "QOPTIONS=t") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:20] Set("SIP/fpbx-1-f04d84a7-00000032", "QOPTIONS=t") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:21] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_OPTIONS=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:21] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_OPTIONS=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:22] Set("SIP/fpbx-1-f04d84a7-00000032", "QGOSUB=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:22] Set("SIP/fpbx-1-f04d84a7-00000032", "QGOSUB=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:23] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_GOSUB=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:23] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_GOSUB=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:24] Set("SIP/fpbx-1-f04d84a7-00000032", "QAGI=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:24] Set("SIP/fpbx-1-f04d84a7-00000032", "QAGI=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:25] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_AGI=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:25] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_AGI=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:26] Set("SIP/fpbx-1-f04d84a7-00000032", "QRULE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:26] Set("SIP/fpbx-1-f04d84a7-00000032", "QRULE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:27] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_RULE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:27] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_RULE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:28] Set("SIP/fpbx-1-f04d84a7-00000032", "QPOSITION=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:28] Set("SIP/fpbx-1-f04d84a7-00000032", "QPOSITION=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:29] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_POSITION=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:29] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_POSITION=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:30] Gosub("SIP/fpbx-1-f04d84a7-00000032", "sub-record-check|s|1(q|299|dontcare)") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:30] Gosub("SIP/fpbx-1-f04d84a7-00000032", "sub-record-check|s|1(q|299|dontcare)") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:1] Set("SIP/fpbx-1-f04d84a7-00000032", "REC_POLICY_MODE_SAVE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:1] Set("SIP/fpbx-1-f04d84a7-00000032", "REC_POLICY_MODE_SAVE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:2] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?check") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:2] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?check") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Goto (sub-record-check,s,7)
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Goto (sub-record-check,s,7)
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:7] Set("SIP/fpbx-1-f04d84a7-00000032", "__MON_FMT=wav") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:7] Set("SIP/fpbx-1-f04d84a7-00000032", "__MON_FMT=wav") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:8] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?next") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:8] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?next") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Goto (sub-record-check,s,11)
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Goto (sub-record-check,s,11)
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:11] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Return|") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [s@sub-record-check:11] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "1|Return|") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:31] Set("SIP/fpbx-1-f04d84a7-00000032", "__CWIGNORE=TRUE") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:31] Set("SIP/fpbx-1-f04d84a7-00000032", "__CWIGNORE=TRUE") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:32] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Playback|| ") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:32] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Playback|| ") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:33] QueueLog("SIP/fpbx-1-f04d84a7-00000032", "299|1487890992.50|NONE|DID|5412237992") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:33] QueueLog("SIP/fpbx-1-f04d84a7-00000032", "299|1487890992.50|NONE|DID|5412237992") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:34] Set("SIP/fpbx-1-f04d84a7-00000032", "QAANNOUNCE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:34] Set("SIP/fpbx-1-f04d84a7-00000032", "QAANNOUNCE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:35] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_AANNOUNCE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:35] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_AANNOUNCE=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:36] Set("SIP/fpbx-1-f04d84a7-00000032", "QMAXWAIT=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:36] Set("SIP/fpbx-1-f04d84a7-00000032", "QMAXWAIT=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:37] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_MAXWAIT=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:37] Set("SIP/fpbx-1-f04d84a7-00000032", "VQ_MAXWAIT=") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:38] Set("SIP/fpbx-1-f04d84a7-00000032", "QUEUENUM=299") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:38] Set("SIP/fpbx-1-f04d84a7-00000032", "QUEUENUM=299") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:39] Set("SIP/fpbx-1-f04d84a7-00000032", "QUEUEJOINTIME=1487891006") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:39] Set("SIP/fpbx-1-f04d84a7-00000032", "QUEUEJOINTIME=1487891006") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:40] Queue("SIP/fpbx-1-f04d84a7-00000032", "299|t||||||||") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Executing [299@ext-queues:40] Queue("SIP/fpbx-1-f04d84a7-00000032", "299|t||||||||") in new stack
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Started music on hold, class 'default', on SIP/fpbx-1-f04d84a7-00000032
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- Started music on hold, class 'default', on SIP/fpbx-1-f04d84a7-00000032
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Ringing for Notify User 07431298 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Ringing for Notify User 07431298 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Ringing for Notify User 210 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Ringing for Notify User 210 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Ringing for Notify User 212 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Ringing for Notify User 212 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Ringing for Notify User 212 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Ringing for Notify User 212 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Ringing for Notify User 18436207 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Ringing for Notify User 18436207 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Ringing for Notify User 18436207 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Ringing for Notify User 18436207 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Ringing for Notify User 07431298 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Ringing for Notify User 07431298 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Ringing for Notify User 210 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Ringing for Notify User 210 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Ringing for Notify User 18436207 
+[2017-02-23 15:03:26] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Ringing for Notify User 18436207 
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- SIP/213-00000033 is ringing
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- SIP/213-00000033 is ringing
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- SIP/212-00000035 is ringing
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- SIP/212-00000035 is ringing
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- SIP/210-00000034 is ringing
+[2017-02-23 15:03:26] VERBOSE[5070] logger.c:     -- SIP/210-00000034 is ringing
+[2017-02-23 15:03:27] VERBOSE[5070] logger.c:     -- SIP/212-00000035 answered SIP/fpbx-1-f04d84a7-00000032
+[2017-02-23 15:03:27] VERBOSE[5070] logger.c:     -- SIP/212-00000035 answered SIP/fpbx-1-f04d84a7-00000032
+[2017-02-23 15:03:27] VERBOSE[5070] logger.c:     -- Stopped music on hold on SIP/fpbx-1-f04d84a7-00000032
+[2017-02-23 15:03:27] VERBOSE[5070] logger.c:     -- Stopped music on hold on SIP/fpbx-1-f04d84a7-00000032
+[2017-02-23 15:03:27] VERBOSE[5070] logger.c:     -- Launched AGI Script /var/lib/asterisk/agi-bin/
+[2017-02-23 15:03:27] VERBOSE[5070] logger.c:     -- Launched AGI Script /var/lib/asterisk/agi-bin/
+[2017-02-23 15:03:27] VERBOSE[5070] logger.c:   ==  ||||: Failed to execute '/var/lib/asterisk/agi-bin/': Permission denied
+[2017-02-23 15:03:27] VERBOSE[5070] logger.c:   ==  ||||: Failed to execute '/var/lib/asterisk/agi-bin/': Permission denied
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state InUse for Notify User 07431298 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state InUse for Notify User 07431298 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Idle for Notify User 07431298 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Idle for Notify User 07431298 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Idle for Notify User 210 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Idle for Notify User 210 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state InUse for Notify User 210 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state InUse for Notify User 210 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Idle for Notify User 212 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Idle for Notify User 212 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Idle for Notify User 212 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Idle for Notify User 212 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Idle for Notify User 18436207 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 213[ext-local] new state Idle for Notify User 18436207 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state InUse for Notify User 18436207 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state InUse for Notify User 18436207 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Idle for Notify User 18436207 
+[2017-02-23 15:03:27] VERBOSE[3409] logger.c:  Extension Changed 210[ext-local] new state Idle for Notify User 18436207 
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [h@ext-queues:1] Macro("SIP/fpbx-1-f04d84a7-00000032", "hangupcall|") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [h@ext-queues:1] Macro("SIP/fpbx-1-f04d84a7-00000032", "hangupcall|") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:1] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?skiprg") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:1] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?skiprg") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Goto (macro-hangupcall,s,3)
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Goto (macro-hangupcall,s,3)
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:3] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?skipblkvm") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:3] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?skipblkvm") in new stack
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:4] Macro("SIP/fpbx-1-f04d84a7-00000032", "blkvm-clr|") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:4] Macro("SIP/fpbx-1-f04d84a7-00000032", "blkvm-clr|") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-clr:1] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?ret") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-clr:1] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "0?ret") in new stack
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-clr:2] NoOp("SIP/fpbx-1-f04d84a7-00000032", "Deleting: BLKVM/299/SIP/fpbx-1-f04d84a7-00000032 TRUE") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-clr:2] NoOp("SIP/fpbx-1-f04d84a7-00000032", "Deleting: BLKVM/299/SIP/fpbx-1-f04d84a7-00000032 TRUE") in new stack
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: Noop
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: Noop
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-clr:3] Set("SIP/fpbx-1-f04d84a7-00000032", "GOSUB_RETVAL=") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-clr:3] Set("SIP/fpbx-1-f04d84a7-00000032", "GOSUB_RETVAL=") in new stack
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: Set
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-clr:4] MacroExit("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-blkvm-clr:4] MacroExit("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: Macro
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: Macro
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:5] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?theend") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:5] GotoIf("SIP/fpbx-1-f04d84a7-00000032", "1?theend") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Goto (macro-hangupcall,s,7)
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Goto (macro-hangupcall,s,7)
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: GotoIf
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:7] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Set|CDR(recordingfile)=") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:7] ExecIf("SIP/fpbx-1-f04d84a7-00000032", "0|Set|CDR(recordingfile)=") in new stack
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:34] DEBUG[5070] app_macro.c: Executed application: ExecIf
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:8] Hangup("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:     -- Executing [s@macro-hangupcall:8] Hangup("SIP/fpbx-1-f04d84a7-00000032", "") in new stack
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:   == Spawn extension (macro-hangupcall, s, 8) exited non-zero on 'SIP/fpbx-1-f04d84a7-00000032' in macro 'hangupcall'
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:   == Spawn extension (macro-hangupcall, s, 8) exited non-zero on 'SIP/fpbx-1-f04d84a7-00000032' in macro 'hangupcall'
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:   == Spawn h extension (ext-queues, h, 1) exited non-zero on 'SIP/fpbx-1-f04d84a7-00000032'
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:   == Spawn h extension (ext-queues, h, 1) exited non-zero on 'SIP/fpbx-1-f04d84a7-00000032'
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:   == Spawn extension (ext-queues, 299, 40) exited non-zero on 'SIP/fpbx-1-f04d84a7-00000032'
+[2017-02-23 15:03:34] VERBOSE[5070] logger.c:   == Spawn extension (ext-queues, 299, 40) exited non-zero on 'SIP/fpbx-1-f04d84a7-00000032'
+[2017-02-23 15:03:34] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Idle for Notify User 07431298 
+[2017-02-23 15:03:34] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Idle for Notify User 07431298 
+[2017-02-23 15:03:34] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Idle for Notify User 210 
+[2017-02-23 15:03:34] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Idle for Notify User 210 
+[2017-02-23 15:03:34] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Idle for Notify User 18436207 
+[2017-02-23 15:03:34] VERBOSE[3409] logger.c:  Extension Changed 212[ext-local] new state Idle for Notify User 18436207 
