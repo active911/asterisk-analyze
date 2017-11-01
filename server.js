@@ -3,14 +3,14 @@ var express=require('express');
 var morgan=require('morgan');
 //var url=require("url");
 var log = require("bunyan").createLogger({"name":"asterisk-analyze"});
-var nconf = require('nconf');
+var fs = require('fs');
 var stream=require('stream');
 var mysql = require("promise-mysql");
 var WebsocketServer=require("ws").Server;
 var redis = new (require("ioredis"))(); 
 
 // Read the config
-nconf.argv().env().file({ file: 'config.json' });
+var config = JSON.parse(fs.readFileSync('config.json'));
 
 
 // A stream to pipe morgan (http logging) to bunyan
@@ -119,7 +119,7 @@ app
 // Connect to the database and start the server
 var db;
 mysql
-	.createConnection(nconf.get('mysql'))
+	.createConnection(config.mysql)
 	.then((c)=>{
 
 		log.info("Connected to database");

@@ -1,6 +1,6 @@
 var promise=require("bluebird");
 var asterisklog=require("./lib/asterisklog.js");
-var nconf = require('nconf');
+var fs = require('fs');
 var log = require("bunyan").createLogger({"name":"asterisk-analyze-syslog"});
 var mysql = require("promise-mysql");
 var moment = require("moment");
@@ -8,21 +8,16 @@ var Redis = require("ioredis"); //promise.promisifyAll(require("redis"));
 var syslogd = require("syslogd");
 
 // Read the config
-nconf
-	.argv()
-	.env()
-	.file({ file: 'config.json' })
-	.defaults({ "general" : { "input" : "full", "output" : "calls.json", "mode" : "follow" } });
-
+var config = JSON.parse(fs.readFileSync('config.json'));
 
 // Redis
 var redis=new Redis();
 
 // MySQL pool.  We use this so we can have auto reconnect.
-var pool=mysql.createPool(nconf.get('mysql'));
+var pool=mysql.createPool(config.mysql);
 
 // Create analyzer
-var al=new asterisklog({queues: nconf.get('asterisk').queues, "require_timestamps" : false });
+var al=new asterisklog({queues: config.asterisk.queues, "require_timestamps" : false });
 al
 	.on("start", (call) => {
 
@@ -38,7 +33,7 @@ al
 
 		log.info("Call ended. Inserting into database");
 		redis.publish("calls",JSON.stringify(call));
-		pool.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)])
+		pool.query("INSERT INTO "+(config.mysql.table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)])
 			.then(()=>{
 				log.info("Call inserted into database successfully.");
 			})
@@ -51,9 +46,9 @@ al
 // Listen for incoming messages
 syslogd((entry) => {
 
-	if(entry.address==nconf.get('general').syslogd.allow) {
+	if(entry.address==config.general.syslogd.allow) {
 
-//		log.info("Data: "+entry.msg);
+		log.info("Data: "+entry.msg);
 		al.add(entry.msg.trim());
 
 	} else {
@@ -61,7 +56,7 @@ syslogd((entry) => {
 		console.log("Disallowing remote data from "+entry.address);
 	}
 
-},{ "address" : nconf.get("general").syslogd.address}).listen(nconf.get("general").syslogd.port, (err)=>{
+},{ "address" : config.general.syslogd.address}).listen(config.general.syslogd.port, (err)=>{
 
 	if(err){
 		
