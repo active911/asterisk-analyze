@@ -6,7 +6,7 @@ var mysql = require("promise-mysql");
 var moment = require("moment");
 var Redis = require("ioredis"); //promise.promisifyAll(require("redis"));
 var syslogd = require("syslogd");
-const Objectpath=require("objectpath");
+const Objectpath=require("object-path");
 
 // Read the config
 nconf
