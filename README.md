@@ -16,9 +16,9 @@ CREATE TABLE `calls` (
   `start` datetime DEFAULT NULL,
   `answered` timestamp NULL DEFAULT NULL,
   `end` datetime DEFAULT NULL,
-  `duration` decimal(5,2) DEFAULT NULL,
-  `caller_id` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `answered_by` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `duration` float NULL DEFAULT NULL,
+  `caller_id` varchar(15) COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `answered_by` varchar(50) COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `attributes` text COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci

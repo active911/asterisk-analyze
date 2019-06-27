@@ -47,10 +47,9 @@ al
 		let duration=(start && end)?(end-start):null;		
 		let caller_id=Objectpath.get(call, "caller_id", null);		
 		let answered_by=Objectpath.get(call, "answered_by", null);		
+		let attributes=Object.keys(call).filter((key)=>(["start", "answered", "end", "caller_id", "answered_by"].indexOf(key)==-1)).reduce((acc, cur)=>{ acc[cur]=call[cur]; return acc; },{});
 
-		["start", "answered", "end", "caller_id", "answered_by"].forEach((key)=>delete call[key]);
-
-		pool.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (start, answered, end, duration, caller_id, answered_by, attributes) VALUES ( ?, ?, ?, ?, ?, ?, ?)",[start, answered, end, duration, caller_id, answered_by, JSON.stringify(call) ])
+		pool.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (start, answered, end, duration, caller_id, answered_by, attributes) VALUES ( FROM_UNIXTIME(?), FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, ?, ?)",[start, answered, end, duration, caller_id, answered_by, JSON.stringify(attributes) ])
 		// pool.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)])
 			.then(()=>{
 				log.info("Call inserted into database successfully.");
