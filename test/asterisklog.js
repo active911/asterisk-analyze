@@ -62,6 +62,35 @@ describe("Ingest sample call data",function(){
 
 	});
 
+	// it("Remote log 1",(done)=>{
+
+	// 	a=new asterisklog({queues: "510",  "require_timestamps" : false });
+	// 	(new linebyline("./test/remote_joseph1.log"))
+	// 		.on("line", (line)=>a.add(line))
+	// 		.on("error", (err)=>{throw err})
+	// 		.on("end",()=>{
+
+	// 			var calls=a.get_calls();
+
+	// 			console.log(JSON.stringify(a));
+	// 			// assert.equal(calls.length,1);
+	// 			// assert.deepEqual(JSON.parse(JSON.stringify(calls[0])),		// Conversion to/from JSON is to convert Date() objects to strings
+	// 			//   {
+	// 			//     "id": "SIP/5412202580-000000e9",
+	// 			//     "start": "2017-01-31T16:48:08.000Z",
+	// 			//     "end": "2017-01-31T16:48:58.000Z",
+	// 			//     "enqueued": "2017-01-31T16:48:28.000Z",
+	// 			//     "answered": "2017-01-31T16:48:53.000Z",
+	// 			//     "answered_by": "Local/206",
+	// 			//     "caller_id": "5412300555",
+	// 			//     "rang": {}
+	// 			//   });
+	// 			done();
+	// 		});
+
+	// });
+
+
 	it("Asterisk 1.4.42 log sample",(done)=>{
 
 		a=new asterisklog({queues: "299", force_utc_offset: "+00:00" });

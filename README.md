@@ -13,7 +13,7 @@ CREATE TABLE calls (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 stamp datetime NOT NULL,
 data text null
-)ENGINE=innodb;
+)ENGINE=innodb DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 2. Create config file
 ```bash

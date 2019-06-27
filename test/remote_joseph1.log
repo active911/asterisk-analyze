@@ -1,0 +1,71 @@
+VERBOSE[4557][C-000014f2]: netsock2.c:603 in ast_set_qos: Using SIP RTP TOS bits 184
+VERBOSE[4557][C-000014f2]: netsock2.c:625 in ast_set_qos: Using SIP RTP CoS mark 5
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:1] Set("SIP/5412237992-0000150c", "__DIRECTION=INBOUND") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:2] Gosub("SIP/5412237992-0000150c", "app-blacklist-check,s,1()") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@app-blacklist-check:1] GotoIf("SIP/5412237992-0000150c", "0?blacklisted") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@app-blacklist-check:2] Set("SIP/5412237992-0000150c", "CALLED_BLACKLIST=1") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@app-blacklist-check:3] Return("SIP/5412237992-0000150c", "") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:3] Set("SIP/5412237992-0000150c", "__FROM_DID=5412237992") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:4] Set("SIP/5412237992-0000150c", "CDR(did)=5412237992") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:5] ExecIf("SIP/5412237992-0000150c", "0 ?Set(CALLERID(name)=5412300278)") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:6] Set("SIP/5412237992-0000150c", "__MOHCLASS=") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:7] Set("SIP/5412237992-0000150c", "__REVERSAL_REJECT=FALSE") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:8] GotoIf("SIP/5412237992-0000150c", "1?post-reverse-charge") in new stack
+VERBOSE[12755][C-000014f2]: pbx_builtins.c:833 in pbx_builtin_goto: Goto (from-trunk,5412237992,10)
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:10] NoOp("SIP/5412237992-0000150c", "") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:11] Set("SIP/5412237992-0000150c", "__CALLINGNAMEPRES_SV=allowed_not_screened") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:12] Set("SIP/5412237992-0000150c", "__CALLINGNUMPRES_SV=allowed_not_screened") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:13] Set("SIP/5412237992-0000150c", "CALLERID(name-pres)=allowed_not_screened") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:14] Set("SIP/5412237992-0000150c", "CALLERID(num-pres)=allowed_not_screened") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:15] NoOp("SIP/5412237992-0000150c", "CallerID Entry Point") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:16] Set("SIP/5412237992-0000150c", "__CRM_DIRECTION=INBOUND") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:17] Set("SIP/5412237992-0000150c", "__CRM_SOURCE=5412300278") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:18] Set("SIP/5412237992-0000150c", "__CRM_LINKEDID=1561657152.82519") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:19] ExecIf("SIP/5412237992-0000150c", "1?Set(CHANNEL(hangup_handler_push)=crm-hangup,s,1)") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [5412237992@from-trunk:20] Goto("SIP/5412237992-0000150c", "app-daynight,0,1") in new stack
+VERBOSE[12755][C-000014f2]: pbx_builtins.c:833 in pbx_builtin_goto: Goto (app-daynight,0,1)
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [0@app-daynight:1] GotoIf("SIP/5412237992-0000150c", "0?app-daynight,1,1:timeconditions,1,1") in new stack
+VERBOSE[12755][C-000014f2]: pbx_builtins.c:833 in pbx_builtin_goto: Goto (timeconditions,1,1)
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:1] Set("SIP/5412237992-0000150c", "DB(TC/1/INUSESTATE)=INUSE") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:2] Set("SIP/5412237992-0000150c", "DB(TC/1/NOT_INUSESTATE)=NOT_INUSE") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:3] NoOp("SIP/5412237992-0000150c", "TIMENOW: 10:39,Thu,27,Jun,America/Los_Angeles") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:4] NoOp("SIP/5412237992-0000150c", "TIMEMATCHED: FALSE") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:5] GotoIfTime("SIP/5412237992-0000150c", "12:31-15:50,mon-fri,*,*,America/Los_Angeles?truestate") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:6] NoOp("SIP/5412237992-0000150c", "TIMENOW: 10:39,Thu,27,Jun,America/Los_Angeles") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:7] NoOp("SIP/5412237992-0000150c", "TIMEMATCHED: TRUE") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:8] GotoIfTime("SIP/5412237992-0000150c", "07:00-11:20,mon-fri,*,*,America/Los_Angeles?truestate") in new stack
+VERBOSE[12755][C-000014f2]: pbx_builtins.c:833 in pbx_builtin_goto: Goto (timeconditions,1,17)
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:17] GotoIf("SIP/5412237992-0000150c", "0?falsegoto") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:18] ExecIf("SIP/5412237992-0000150c", "0?Set(DB(TC/1)=)") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:19] Set("SIP/5412237992-0000150c", "DEVICE_STATE(Custom:TC1)=NOT_INUSE") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:20] ExecIf("SIP/5412237992-0000150c", "0?Set(DEVICE_STATE(Custom:TCSTICKY)=INUSE)") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [1@timeconditions:21] GotoIf("SIP/5412237992-0000150c", "1?ivr-1,s,1") in new stack
+VERBOSE[12755][C-000014f2]: pbx_builtins.c:833 in pbx_builtin_goto: Goto (ivr-1,s,1)
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:1] Set("SIP/5412237992-0000150c", "INVALID_LOOPCOUNT=0") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:2] Set("SIP/5412237992-0000150c", "_IVR_CONTEXT_ivr-1=") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:3] Set("SIP/5412237992-0000150c", "_IVR_CONTEXT=ivr-1") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:4] Set("SIP/5412237992-0000150c", "__IVR_RETVM=RETURN") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:5] GotoIf("SIP/5412237992-0000150c", "0?skip") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:6] Answer("SIP/5412237992-0000150c", "") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:7] Wait("SIP/5412237992-0000150c", "1") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:8] Set("SIP/5412237992-0000150c", "IVR_MSG=custom/oct2018-cropped") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:9] Set("SIP/5412237992-0000150c", "TIMEOUT(digit)=3") in new stack
+VERBOSE[12755][C-000014f2]: func_timeout.c:185 in timeout_write: Digit timeout set to 3.000
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@ivr-1:10] ExecIf("SIP/5412237992-0000150c", "1?Background(custom/oct2018-cropped)") in new stack
+VERBOSE[12755][C-000014f2]: file.c:1287 in ast_streamfile: <SIP/5412237992-0000150c> Playing 'custom/oct2018-cropped.slin' (language 'en')
+VERBOSE[12755][C-000014f2]: pbx.c:4347 in __ast_pbx_run: Spawn extension (ivr-1, s, 10) exited non-zero on 'SIP/5412237992-0000150c'
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [h@ivr-1:1] Hangup("SIP/5412237992-0000150c", "") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:4160 in ast_pbx_h_exten_run: Spawn extension (ivr-1, h, 1) exited non-zero on 'SIP/5412237992-0000150c'
+VERBOSE[12755][C-000014f2]: app_stack.c:984 in gosub_run: SIP/5412237992-0000150c Internal Gosub(crm-hangup,s,1) start
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@crm-hangup:1] NoOp("SIP/5412237992-0000150c", "Sending Hangup to CRM") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@crm-hangup:2] NoOp("SIP/5412237992-0000150c", "HANGUP CAUSE: 16") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@crm-hangup:3] ExecIf("SIP/5412237992-0000150c", "0?Set(__CRM_VOICEMAIL=)") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@crm-hangup:4] NoOp("SIP/5412237992-0000150c", "MASTER CHANNEL: 1561657152.82519 = 1561657152.82519") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@crm-hangup:5] GotoIf("SIP/5412237992-0000150c", "0?return") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@crm-hangup:6] Set("SIP/5412237992-0000150c", "__CRM_HANGUP=1") in new stack
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@crm-hangup:7] AGI("SIP/5412237992-0000150c", "sangomacrm.agi") in new stack
+VERBOSE[12755][C-000014f2]: res_agi.c:2287 in launch_script: Launched AGI Script /var/lib/asterisk/agi-bin/sangomacrm.agi
+VERBOSE[12755][C-000014f2]: res_agi.c:4206 in run_agi: <SIP/5412237992-0000150c>AGI Script sangomacrm.agi completed, returning 0
+VERBOSE[12755][C-000014f2]: pbx.c:2882 in pbx_extension_helper: Executing [s@crm-hangup:8] Return("SIP/5412237992-0000150c", "") in new stack
+VERBOSE[12755][C-000014f2]: app_stack.c:1071 in gosub_run: Spawn extension (ivr-1, h, 1) exited non-zero on 'SIP/5412237992-0000150c'
+VERBOSE[12755][C-000014f2]: app_stack.c:1080 in gosub_run: SIP/5412237992-0000150c Internal Gosub(crm-hangup,s,1) complete GOSUB_RETVAL=
