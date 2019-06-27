@@ -6,6 +6,7 @@ var mysql = require("promise-mysql");
 var moment = require("moment");
 var Redis = require("ioredis"); //promise.promisifyAll(require("redis"));
 var syslogd = require("syslogd");
+const Objectpath=require("objectpath");
 
 // Read the config
 nconf
@@ -38,7 +39,19 @@ al
 
 		log.info("Call ended. Inserting into database");
 		redis.publish("calls",JSON.stringify(call));
-		pool.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)])
+
+		// Extract safe values from call object, knowing that not all of them are guaranteed to exist
+		let start=Objectpath.get(call, "start", null)?parseInt(moment(Objectpath.get(call, "start")).format("X")):null;
+		let answered=Objectpath.get(call, "answered", null)?parseInt(moment(Objectpath.get(call, "answered")).format("X")):null;
+		let end=Objectpath.get(call, "end", null)?parseInt(moment(Objectpath.get(call, "end")).format("X")):null;
+		let duration=(start && end)?(end-start):null;		
+		let caller_id=Objectpath.get(call, "caller_id", null);		
+		let answered_by=Objectpath.get(call, "answered_by", null);		
+
+		["start", "answered", "end", "caller_id", "answered_by"].forEach((key)=>delete call[key]);
+
+		pool.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (start, answered, end, duration, caller_id, answered_by, attributes) VALUES ( ?, ?, ?, ?, ?, ?, ?)",[start, answered, end, duration, caller_id, answered_by, JSON.stringify(call) ])
+		// pool.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)])
 			.then(()=>{
 				log.info("Call inserted into database successfully.");
 			})

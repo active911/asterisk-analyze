@@ -9,6 +9,21 @@
 #### Configure
 1. Create MySQL table
 ```sql
+
+
+CREATE TABLE `calls` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start` datetime DEFAULT NULL,
+  `answered` timestamp NULL DEFAULT NULL,
+  `end` datetime DEFAULT NULL,
+  `duration` decimal(5,2) DEFAULT NULL,
+  `caller_id` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answered_by` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attributes` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+
+
 CREATE TABLE calls (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 stamp datetime NOT NULL,
