@@ -26,6 +26,7 @@
   "homepage": "https://github.com/active911/asterisk-analyze#readme",
   "dependencies": {
     "always-tail2": "^1.0.0",
+    "babel-cli": "^6.26.0",
     "bluebird": "^3.4.6",
     "bunyan": "^1.8.5",
     "line-by-line": "^0.1.5",

@@ -7,7 +7,6 @@ var Tail = require('always-tail2');
 var log = require("bunyan").createLogger({"name":"asterisk-analyze-etl"});
 var mysql = require("promise-mysql");
 var moment = require("moment");
-//var redis = new (require("ioredis"))(); //promise.promisifyAll(require("redis"));
 
 
 // Read the config
@@ -43,7 +42,6 @@ mysql
 			if(nconf.get('dry-run')) return;
 
 			log.info("New call started");
-			redis.publish("calls",JSON.stringify(call));
 		})
 		.on("enqueued", (call)=>{
 
@@ -51,7 +49,6 @@ mysql
 			if(nconf.get('dry-run')) return;
 
 			log.info("Call in queue");
-			redis.publish("calls",JSON.stringify(call));
 		})
 		.on("end", (call) => {
 
@@ -59,18 +56,16 @@ mysql
 			if(nconf.get('dry-run')) return;
 
 			log.info("Call ended");
-			redis.publish("calls",JSON.stringify(call));
-
 
 			// See if this record already exists
 			c
-				.query("SELECT id, data FROM "+(nconf.get('mysql').table||"calls")+" WHERE stamp = ?", [moment(call.start).format('YYYY-MM-DD HH:mm:ss')])
+				.query("SELECT id, attributes FROM "+(nconf.get('mysql').table||"calls")+" WHERE start = ?", [moment(call.start).format('YYYY-MM-DD HH:mm:ss')])
 				.then((rows) =>{
 
 
 					for(let n in rows) {
 
-						var data=JSON.parse(rows[n].data);
+						var data=JSON.parse(rows[n].attributes);
 						if (call.id == data.id){
 
 							if(call.end) {
@@ -89,7 +84,16 @@ mysql
 				})
 				.then((b)=>{
 
-					if(b) c.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)]);
+					var start=Objectpath.get(call, "start", null)?parseInt(moment(Objectpath.get(call, "start")).format("X")):null;
+					var answered=Objectpath.get(call, "answered", null)?parseInt(moment(Objectpath.get(call, "answered")).format("X")):null;
+					var end=Objectpath.get(call, "end", null)?parseInt(moment(Objectpath.get(call, "end")).format("X")):null;
+					var duration=(start && end)?(end-start):null;		
+					var caller_id=Objectpath.get(call, "caller_id", null);		
+					var answered_by=Objectpath.get(call, "answered_by", null);		
+					var attributes=Object.keys(call).filter((key)=>(["start", "answered", "end", "caller_id", "answered_by"].indexOf(key)==-1)).reduce((acc, cur)=>{ acc[cur]=call[cur]; return acc; },{});
+
+					if(b) c.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (start, answered, end, duration, caller_id, answered_by, attributes) VALUES ( FROM_UNIXTIME(?), FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, ?, ?)",[start, answered, end, duration, caller_id, answered_by, JSON.stringify(attributes) ])
+					//if(b) c.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)]);
 				});		
 		});	
 
