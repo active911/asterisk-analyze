@@ -1,13 +1,13 @@
-var promise=require("bluebird");
-var asterisklog=require("./lib/asterisklog.js");
-var nconf = require('nconf');
-var fs=promise.promisifyAll(require("fs"));
-var linebyline=require("line-by-line");
-var Tail = require('always-tail2');
-var log = require("bunyan").createLogger({"name":"asterisk-analyze-etl"});
-var mysql = require("promise-mysql");
-var moment = require("moment");
-
+const promise=require("bluebird");
+const asterisklog=require("./lib/asterisklog.js");
+const nconf = require('nconf');
+const fs=promise.promisifyAll(require("fs"));
+const linebyline=require("line-by-line");
+const Tail = require('always-tail2');
+const log = require("bunyan").createLogger({"name":"asterisk-analyze-etl"});
+const mysql = require("promise-mysql");
+const moment = require("moment");
+const Objectpath = require("object-path");
 
 // Read the config
 nconf
@@ -84,15 +84,16 @@ mysql
 				})
 				.then((b)=>{
 
-					var start=Objectpath.get(call, "start", null)?parseInt(moment(Objectpath.get(call, "start")).format("X")):null;
-					var answered=Objectpath.get(call, "answered", null)?parseInt(moment(Objectpath.get(call, "answered")).format("X")):null;
-					var end=Objectpath.get(call, "end", null)?parseInt(moment(Objectpath.get(call, "end")).format("X")):null;
-					var duration=(start && end)?(end-start):null;		
-					var caller_id=Objectpath.get(call, "caller_id", null);		
-					var answered_by=Objectpath.get(call, "answered_by", null);		
-					var attributes=Object.keys(call).filter((key)=>(["start", "answered", "end", "caller_id", "answered_by"].indexOf(key)==-1)).reduce((acc, cur)=>{ acc[cur]=call[cur]; return acc; },{});
+					let start=Objectpath.get(call, "start", null)?parseInt(moment(Objectpath.get(call, "start")).format("X")):null;
+					let answered=Objectpath.get(call, "answered", null)?parseInt(moment(Objectpath.get(call, "answered")).format("X")):null;
+					let end=Objectpath.get(call, "end", null)?parseInt(moment(Objectpath.get(call, "end")).format("X")):null;
+					let enqueued=Objectpath.get(call, "enqueued", null)?parseInt(moment(Objectpath.get(call, "enqueued")).format("X")):null;
+					let duration=(start && end)?(end-start):null;		
+					let caller_id=Objectpath.get(call, "caller_id", null);		
+					let answered_by=Objectpath.get(call, "answered_by", null);		
+					let attributes=Object.keys(call).filter((key)=>(["start", "answered", "end", "caller_id", "answered_by", "enqueued"].indexOf(key)==-1)).reduce((acc, cur)=>{ acc[cur]=call[cur]; return acc; },{});
 
-					if(b) c.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (start, answered, end, duration, caller_id, answered_by, attributes) VALUES ( FROM_UNIXTIME(?), FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, ?, ?)",[start, answered, end, duration, caller_id, answered_by, JSON.stringify(attributes) ])
+					if(b) c.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (start, answered, end, enqueued, duration, caller_id, answered_by, attributes) VALUES ( FROM_UNIXTIME(?), FROM_UNIXTIME(?), FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, ?, ?)",[start, answered, end, enqueued, duration, caller_id, answered_by, JSON.stringify(attributes) ])
 					//if(b) c.query("INSERT INTO "+(nconf.get('mysql').table||"calls")+" (stamp, data) VALUES ( ?, ?)",[moment(call.start).format('YYYY-MM-DD HH:mm:ss'),JSON.stringify(call)]);
 				});		
 		});	
